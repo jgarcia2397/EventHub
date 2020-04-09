@@ -1,11 +1,14 @@
 import React from 'react';
 
 import Layout from './hoc/Layout/Layout';
+import Calendar from './components/Calendar/Calendar';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <Layout />
+      <Layout>
+        <Calendar />
+      </Layout>
     </div>
   );
 }
