@@ -7,6 +7,11 @@ tr {
     margin: 0;
 }
 
+.MonthListTable {
+    margin: auto;
+    font-size: 1.0em;
+} 
+
 .CalendarContainer {
     border: 2px solid skyblue;
     width: 100%;
@@ -21,7 +26,7 @@ tr {
 
 .CalendarHeader {
     border-bottom: 1px dashed skyblue;
-    font-size: 1.6em;
+    /* font-size: 1.6em; */
     text-align: center;
 }
 
@@ -98,7 +103,7 @@ tr {
 
 .LabelMonth,
 .LabelYear {
-    font-size: 1.4em;
+    font-size: 2.2em;
 }
 
 .LabelMonth {

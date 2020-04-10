@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import classes from './Calendar.module.css';
+import MonthList from '../../components/MonthList/MonthList';
 
 class Calendar extends Component {
     state = {
-        dateObject: moment()
+        dateObject: moment(),
+        monthList: moment.months()
     };
 
     weekdayShortNames = moment.weekdaysShort();
@@ -96,12 +98,24 @@ class Calendar extends Component {
         return (
             <div className={classes.CalendarContainer}>
                 <table className={classes.Calendar}>
-                    <thead>
-                        <tr className={classes.CalendarHeader}>
+                    <thead className={classes.CalendarHeader}>
+                        <tr>
                             <td colSpan="7">
                                 <span className={classes.LabelMonth}>
                                     {this.getMonth()}
                                 </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="7">
+                                Select a month
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="7">
+                                <table className={classes.MonthListTable}>
+                                    <MonthList listOfMonths={this.state.monthList} />
+                                </table>
                             </td>
                         </tr>
                     </thead>
