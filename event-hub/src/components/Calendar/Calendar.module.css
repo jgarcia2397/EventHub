@@ -1,0 +1,100 @@
+.CalendarContainer,
+.Calendar,
+.CalendarHeader,
+td,
+tr {
+    padding: 0;
+    margin: 0;
+}
+
+.CalendarContainer {
+    border: 2px solid skyblue;
+    width: 100%;
+}
+
+.Calendar {
+    background-color: white;
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.CalendarHeader {
+    border-bottom: 1px dashed skyblue;
+    font-size: 1.6em;
+}
+
+.CalendarHeader td {
+    border-spacing: 0;
+    padding-left: 5px;
+}
+
+.Day,
+.EmptySlot,
+.WeekDay {
+    text-align: center;
+    height: 40px;
+}
+
+.WeekDay {
+    font-size: 0.8em;
+}
+
+.Day {
+    font-size: 0.8em;
+}
+
+.Day {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.CurrentDay {
+    background-color: #4285f4;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 2%;
+    color: white;
+}
+.SelectedDay {
+    background-color:yellow;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 2%;
+    color: black;
+}
+
+.MonthPopup {
+    position: absolute;
+    padding: 5px;
+    background: white;
+    border: 2px solid skyblue;
+}
+
+.MonthPopup div {
+    padding: 0.3em;
+}
+
+.NavMonth {
+    position: absolute;
+    top: 0.6em;
+    font-size: 0.6em;
+    right:3px;
+}
+
+.EditorYear {
+    max-width: 3.6em;
+}
+
+.LabelMonth,
+.LabelYear {
+    font-size: 0.6em;
+}
+
+.LabelMonth {
+    cursor: pointer;
+}
