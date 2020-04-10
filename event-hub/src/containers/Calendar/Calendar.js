@@ -14,6 +14,10 @@ class Calendar extends Component {
         return this.state.dateObject.daysInMonth();
     }
 
+    getCurrentDay = () => {
+        return this.state.dateObject.format("D");
+    }
+
     getFirstDayOfMonth = () => {
         let dateObject = this.state.dateObject;
         let firstDay = moment(dateObject).startOf("month").format("d");
@@ -38,8 +42,9 @@ class Calendar extends Component {
         let days = [];
 
         for (let d = 1; d <= this.getDays(); d++) {
+            let currentDay = d == this.getCurrentDay() ? classes.CurrentDay : classes.Day;
             days.push(
-                <td key={d} className={classes.Day}>
+                <td key={d} className={currentDay}>
                     {d}
                 </td>
             );
