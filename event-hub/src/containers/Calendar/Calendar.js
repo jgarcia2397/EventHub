@@ -18,6 +18,10 @@ class Calendar extends Component {
         return this.state.dateObject.format("D");
     }
 
+    getMonth = () => {
+        return this.state.dateObject.format("MMMM");
+    }
+
     getFirstDayOfMonth = () => {
         let dateObject = this.state.dateObject;
         let firstDay = moment(dateObject).startOf("month").format("d");
@@ -93,9 +97,18 @@ class Calendar extends Component {
             <div className={classes.CalendarContainer}>
                 <table className={classes.Calendar}>
                     <thead>
-                        <tr className={classes.CalendarHeader}>{weekDays}</tr>
+                        <tr className={classes.CalendarHeader}>
+                            <td colSpan="7">
+                                <span className={classes.LabelMonth}>
+                                    {this.getMonth()}
+                                </span>
+                            </td>
+                        </tr>
                     </thead>
                     <tbody>
+                        <tr className={classes.WeekDay}>
+                            {weekDays}
+                        </tr>
                         {this.createCalendar()}
                     </tbody>
                 </table>

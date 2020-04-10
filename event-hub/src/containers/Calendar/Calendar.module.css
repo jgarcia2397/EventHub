@@ -22,6 +22,7 @@ tr {
 .CalendarHeader {
     border-bottom: 1px dashed skyblue;
     font-size: 1.6em;
+    text-align: center;
 }
 
 .CalendarHeader td {
@@ -40,7 +41,7 @@ tr {
 }
 
 .WeekDay {
-    font-size: 0.8em;
+    font-size: 1.0em;
 }
 
 .Day {
@@ -97,7 +98,7 @@ tr {
 
 .LabelMonth,
 .LabelYear {
-    font-size: 0.6em;
+    font-size: 1.4em;
 }
 
 .LabelMonth {
