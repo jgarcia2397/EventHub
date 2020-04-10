@@ -56,13 +56,13 @@ class Calendar extends Component {
         let rows = [];
         let cells = [];
 
-        totalSlots.forEach((row, i) => {
+        totalSlots.forEach((dayValue, i) => {
             if (i % 7 !== 0) {
-                cells.push(row);
+                cells.push(dayValue);
             } else {
                 rows.push(cells);
                 cells = [];
-                cells.push(row);
+                cells.push(dayValue);
             }
             if (i === totalSlots.length - 1) {
                 rows.push(cells);
