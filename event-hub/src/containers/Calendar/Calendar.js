@@ -96,6 +96,12 @@ class Calendar extends Component {
         });
     }
 
+    toggleMonthSelector = () => {
+        this.setState({
+            showMonthSelector: !this.state.showMonthSelector
+        });
+    }
+
     render () {
         let weekDays = this.weekdayShortNames.map(day => {
             return (
@@ -110,10 +116,12 @@ class Calendar extends Component {
                 <table className={classes.Calendar}>
                     <thead className={classes.CalendarHeader}>
                         <tr>
-                            <td colSpan="7">
-                                <span className={classes.LabelMonth}>
-                                    {this.getMonth()}
-                                </span>
+                            <td 
+                                onClick={() => {this.toggleMonthSelector()}} 
+                                colSpan="7">
+                                    <span className={classes.LabelMonth}>
+                                        {this.getMonth()}
+                                    </span>
                             </td>
                         </tr>
                         <tr>
@@ -124,10 +132,13 @@ class Calendar extends Component {
                         <tr>
                             <td colSpan="7">
                                 <table className={classes.MonthListTable}>
-                                    <MonthSelector 
-                                        listOfMonths={this.state.monthList} 
-                                        selectedMonth={this.selectMonth} 
-                                    />
+                                    {
+                                        this.state.showMonthSelector 
+                                            ? <MonthSelector 
+                                                listOfMonths={this.state.monthList} 
+                                                selectedMonth={this.selectMonth} />
+                                            : null
+                                    }
                                 </table>
                             </td>
                         </tr>
