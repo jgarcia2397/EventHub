@@ -13,6 +13,10 @@ tr {
     cursor: pointer;
 } 
 
+.MonthListTable span:hover {
+    color: red;
+} 
+
 .CalendarContainer {
     border: 2px solid skyblue;
     width: 100%;
