@@ -10,6 +10,7 @@ tr {
 .MonthListTable {
     margin: auto;
     font-size: 1.0em;
+    cursor: pointer;
 } 
 
 .CalendarContainer {

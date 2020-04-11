@@ -86,6 +86,15 @@ class Calendar extends Component {
         return calendarDays;
     }
 
+    selectMonth = (month) => {
+        let monthNo = this.state.monthList.indexOf(month); 
+        let dateObject = Object.assign({}, this.state.dateObject);
+        dateObject = moment(dateObject).set("month", monthNo); 
+        this.setState({
+            dateObject: dateObject 
+        });
+    }
+
     render () {
         let weekDays = this.weekdayShortNames.map(day => {
             return (
@@ -114,7 +123,10 @@ class Calendar extends Component {
                         <tr>
                             <td colSpan="7">
                                 <table className={classes.MonthListTable}>
-                                    <MonthList listOfMonths={this.state.monthList} />
+                                    <MonthList 
+                                        listOfMonths={this.state.monthList} 
+                                        selectedMonth={this.selectMonth} 
+                                    />
                                 </table>
                             </td>
                         </tr>

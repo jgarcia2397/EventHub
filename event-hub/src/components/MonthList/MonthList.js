@@ -8,7 +8,7 @@ const monthList = (props) => {
     props.listOfMonths.map(
         data => {
             months.push(
-                <td>
+                <td onClick={() => props.selectedMonth(data)}>
                     <span>{data}</span>
                 </td>
             );
