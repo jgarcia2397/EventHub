@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import classes from './Calendar.module.css';
-import MonthList from '../../components/MonthList/MonthList';
+import MonthList from '../../components/MonthSelector/MonthSelector';
 
 class Calendar extends Component {
     state = {
         dateObject: moment(),
-        monthList: moment.months()
+        monthList: moment.months(),
+
     };
 
     weekdayShortNames = moment.weekdaysShort();
