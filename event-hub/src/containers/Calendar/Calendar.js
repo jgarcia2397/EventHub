@@ -92,7 +92,8 @@ class Calendar extends Component {
         let dateObject = Object.assign({}, this.state.dateObject);
         dateObject = moment(dateObject).set("month", monthNo); 
         this.setState({
-            dateObject: dateObject 
+            dateObject: dateObject,
+            showMonthSelector: !this.state.showMonthSelector 
         });
     }
 
@@ -124,31 +125,36 @@ class Calendar extends Component {
                                     </span>
                             </td>
                         </tr>
-                        <tr>
-                            <td colSpan="7">
-                                Select a month
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td colSpan="7">
                                 <table className={classes.MonthListTable}>
-                                    {
-                                        this.state.showMonthSelector 
-                                            ? <MonthSelector 
+                                    { this.state.showMonthSelector 
+                                        ? <div>
+                                            <tr>
+                                                <td colSpan="7">
+                                                    Select a month
+                                                </td>
+                                            </tr>
+                                            <MonthSelector 
                                                 listOfMonths={this.state.monthList} 
                                                 selectedMonth={this.selectMonth} />
-                                            : null
+                                        </div>
+                                        : null
                                     }
                                 </table>
                             </td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr className={classes.WeekDay}>
-                            {weekDays}
-                        </tr>
-                        {this.createCalendar()}
-                    </tbody>
+                    { !this.state.showMonthSelector 
+                        ? <tbody>
+                            <tr className={classes.WeekDay}>
+                                {weekDays}
+                            </tr>
+                            {this.createCalendar()}
+                        </tbody> 
+                        : null   
+                    }
                 </table>
             </div>
         );
