@@ -128,12 +128,12 @@ class Calendar extends Component {
         var yearArray = [];
         var currentYear = moment(startYear);
         var endYear = moment(stopYear);
-        console.log("[getYearRange] currentYear: ", currentYear);
-        console.log("[getYearRange] endYear: ", endYear);
+        // console.log("[getYearRange] currentYear: ", currentYear);
+        // console.log("[getYearRange] endYear: ", endYear);
         while (currentYear <= endYear) {
             yearArray.push(moment(currentYear).format("YYYY"));
             currentYear = moment(currentYear).add(1, "year");
-            console.log("[getYearRange] currentYear + 1: ", currentYear);
+            // console.log("[getYearRange] currentYear + 1: ", currentYear);
         }
         return yearArray;
     }
@@ -202,7 +202,7 @@ class Calendar extends Component {
                             </td>
                         </tr>
                     </thead>
-                    { !this.state.showMonthSelector  || !this.state.showYearSelector
+                    { !this.state.showMonthSelector && !this.state.showYearSelector
                         ? <tbody>
                             <tr className={classes.WeekDay}>
                                 {weekDays}

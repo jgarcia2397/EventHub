@@ -10,9 +10,9 @@ const yearSelector = (props) => {
         .format("Y");
 
     let yearRange = props.yearRange(props.currentYear, nextTwelveYears);
-    console.log("props.currentYear: " + props.currentYear);
-    console.log("nextTwelveYears: " + nextTwelveYears);
-    console.log("yearRange: " + yearRange);
+    // console.log("props.currentYear: " + props.currentYear);
+    // console.log("nextTwelveYears: " + nextTwelveYears);
+    // console.log("yearRange: " + yearRange);
 
     yearRange.map(data => {
         years.push(
