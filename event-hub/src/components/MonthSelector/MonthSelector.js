@@ -16,7 +16,7 @@ const monthList = (props) => {
     );
 
     months.forEach((monValue, i) => {
-        if (i % 3 !== 0 || i == 0) {
+        if (i % 3 !== 0 || i === 0) {
             cells.push(monValue);
         } else {
             rows.push(cells);

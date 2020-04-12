@@ -3,12 +3,14 @@ import moment from 'moment';
 
 import classes from './Calendar.module.css';
 import MonthSelector from '../../components/MonthSelector/MonthSelector';
+import YearSelector from '../../components/YearSelector/YearSelector';
 
 class Calendar extends Component {
     state = {
         dateObject: moment(),
         monthList: moment.months(),
-        showMonthSelector: false
+        showMonthSelector: false,
+        showYearSelector: false
     };
 
     weekdayShortNames = moment.weekdaysShort();
@@ -23,6 +25,10 @@ class Calendar extends Component {
 
     getMonth = () => {
         return this.state.dateObject.format("MMMM");
+    }
+
+    getYear = () => {
+        return this.state.dateObject.format("Y");
     }
 
     getFirstDayOfMonth = () => {
@@ -103,6 +109,26 @@ class Calendar extends Component {
         });
     }
 
+    toggleYearSelector = () => {
+        this.setState({
+            showYearSelector: !this.state.showYearSelector
+        });
+    }
+
+    getYearRange(startYear, stopYear) {
+        var yearArray = [];
+        var currentYear = moment(startYear);
+        var endYear = moment(stopYear);
+        console.log("[getYearRange] currentYear: ", currentYear);
+        console.log("[getYearRange] endYear: ", endYear);
+        while (currentYear <= endYear) {
+            yearArray.push(moment(currentYear).format("YYYY"));
+            currentYear = moment(currentYear).add(1, "year");
+            console.log("[getYearRange] currentYear + 1: ", currentYear);
+        }
+        return yearArray;
+    }
+
     render () {
         let weekDays = this.weekdayShortNames.map(day => {
             return (
@@ -119,18 +145,24 @@ class Calendar extends Component {
                         <tr>
                             <td 
                                 onClick={() => {this.toggleMonthSelector()}} 
-                                colSpan="7">
+                                colSpan="3">
                                     <span className={classes.LabelMonth}>
                                         {this.getMonth()}
                                     </span>
                             </td>
+                            <td 
+                                onClick={() => {this.toggleYearSelector()}}
+                                colSpan="3">
+                                    <span className={classes.LabelYear}>
+                                        {this.getYear()}
+                                    </span>
+                            </td>
                         </tr>
-                        
                         <tr>
                             <td colSpan="7">
                                 <table className={classes.MonthListTable}>
                                     { this.state.showMonthSelector 
-                                        ? <div>
+                                        ? <tbody>
                                             <tr>
                                                 <td colSpan="7">
                                                     Select a month
@@ -139,14 +171,28 @@ class Calendar extends Component {
                                             <MonthSelector 
                                                 listOfMonths={this.state.monthList} 
                                                 selectedMonth={this.selectMonth} />
-                                        </div>
+                                        </tbody>
+                                        : null
+                                    }
+                                    { this.state.showYearSelector 
+                                        ? <tbody>
+                                            <tr>
+                                                <td colSpan="7">
+                                                    Select a year
+                                                </td>
+                                            </tr>
+                                            <YearSelector
+                                                moment={this.state.dateObject}
+                                                currentYear={this.getYear()}
+                                                yearRange={this.getYearRange} />
+                                        </tbody>
                                         : null
                                     }
                                 </table>
                             </td>
                         </tr>
                     </thead>
-                    { !this.state.showMonthSelector 
+                    { !this.state.showMonthSelector  || !this.state.showYearSelector
                         ? <tbody>
                             <tr className={classes.WeekDay}>
                                 {weekDays}

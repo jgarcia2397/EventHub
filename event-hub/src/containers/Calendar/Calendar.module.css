@@ -111,6 +111,7 @@ tr {
     font-size: 2.2em;
 }
 
-.LabelMonth {
+.LabelMonth,
+.LabelYear {
     cursor: pointer;
 }
