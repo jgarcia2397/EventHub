@@ -242,7 +242,6 @@ class Calendar extends Component {
                                                 </td>
                                             </tr>
                                             <YearSelector
-                                                moment={this.state.dateObject}
                                                 currentYear={this.getYear()}
                                                 yearRange={this.getYearRange}
                                                 selectedYear={this.selectYear} />

@@ -1,10 +1,15 @@
 import React from 'react';
-//import moment from 'moment';
+import moment from 'moment';
 
 const yearSelector = (props) => {
     let years = [];
 
-    let nextTwelveYears = props.moment
+    // let nextTwelveYears = props.moment
+    //     .set("year", props.currentYear)
+    //     .add(11, "year")
+    //     .format("Y");
+
+    let nextTwelveYears = moment()
         .set("year", props.currentYear)
         .add(11, "year")
         .format("Y");
