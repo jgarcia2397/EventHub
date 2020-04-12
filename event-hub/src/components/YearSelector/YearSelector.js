@@ -15,7 +15,7 @@ const yearSelector = (props) => {
     // console.log("yearRange: " + yearRange);
 
     yearRange.map(data => {
-        years.push(
+        return years.push(
             <td
                 key={data}
                 onClick={() => {props.selectedYear(data)}}
