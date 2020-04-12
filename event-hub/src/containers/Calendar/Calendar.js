@@ -104,6 +104,7 @@ class Calendar extends Component {
     }
 
     selectYear = (year) => {
+        // console.log("[selectYear] year: " + year);
         let dateObject = Object.assign({}, this.state.dateObject);
         dateObject = moment(dateObject).set("year", year); 
         this.setState({
@@ -138,6 +139,30 @@ class Calendar extends Component {
         return yearArray;
     }
 
+    onPrev = () => {
+        let curr = "";
+        if (this.state.showYearSelector) {
+            curr = "year";
+        } else {
+            curr = "month";
+        }
+        this.setState({
+            dateObject: this.state.dateObject.subtract(1, curr)
+        });
+    };
+
+    onNext = () => {
+        let curr = "";
+        if (this.state.showYearSelector) {
+            curr = "year";
+        } else {
+            curr = "month";
+        }
+        this.setState({
+            dateObject: this.state.dateObject.add(1, curr)
+        });
+    };
+
     render () {
         let weekDays = this.weekdayShortNames.map(day => {
             return (
@@ -153,6 +178,11 @@ class Calendar extends Component {
                     <thead className={classes.CalendarHeader}>
                         <tr>
                             <td 
+                                onClick={() => {this.onPrev()}}
+                                colSpan="1">
+                                    <a className={classes.ButtonPrev}>&#8249;</a>
+                            </td>
+                            <td 
                                 onClick={() => {this.toggleMonthSelector()}} 
                                 colSpan="3">
                                     <span className={classes.LabelMonth}>
@@ -161,10 +191,15 @@ class Calendar extends Component {
                             </td>
                             <td 
                                 onClick={() => {this.toggleYearSelector()}}
-                                colSpan="3">
+                                colSpan="2">
                                     <span className={classes.LabelYear}>
                                         {this.getYear()}
                                     </span>
+                            </td>
+                            <td 
+                                onClick={() => {this.onNext()}}
+                                colSpan="1">
+                                    <a className={classes.ButtonNext}>&#8250;</a>
                             </td>
                         </tr>
                         <tr>
