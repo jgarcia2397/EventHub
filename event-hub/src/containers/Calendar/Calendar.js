@@ -10,7 +10,8 @@ class Calendar extends Component {
         dateObject: moment(),
         monthList: moment.months(),
         showMonthSelector: false,
-        showYearSelector: false
+        showYearSelector: false,
+        selectedDay: 0
     };
 
     weekdayShortNames = moment.weekdaysShort();
@@ -57,13 +58,26 @@ class Calendar extends Component {
         for (let d = 1; d <= this.getDays(); d++) {
             let currentDay = d == this.getCurrentDay() ? classes.CurrentDay : classes.Day;
             days.push(
-                <td key={d} className={currentDay}>
+                <td 
+                    key={d} 
+                    className={currentDay}
+                    onClick={() => {this.onDayClick(d)}}
+                >
                     {d}
                 </td>
             );
         }
         // console.log("Days: ", days);
         return days;
+    }
+
+    onDayClick = (d) => {
+        this.setState({
+            selectedDay: d
+        },
+        () => {
+            console.log("SELECTED DAY: ", this.state.selectedDay);
+        });
     }
 
     createCalendar = () => {
