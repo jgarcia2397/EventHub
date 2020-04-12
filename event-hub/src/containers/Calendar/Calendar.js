@@ -194,7 +194,7 @@ class Calendar extends Component {
                             <td 
                                 onClick={() => {this.onPrev()}}
                                 colSpan="1">
-                                    <a className={classes.ButtonPrev}>&#8249;</a>
+                                    <button className={classes.ButtonPrev}>&#8249;</button>
                             </td>
                             <td 
                                 onClick={() => {this.toggleMonthSelector()}} 
@@ -213,7 +213,7 @@ class Calendar extends Component {
                             <td 
                                 onClick={() => {this.onNext()}}
                                 colSpan="1">
-                                    <a className={classes.ButtonNext}>&#8250;</a>
+                                    <button className={classes.ButtonNext}>&#8250;</button>
                             </td>
                         </tr>
                         <tr>
