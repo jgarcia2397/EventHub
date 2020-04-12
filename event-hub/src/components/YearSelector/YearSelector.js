@@ -6,7 +6,7 @@ const yearSelector = (props) => {
 
     let nextTwelveYears = props.moment
         .set("year", props.currentYear)
-        .add(12, "year")
+        .add(11, "year")
         .format("Y");
 
     let yearRange = props.yearRange(props.currentYear, nextTwelveYears);
@@ -18,6 +18,7 @@ const yearSelector = (props) => {
         years.push(
             <td
                 key={data}
+                onClick={() => {props.selectedYear(data)}}
             >
                 <span>{data}</span>
             </td>

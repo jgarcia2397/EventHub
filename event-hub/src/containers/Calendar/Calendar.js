@@ -103,6 +103,15 @@ class Calendar extends Component {
         });
     }
 
+    selectYear = (year) => {
+        let dateObject = Object.assign({}, this.state.dateObject);
+        dateObject = moment(dateObject).set("year", year); 
+        this.setState({
+            dateObject: dateObject,
+            showYearSelector: !this.state.showYearSelector 
+        });
+    }
+
     toggleMonthSelector = () => {
         this.setState({
             showMonthSelector: !this.state.showMonthSelector
@@ -184,7 +193,8 @@ class Calendar extends Component {
                                             <YearSelector
                                                 moment={this.state.dateObject}
                                                 currentYear={this.getYear()}
-                                                yearRange={this.getYearRange} />
+                                                yearRange={this.getYearRange}
+                                                selectedYear={this.selectYear} />
                                         </tbody>
                                         : null
                                     }
