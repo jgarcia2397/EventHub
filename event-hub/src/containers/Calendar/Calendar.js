@@ -141,8 +141,10 @@ class Calendar extends Component {
 
     getYearRange(startYear, stopYear) {
         var yearArray = [];
-        var currentYear = moment(startYear);
-        var endYear = moment(stopYear);
+        // console.log("[getYearRange] startYear: ", startYear);
+        // console.log("[getYearRange] stopYear: ", stopYear);
+        var currentYear = moment(startYear, "YYYY");
+        var endYear = moment(stopYear, "YYYY");
         // console.log("[getYearRange] currentYear: ", currentYear);
         // console.log("[getYearRange] endYear: ", endYear);
         while (currentYear <= endYear) {
