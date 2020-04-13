@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import classes from './Calendar.module.css';
 import Selector from '../../components/Selector/Selector';
+import DateHeader from '../../components/DateHeader/DateHeader';
 
 class Calendar extends Component {
     state = {
@@ -197,20 +198,11 @@ class Calendar extends Component {
                                 colSpan="1">
                                     <button className={classes.ButtonPrev}>&#8249;</button>
                             </td>
-                            <td 
-                                onClick={() => {this.toggleMonthSelector()}} 
-                                colSpan="3">
-                                    <span className={classes.LabelMonth}>
-                                        {this.getMonth()}
-                                    </span>
-                            </td>
-                            <td 
-                                onClick={() => {this.toggleYearSelector()}}
-                                colSpan="2">
-                                    <span className={classes.LabelYear}>
-                                        {this.getYear()}
-                                    </span>
-                            </td>
+                            <DateHeader
+                                toggleMonthSel={this.toggleMonthSelector}
+                                toggleYearSel={this.toggleYearSelector}
+                                month={this.getMonth()}
+                                year={this.getYear()} />
                             <td 
                                 onClick={() => {this.onNext()}}
                                 colSpan="1">

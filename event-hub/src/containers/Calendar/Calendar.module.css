@@ -120,13 +120,3 @@ button:hover {
 .EditorYear {
     max-width: 3.6em;
 }
-
-.LabelMonth,
-.LabelYear {
-    font-size: 2.2em;
-}
-
-.LabelMonth,
-.LabelYear {
-    cursor: pointer;
-}

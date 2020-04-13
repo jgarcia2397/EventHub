@@ -1,0 +1,5 @@
+.LabelMonth,
+.LabelYear {
+    font-size: 2.2em;
+    cursor: pointer;
+}
