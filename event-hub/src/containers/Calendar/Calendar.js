@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 
 import classes from './Calendar.module.css';
-import MonthSelector from '../../components/MonthSelector/MonthSelector';
-import YearSelector from '../../components/YearSelector/YearSelector';
+import Selector from '../../components/Selector/Selector';
 
 class Calendar extends Component {
     state = {
@@ -220,34 +219,15 @@ class Calendar extends Component {
                         </tr>
                         <tr>
                             <td colSpan="7">
-                                <table className={classes.MonthListTable}>
-                                    { this.state.showMonthSelector 
-                                        ? <tbody>
-                                            <tr>
-                                                <td colSpan="7">
-                                                    Select a month
-                                                </td>
-                                            </tr>
-                                            <MonthSelector 
-                                                listOfMonths={this.state.monthList} 
-                                                selectedMonth={this.selectMonth} />
-                                        </tbody>
-                                        : null
-                                    }
-                                    { this.state.showYearSelector 
-                                        ? <tbody>
-                                            <tr>
-                                                <td colSpan="7">
-                                                    Select a year
-                                                </td>
-                                            </tr>
-                                            <YearSelector
-                                                currentYear={this.getYear()}
-                                                yearRange={this.getYearRange}
-                                                selectedYear={this.selectYear} />
-                                        </tbody>
-                                        : null
-                                    }
+                                <table>
+                                    <Selector 
+                                        showMonthSelector={this.state.showMonthSelector}
+                                        showYearSelector={this.state.showYearSelector}
+                                        listOfMonths={this.state.monthList}
+                                        selectedMonth={this.selectMonth}
+                                        currentYear={this.getYear()}
+                                        yearRange={this.getYearRange}
+                                        selectedYear={this.selectYear} />
                                 </table>
                             </td>
                         </tr>

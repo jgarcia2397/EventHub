@@ -7,6 +7,10 @@ tr {
     margin: 0;
 }
 
+table {
+    margin: auto;
+}
+
 button {
     text-decoration: none;
     display: inline-block;
@@ -26,16 +30,6 @@ button:hover {
 .ButtonNext {
     background-color: #4169E1;
     color: white;
-}
-
-.MonthListTable {
-    margin: auto;
-    font-size: 1.0em;
-    cursor: pointer;
-} 
-
-.MonthListTable span:hover {
-    color: red;
 } 
 
 .CalendarContainer {

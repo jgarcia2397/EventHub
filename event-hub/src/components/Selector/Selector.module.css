@@ -1,0 +1,9 @@
+.SelectorTable {
+    margin: auto;
+    font-size: 1.0em;
+    cursor: pointer;
+} 
+
+.SelectorTable span:hover {
+    color: red;
+}
