@@ -11,27 +11,6 @@ table {
     margin: auto;
 }
 
-button {
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 16px;
-}
-
-button:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.ButtonPrev {
-    background-color: #f1f1f1;
-    color: black;
-}
-
-.ButtonNext {
-    background-color: #4169E1;
-    color: white;
-} 
-
 .CalendarContainer {
     border: 2px solid skyblue;
     width: 100%;

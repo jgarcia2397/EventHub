@@ -4,6 +4,7 @@ import moment from 'moment';
 import classes from './Calendar.module.css';
 import Selector from '../../components/Selector/Selector';
 import DateHeader from '../../components/DateHeader/DateHeader';
+import DateButton from '../../components/DateButton/DateButton';
 
 class Calendar extends Component {
     state = {
@@ -193,21 +194,19 @@ class Calendar extends Component {
                 <table className={classes.Calendar}>
                     <thead className={classes.CalendarHeader}>
                         <tr>
-                            <td 
-                                onClick={() => {this.onPrev()}}
-                                colSpan="1">
-                                    <button className={classes.ButtonPrev}>&#8249;</button>
-                            </td>
+                            <DateButton
+                                prevClick={this.onPrev}
+                                nextClick={this.onNext}
+                                type="prev" />
                             <DateHeader
                                 toggleMonthSel={this.toggleMonthSelector}
                                 toggleYearSel={this.toggleYearSelector}
                                 month={this.getMonth()}
                                 year={this.getYear()} />
-                            <td 
-                                onClick={() => {this.onNext()}}
-                                colSpan="1">
-                                    <button className={classes.ButtonNext}>&#8250;</button>
-                            </td>
+                            <DateButton
+                                prevClick={this.onPrev}
+                                nextClick={this.onNext}
+                                type="next" />
                         </tr>
                         <tr>
                             <td colSpan="7">
