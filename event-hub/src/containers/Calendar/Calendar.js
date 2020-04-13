@@ -5,6 +5,7 @@ import classes from './Calendar.module.css';
 import Selector from '../../components/Selector/Selector';
 import DateHeader from '../../components/DateHeader/DateHeader';
 import DateButton from '../../components/DateButton/DateButton';
+import CalendarTable from '../../components/CalendarTable/CalendarTable';
 
 class Calendar extends Component {
     state = {
@@ -14,8 +15,6 @@ class Calendar extends Component {
         showYearSelector: false,
         selectedDay: 0
     };
-
-    weekdayShortNames = moment.weekdaysShort();
 
     getDays = () => {
         return this.state.dateObject.daysInMonth();
@@ -181,14 +180,6 @@ class Calendar extends Component {
     };
 
     render () {
-        let weekDays = this.weekdayShortNames.map(day => {
-            return (
-                <th key={day} className={classes.WeekDay}>
-                    {day}
-                </th>
-            );
-        });
-
         return (
             <div className={classes.CalendarContainer}>
                 <table className={classes.Calendar}>
@@ -223,15 +214,10 @@ class Calendar extends Component {
                             </td>
                         </tr>
                     </thead>
-                    { !this.state.showMonthSelector && !this.state.showYearSelector
-                        ? <tbody>
-                            <tr className={classes.WeekDay}>
-                                {weekDays}
-                            </tr>
-                            {this.createCalendar()}
-                        </tbody> 
-                        : null   
-                    }
+                    <CalendarTable
+                        showMonthSel={this.state.showMonthSelector}
+                        showYearSel={this.state.showYearSelector}
+                        calendar={this.createCalendar} />
                 </table>
             </div>
         );

@@ -38,14 +38,9 @@ table {
     height: 24px;
 }
 
-.Day,
-.WeekDay {
+.Day {
     text-align: center;
     height: 40px;
-}
-
-.WeekDay {
-    font-size: 1.0em;
 }
 
 .Day {
