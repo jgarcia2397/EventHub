@@ -13,7 +13,8 @@ table {
 
 .CalendarContainer {
     border: 2px solid skyblue;
-    width: 100%;
+    margin: 150px auto;
+    width: 70%;
 }
 
 .Calendar {
