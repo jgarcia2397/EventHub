@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import classes from './EventCreator.module.css';
+import classes from './EventHub.module.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Selector from '../../components/Selector/Selector';
 import DateHeader from '../../components/DateHeader/DateHeader';
