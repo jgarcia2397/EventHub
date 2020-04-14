@@ -9,8 +9,8 @@ const App = () => {
   return (
     <div className="App">
       <Layout>
-        <Route path="/" exact component={EventHub} />
-        <Route path="/createEventForm" component={EventForm} />
+          <Route path="/createEventForm" component={EventForm} />
+          <Route path="/" exact component={EventHub} />
       </Layout>
     </div>
   );

@@ -180,6 +180,11 @@ class Calendar extends Component {
         });
     };
 
+    createEvent = () => {
+        this.props.history.push('/createEventForm');
+        //console.log(this.props);
+    }
+
     render () {
         let calendar = null;
         calendar = (
@@ -221,12 +226,13 @@ class Calendar extends Component {
                         showYearSel={this.state.showYearSelector}
                         calendar={this.createCalendar} />
                 </table>
-            </div>
+            </div>    
         );
 
         return (
             <Auxiliary>
                 {calendar}
+                <button onClick={this.createEvent}>CREATE EVENT</button>
             </Auxiliary>
         );
     }
