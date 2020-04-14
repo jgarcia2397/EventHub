@@ -8,7 +8,7 @@ import DateHeader from '../../components/DateHeader/DateHeader';
 import DateButton from '../../components/DateButton/DateButton';
 import CalendarTable from '../../components/CalendarTable/CalendarTable';
 
-class Calendar extends Component {
+class EventHub extends Component {
     state = {
         dateObject: moment(),
         monthList: moment.months(),
@@ -238,4 +238,4 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+export default EventHub;
