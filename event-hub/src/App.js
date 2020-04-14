@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Layout from './hoc/Layout/Layout';
-import Calendar from './containers/EventHub/EventHub';
+import EventHub from './containers/EventHub/EventHub';
 
 const App = () => {
   return (
     <div className="App">
       <Layout>
-        <Calendar />
+        <EventHub />
       </Layout>
     </div>
   );
