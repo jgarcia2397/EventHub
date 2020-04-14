@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Layout from './hoc/Layout/Layout';
-import Calendar from './containers/Calendar/Calendar';
+import Calendar from './containers/EventCreator/EventCreator';
 
 const App = () => {
   return (

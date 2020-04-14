@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
-import classes from './Calendar.module.css';
+import classes from './EventCreator.module.css';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Selector from '../../components/Selector/Selector';
 import DateHeader from '../../components/DateHeader/DateHeader';
 import DateButton from '../../components/DateButton/DateButton';
@@ -180,7 +181,8 @@ class Calendar extends Component {
     };
 
     render () {
-        return (
+        let calendar = null;
+        calendar = (
             <div className={classes.CalendarContainer}>
                 <table className={classes.Calendar}>
                     <thead className={classes.CalendarHeader}>
@@ -220,6 +222,12 @@ class Calendar extends Component {
                         calendar={this.createCalendar} />
                 </table>
             </div>
+        );
+
+        return (
+            <Auxiliary>
+                {calendar}
+            </Auxiliary>
         );
     }
 }
