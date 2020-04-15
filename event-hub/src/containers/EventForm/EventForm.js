@@ -11,7 +11,8 @@ class EventForm extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Event Name'
+                    placeholder: 'Event Name',
+                    label: "Enter the event name: "
                 },
                 value: '',
                 validation: {
@@ -21,10 +22,11 @@ class EventForm extends Component {
                 touched: false
             },
             month: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Month'
+                    placeholder: 'Month',
+                    label: "Enter date of the event: "
                 },
                 value: '',
                 validation: {
@@ -34,7 +36,7 @@ class EventForm extends Component {
                 touched: false
             },
             day: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Day'
@@ -47,7 +49,7 @@ class EventForm extends Component {
                 touched: false
             },
             year: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Year'
@@ -60,10 +62,11 @@ class EventForm extends Component {
                 touched: false
             },
             startHour: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Hour'
+                    placeholder: 'Hour',
+                    label: "Enter start time of the event: "
                 },
                 value: '',
                 validation: {
@@ -73,7 +76,7 @@ class EventForm extends Component {
                 touched: false
             },
             startMinute: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Minute'
@@ -86,7 +89,7 @@ class EventForm extends Component {
                 touched: false
             },
             startPeriod: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'AM or PM'
@@ -99,10 +102,11 @@ class EventForm extends Component {
                 touched: false
             },
             endHour: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Hour'
+                    placeholder: 'Hour',
+                    label: "Enter end time of the event: "
                 },
                 value: '',
                 validation: {
@@ -112,7 +116,7 @@ class EventForm extends Component {
                 touched: false
             },
             endMinute: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'Minute'
@@ -125,7 +129,7 @@ class EventForm extends Component {
                 touched: false
             },
             endPeriod: {
-                elementType: 'input',
+                elementType: 'timeInput',
                 elementConfig: {
                     type: 'text',
                     placeholder: 'AM or PM'
@@ -141,7 +145,8 @@ class EventForm extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Place'
+                    placeholder: 'Place',
+                    label: "Enter the place of your event: "
                 },
                 value: '',
                 validation: {
@@ -155,20 +160,30 @@ class EventForm extends Component {
     }
 
     render () {
+        const formElementsArray = [];
+        for (let key in this.state.eventForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.eventForm[key]
+            });
+        }
+
+        let form = (
+            <form>
+                {formElementsArray.map(formElement => (
+                    <Input 
+                        key={formElement.id}
+                        elementType={formElement.config.elementType} 
+                        elementConfig={formElement.config.elementConfig} 
+                        value={formElement.config.value} />
+                ))}
+                <button>CREATE EVENT</button>
+            </form>
+        );
+
         return (
             <div className={classes.EventForm}>
-                <Input inputtype="input" type="text" name="eventName" placeholder="Event Name" label="Enter your event name: " />
-                <Input inputtype="timeInput" type="text" name="eventMonth" placeholder="Month" label="Enter date of the event: " />
-                <Input inputtype="timeInput" type="text" name="eventDay" placeholder="Day" />
-                <Input inputtype="timeInput" type="text" name="eventYear" placeholder="Year" />
-                <Input inputtype="timeInput" type="text" name="eventStartHour" placeholder="HH" label="Enter start time of the event: " />
-                <Input inputtype="timeInput" type="text" name="eventStartMinute" placeholder="MM" />
-                <Input inputtype="timeInput" type="text" name="eventStartPeriod" placeholder="AM/PM" />
-                <Input inputtype="timeInput" type="text" name="eventEndHour" placeholder="HH" label="Enter end time of the event: " />
-                <Input inputtype="timeInput" type="text" name="eventEndMinute" placeholder="MM" />
-                <Input inputtype="timeInput" type="text" name="eventEndPeriod" placeholder="AM/PM" />
-                <Input inputtype="input" type="text" name="eventPlace" placeholder="Event Place" label="Enter the place of your event: " />
-                <button>CREATE EVENT</button>
+                {form}
             </div>
         );
     }

@@ -5,12 +5,18 @@ import classes from './Input.module.css';
 const input = (props) => {
     let inputElement = null;
 
-    switch (props.inputtype) {
+    switch (props.elementType) {
         case ('input'):
-            inputElement = <input className={classes.InputElement} {...props} />;
+            inputElement = <input 
+                className={classes.InputElement} 
+                {...props.elementConfig} 
+                value={props.value} />;
             break;
         case ('timeInput'):
-            inputElement = <input className={classes.TimeInputElement} {...props} />;
+            inputElement = <input 
+                className={classes.TimeInputElement} 
+                {...props.elementConfig} 
+                value={props.value} />;
             break;
         /*case ('select'):
             inputElement = <select className={classes.TimeInputElement} {...props}>
@@ -22,12 +28,15 @@ const input = (props) => {
             </select>;
             break;*/
         default:
-            inputElement = <input className={classes.InputElement} />;
+            inputElement = <input 
+                className={classes.InputElement} 
+                {...props.elementConfig} 
+                value={props.value} />;
     }
     
     return (
         <div className={classes.Input}>
-            <label className={classes.Label}>{props.label}</label>
+            <label className={classes.Label}>{props.elementConfig.label}</label>
             {inputElement}
         </div>
     );
