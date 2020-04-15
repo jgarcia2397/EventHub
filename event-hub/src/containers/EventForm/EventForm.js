@@ -205,6 +205,20 @@ class EventForm extends Component {
         formIsValid: false
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedEventForm = {
+            ...this.state.eventForm
+        };
+
+        const updatedFormElement = {
+            ...updatedEventForm[inputIdentifier]
+        };
+
+        updatedFormElement.value = event.target.value;
+        updatedEventForm[inputIdentifier] = updatedFormElement;
+        this.setState({eventForm: updatedEventForm});
+    }
+
     render () {
         const formElementsArray = [];
         for (let key in this.state.eventForm) {
@@ -221,7 +235,8 @@ class EventForm extends Component {
                         key={formElement.id}
                         elementType={formElement.config.elementType} 
                         elementConfig={formElement.config.elementConfig} 
-                        value={formElement.config.value} />
+                        value={formElement.config.value}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <button>CREATE EVENT</button>
             </form>
