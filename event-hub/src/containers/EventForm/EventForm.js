@@ -67,18 +67,18 @@ class EventForm extends Component {
                 elementConfig: {
                     label: "Enter start time of the event: ",
                     options: [
-                        {value: 'oneStartHour', displayValue: '1'}, 
-                        {value: 'twoStartHour', displayValue: '2'},
-                        {value: 'threeStartHour', displayValue: '3'},
-                        {value: 'fourStartHour', displayValue: '4'},
-                        {value: 'fiveStartHour', displayValue: '5'},
-                        {value: 'sixStartHour', displayValue: '6'},
-                        {value: 'sevenStartHour', displayValue: '7'},
-                        {value: 'eightStartHour', displayValue: '8'},
-                        {value: 'nineStartHour', displayValue: '9'},
-                        {value: 'tenStartHour', displayValue: '10'},
-                        {value: 'elevenStartHour', displayValue: '11'},
-                        {value: 'twelveStartHour', displayValue: '12'}
+                        {value: '1', displayValue: '1'}, 
+                        {value: '2', displayValue: '2'},
+                        {value: '3', displayValue: '3'},
+                        {value: '4', displayValue: '4'},
+                        {value: '5', displayValue: '5'},
+                        {value: '6', displayValue: '6'},
+                        {value: '7', displayValue: '7'},
+                        {value: '8', displayValue: '8'},
+                        {value: '9', displayValue: '9'},
+                        {value: '10', displayValue: '10'},
+                        {value: '11', displayValue: '11'},
+                        {value: '12', displayValue: '12'}
                     ]
                 },
                 value: '',
@@ -91,18 +91,18 @@ class EventForm extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: 'zeroStartMin', displayValue: '00'}, 
-                        {value: 'fiveStartMin', displayValue: '05'},
-                        {value: 'tenStartMin', displayValue: '10'},
-                        {value: 'fifteenStartMin', displayValue: '15'},
-                        {value: 'twentyStartMin', displayValue: '20'},
-                        {value: 'twentyfiveStartMin', displayValue: '25'},
-                        {value: 'thirtyStartMin', displayValue: '30'},
-                        {value: 'thirtyfiveStartMin', displayValue: '35'},
-                        {value: 'fortyStartMin', displayValue: '40'},
-                        {value: 'fortyfiveStartMin', displayValue: '45'},
-                        {value: 'fiftyStartMin', displayValue: '50'},
-                        {value: 'fiftyfiveStartMin', displayValue: '55'}
+                        {value: '00', displayValue: '00'}, 
+                        {value: '05', displayValue: '05'},
+                        {value: '10', displayValue: '10'},
+                        {value: '15', displayValue: '15'},
+                        {value: '20', displayValue: '20'},
+                        {value: '25', displayValue: '25'},
+                        {value: '30', displayValue: '30'},
+                        {value: '35', displayValue: '35'},
+                        {value: '40', displayValue: '40'},
+                        {value: '45', displayValue: '45'},
+                        {value: '50', displayValue: '50'},
+                        {value: '55', displayValue: '55'}
                     ]
                 },
                 value: '',
@@ -130,18 +130,18 @@ class EventForm extends Component {
                 elementConfig: {
                     label: "Enter end time of the event: ",
                     options: [
-                        {value: 'oneEndtHour', displayValue: '1'}, 
-                        {value: 'twoEndHour', displayValue: '2'},
-                        {value: 'threeEndHour', displayValue: '3'},
-                        {value: 'fourEndHour', displayValue: '4'},
-                        {value: 'fiveEndHour', displayValue: '5'},
-                        {value: 'sixEndHour', displayValue: '6'},
-                        {value: 'sevenEndHour', displayValue: '7'},
-                        {value: 'eightEndHour', displayValue: '8'},
-                        {value: 'nineEndHour', displayValue: '9'},
-                        {value: 'tenEndHour', displayValue: '10'},
-                        {value: 'elevenEndHour', displayValue: '11'},
-                        {value: 'twelveEndHour', displayValue: '12'}
+                        {value: '1', displayValue: '1'}, 
+                        {value: '2', displayValue: '2'},
+                        {value: '3', displayValue: '3'},
+                        {value: '4', displayValue: '4'},
+                        {value: '5', displayValue: '5'},
+                        {value: '6', displayValue: '6'},
+                        {value: '7', displayValue: '7'},
+                        {value: '8', displayValue: '8'},
+                        {value: '9', displayValue: '9'},
+                        {value: '10', displayValue: '10'},
+                        {value: '11', displayValue: '11'},
+                        {value: '12', displayValue: '12'}
                     ]
                 },
                 value: '',
@@ -154,18 +154,18 @@ class EventForm extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: 'zeroEndMin', displayValue: '00'}, 
-                        {value: 'fiveEndMin', displayValue: '05'},
-                        {value: 'tenEndMin', displayValue: '10'},
-                        {value: 'fifteenEndMin', displayValue: '15'},
-                        {value: 'twentyEndMin', displayValue: '20'},
-                        {value: 'twentyfiveEndMin', displayValue: '25'},
-                        {value: 'thirtyEndMin', displayValue: '30'},
-                        {value: 'thirtyfiveEndMin', displayValue: '35'},
-                        {value: 'fortyEndMin', displayValue: '40'},
-                        {value: 'fortyfiveEndMin', displayValue: '45'},
-                        {value: 'fiftyEndMin', displayValue: '50'},
-                        {value: 'fiftyfiveEndMin', displayValue: '55'}
+                        {value: '00', displayValue: '00'}, 
+                        {value: '05', displayValue: '05'},
+                        {value: '10', displayValue: '10'},
+                        {value: '15', displayValue: '15'},
+                        {value: '20', displayValue: '20'},
+                        {value: '25', displayValue: '25'},
+                        {value: '30', displayValue: '30'},
+                        {value: '35', displayValue: '35'},
+                        {value: '40', displayValue: '40'},
+                        {value: '45', displayValue: '45'},
+                        {value: '50', displayValue: '50'},
+                        {value: '55', displayValue: '55'}
                     ]
                 },
                 value: '',
