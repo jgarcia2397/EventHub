@@ -18,15 +18,17 @@ const input = (props) => {
                 {...props.elementConfig} 
                 value={props.value} />;
             break;
-        /*case ('select'):
-            inputElement = <select className={classes.TimeInputElement} {...props}>
-               {props.elementConfig.options.map(option => (
-                    <option key={option.value} value={option.value}>
-                        {option.displayValue}
-                    </option>
-                ))} 
+        case ('select'):
+            inputElement = <select 
+                className={classes.TimeInputElement}
+                value={props.value}>
+                    {props.elementConfig.options.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.displayValue}
+                        </option>
+                    ))} 
             </select>;
-            break;*/
+            break;
         default:
             inputElement = <input 
                 className={classes.InputElement} 

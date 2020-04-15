@@ -62,84 +62,130 @@ class EventForm extends Component {
                 touched: false
             },
             startHour: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Hour',
-                    label: "Enter start time of the event: "
+                    label: "Enter start time of the event: ",
+                    options: [
+                        {value: 'oneStartHour', displayValue: '1'}, 
+                        {value: 'twoStartHour', displayValue: '2'},
+                        {value: 'threeStartHour', displayValue: '3'},
+                        {value: 'fourStartHour', displayValue: '4'},
+                        {value: 'fiveStartHour', displayValue: '5'},
+                        {value: 'sixStartHour', displayValue: '6'},
+                        {value: 'sevenStartHour', displayValue: '7'},
+                        {value: 'eightStartHour', displayValue: '8'},
+                        {value: 'nineStartHour', displayValue: '9'},
+                        {value: 'tenStartHour', displayValue: '10'},
+                        {value: 'elevenStartHour', displayValue: '11'},
+                        {value: 'twelveStartHour', displayValue: '12'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             startMinute: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Minute'
+                    options: [
+                        {value: 'zeroStartMin', displayValue: '00'}, 
+                        {value: 'fiveStartMin', displayValue: '05'},
+                        {value: 'tenStartMin', displayValue: '10'},
+                        {value: 'fifteenStartMin', displayValue: '15'},
+                        {value: 'twentyStartMin', displayValue: '20'},
+                        {value: 'twentyfiveStartMin', displayValue: '25'},
+                        {value: 'thirtyStartMin', displayValue: '30'},
+                        {value: 'thirtyfiveStartMin', displayValue: '35'},
+                        {value: 'fortyStartMin', displayValue: '40'},
+                        {value: 'fortyfiveStartMin', displayValue: '45'},
+                        {value: 'fiftyStartMin', displayValue: '50'},
+                        {value: 'fiftyfiveStartMin', displayValue: '55'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             startPeriod: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'AM or PM'
+                    options: [
+                        {value: 'AM', displayValue: 'AM'}, 
+                        {value: 'PM', displayValue: 'PM'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             endHour: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Hour',
-                    label: "Enter end time of the event: "
+                    label: "Enter end time of the event: ",
+                    options: [
+                        {value: 'oneEndtHour', displayValue: '1'}, 
+                        {value: 'twoEndHour', displayValue: '2'},
+                        {value: 'threeEndHour', displayValue: '3'},
+                        {value: 'fourEndHour', displayValue: '4'},
+                        {value: 'fiveEndHour', displayValue: '5'},
+                        {value: 'sixEndHour', displayValue: '6'},
+                        {value: 'sevenEndHour', displayValue: '7'},
+                        {value: 'eightEndHour', displayValue: '8'},
+                        {value: 'nineEndHour', displayValue: '9'},
+                        {value: 'tenEndHour', displayValue: '10'},
+                        {value: 'elevenEndHour', displayValue: '11'},
+                        {value: 'twelveEndHour', displayValue: '12'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             endMinute: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Minute'
+                    options: [
+                        {value: 'zeroEndMin', displayValue: '00'}, 
+                        {value: 'fiveEndMin', displayValue: '05'},
+                        {value: 'tenEndMin', displayValue: '10'},
+                        {value: 'fifteenEndMin', displayValue: '15'},
+                        {value: 'twentyEndMin', displayValue: '20'},
+                        {value: 'twentyfiveEndMin', displayValue: '25'},
+                        {value: 'thirtyEndMin', displayValue: '30'},
+                        {value: 'thirtyfiveEndMin', displayValue: '35'},
+                        {value: 'fortyEndMin', displayValue: '40'},
+                        {value: 'fortyfiveEndMin', displayValue: '45'},
+                        {value: 'fiftyEndMin', displayValue: '50'},
+                        {value: 'fiftyfiveEndMin', displayValue: '55'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             endPeriod: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'AM or PM'
+                    options: [
+                        {value: 'AM', displayValue: 'AM'}, 
+                        {value: 'PM', displayValue: 'PM'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             place: {
                 elementType: 'input',
