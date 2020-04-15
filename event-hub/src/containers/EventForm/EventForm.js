@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
+import axios from '../../axios-events';
 
 class EventForm extends Component {
 
@@ -219,6 +220,23 @@ class EventForm extends Component {
         this.setState({eventForm: updatedEventForm});
     }
 
+    createEventHandler = (event) => {
+        event.preventDefault();
+
+        const formData = {};
+        for (let formElementIdentifier in this.state.eventForm) {
+            formData[formElementIdentifier] = this.state.eventForm[formElementIdentifier].value;
+        }
+
+        const eventDetails = {
+            eventDetails: formData
+        }
+
+        axios.post('/events.json', eventDetails)
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
+    }
+
     render () {
         const formElementsArray = [];
         for (let key in this.state.eventForm) {
@@ -229,7 +247,7 @@ class EventForm extends Component {
         }
 
         let form = (
-            <form>
+            <form onSubmit={this.createEventHandler}>
                 {formElementsArray.map(formElement => (
                     <Input 
                         key={formElement.id}
