@@ -234,8 +234,13 @@ class EventForm extends Component {
         }
 
         axios.post('/events.json', eventDetails)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+            .then(response => {
+                // console.log(response);
+                this.props.history.push('/');
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     render () {
