@@ -31,7 +31,8 @@ class EventList extends Component {
                 {this.state.eventList.map(event => (
                     <Event 
                         key={event.id}
-                        details={event.eventDetails} />
+                        details={event.eventDetails}
+                        numGuests={event.numberOfGuests} />
                 ))}
             </div>
         );

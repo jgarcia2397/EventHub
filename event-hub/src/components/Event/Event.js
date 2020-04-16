@@ -18,6 +18,7 @@ const event = (props) => {
             <p><strong>{props.details.name}</strong> @ {props.details.place}</p>
             <p><strong>Starts at </strong>{props.details.startHour}:{props.details.startMinute} {props.details.startPeriod}</p>
             <p><strong>Ends at </strong>{props.details.endHour}:{props.details.endMinute} {props.details.endPeriod}</p>
+            <p>You have invited {props.numGuests} guests</p>
         </div>
     );
 }

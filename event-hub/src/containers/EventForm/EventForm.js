@@ -229,7 +229,8 @@ class EventForm extends Component {
         }
 
         const eventDetails = {
-            eventDetails: formData
+            eventDetails: formData,
+            numberOfGuests: 0
         }
 
         axios.post('/events.json', eventDetails)
