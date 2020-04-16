@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classes from './EventList.module.css';
 import axios from '../../../axios-events';
 import Event from '../../../components/Event/Event';
 
@@ -27,7 +28,7 @@ class EventList extends Component {
 
     render () {
         return (
-            <div>
+            <div className={classes.List}>
                 {this.state.eventList.map(event => (
                     <Event 
                         key={event.id}

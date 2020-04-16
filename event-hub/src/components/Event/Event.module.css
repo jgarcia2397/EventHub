@@ -1,8 +1,24 @@
 .Event {
-    width: 60%;
+    width: 50%;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     padding: 10px;
     margin: 10px auto;
     box-sizing: border-box;
+    display: flex;
+}
+
+.Text {
+    width: 70%;
+    float: left;
+}
+
+.ButtonSide {
+    width: 30%;
+    float: right;
+    padding: 75px 0px 0px;
+}
+
+p {
+    text-align: left;
 }
