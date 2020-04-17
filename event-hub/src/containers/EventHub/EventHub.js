@@ -57,8 +57,19 @@ class EventHub extends Component {
     getDaysOfMonth = () => {
         let days = [];
 
+        // current date
+        const currMonth = moment().format("MMMM");
+        const currYear = moment().format("YYYY");
+
+        // selected calendar date, dateObject in state updated everytime new date selected
+        const dateObjectMonth = this.state.dateObject.format("MMMM");
+        const dateObjectYear = this.state.dateObject.format("YYYY");
+
+        // console.log("currMonth: " + currMonth + ", currYear: " + currYear);
+        // console.log("dateObjectMonth: " + dateObjectMonth + ", dateObjectYear: " + dateObjectYear);
+
         for (let d = 1; d <= this.getDays(); d++) {
-            let currentDay = d == this.getCurrentDay() ? classes.CurrentDay : classes.Day;
+            let currentDay = (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear) ? classes.CurrentDay : classes.Day;
             days.push(
                 <td 
                     key={d} 
