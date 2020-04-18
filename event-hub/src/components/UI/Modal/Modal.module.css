@@ -8,4 +8,5 @@
     box-sizing: border-box;
     left: 25%;
     top: 30%;
+    z-index: 200;
 }
