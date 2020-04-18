@@ -8,6 +8,7 @@ import DateHeader from '../../components/DateHeader/DateHeader';
 import DateButton from '../../components/DateButton/DateButton';
 import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from './EventList/EventList';
+import Modal from '../../components/UI/Modal/Modal';
 
 class EventHub extends Component {
     state = {
@@ -243,6 +244,7 @@ class EventHub extends Component {
 
         return (
             <Auxiliary>
+                <Modal />
                 {calendar}
                 <button onClick={this.createEvent}>CREATE EVENT</button>
                 <h1>Your Events</h1>
