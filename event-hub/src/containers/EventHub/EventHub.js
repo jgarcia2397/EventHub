@@ -260,8 +260,10 @@ class EventHub extends Component {
 
         return (
             <Auxiliary>
-                <Modal show={this.state.isDaySelected}>
-                    {createEventPopup}
+                <Modal 
+                    show={this.state.isDaySelected}
+                    close={this.onCreateEventCancel}>
+                        {createEventPopup}
                 </Modal>
                 {calendar}
                 <h1>Your Events</h1>
