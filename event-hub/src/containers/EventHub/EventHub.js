@@ -9,6 +9,7 @@ import DateButton from '../../components/DateButton/DateButton';
 import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from './EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
+import CreateEventPopup from '../../components/CreateEventPopup/CreateEventPopup';
 
 class EventHub extends Component {
     state = {
@@ -16,7 +17,8 @@ class EventHub extends Component {
         monthList: moment.months(),
         showMonthSelector: false,
         showYearSelector: false,
-        selectedDay: 0
+        selectedDay: 0,
+        isDaySelected: false
     };
 
     getDays = () => {
@@ -87,7 +89,8 @@ class EventHub extends Component {
 
     onDayClick = (d) => {
         this.setState({
-            selectedDay: d
+            selectedDay: d,
+            isDaySelected: true
         },
         () => {
             console.log("SELECTED DAY: ", this.state.selectedDay);
@@ -193,9 +196,14 @@ class EventHub extends Component {
         });
     };
 
-    createEvent = () => {
+    onCreateEventContinue = () => {
         this.props.history.push('/createEventForm');
-        //console.log(this.props);
+    }
+
+    onCreateEventCancel = () => {
+        this.setState({
+            isDaySelected: false
+        });
     }
 
     render () {
@@ -242,11 +250,20 @@ class EventHub extends Component {
             </div>    
         );
 
+        let createEventPopup = null;
+        createEventPopup = <CreateEventPopup
+                                month={this.state.dateObject.format("MMMM")}
+                                day={this.state.selectedDay}
+                                year={this.state.dateObject.format("YYYY")}
+                                onContinue={this.onCreateEventContinue}
+                                onCancel={this.onCreateEventCancel} />
+
         return (
             <Auxiliary>
-                <Modal />
+                <Modal show={this.state.isDaySelected}>
+                    {createEventPopup}
+                </Modal>
                 {calendar}
-                <button onClick={this.createEvent}>CREATE EVENT</button>
                 <h1>Your Events</h1>
                 <EventList />
             </Auxiliary>

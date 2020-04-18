@@ -4,8 +4,12 @@ import classes from './Modal.module.css';
 
 const modal = (props) => {
     return (
-        <div className={classes.Modal}>
-            {props.children}
+        <div 
+            className={classes.Modal}
+            style={{
+                opacity: props.show ? '1' : '0'
+            }}>
+                {props.children}
         </div>
     );
 }
