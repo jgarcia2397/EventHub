@@ -228,9 +228,14 @@ class EventForm extends Component {
             formData[formElementIdentifier] = this.state.eventForm[formElementIdentifier].value;
         }
 
+        // let dateData = firebase.firestore.Timestamp.fromDate(new Date(formData.month + " " + formData.day + ", " + formData.year));
+        let dateData = new Date(formData.month + " " + formData.day + ", " + formData.year);
+        // console.log("dateData: " + dateData);
+
         const eventDetails = {
             eventDetails: formData,
-            numberOfGuests: 0
+            numberOfGuests: 0,
+            eventTimestamp: dateData
         }
 
         axios.post('/events.json', eventDetails)
