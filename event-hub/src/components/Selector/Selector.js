@@ -9,7 +9,7 @@ const selector = (props) => {
     return (
         <Auxiliary>
             { props.showMonthSelector 
-                ? <tbody className={classes.SelectorTable}>
+                ? <thead className={classes.SelectorTable}>
                     <tr>
                         <td colSpan="7">
                             Select a month
@@ -18,11 +18,11 @@ const selector = (props) => {
                     <MonthSelector 
                         listOfMonths={props.listOfMonths} 
                         selectedMonth={props.selectedMonth} />
-                </tbody>
+                </thead>
                 : null
             }
             { props.showYearSelector 
-                ? <tbody className={classes.SelectorTable}>
+                ? <thead className={classes.SelectorTable}>
                     <tr>
                         <td colSpan="7">
                             Select a year
@@ -32,7 +32,7 @@ const selector = (props) => {
                         currentYear={props.currentYear}
                         yearRange={props.yearRange}
                         selectedYear={props.selectedYear} />
-                </tbody>
+                </thead>
                 : null
             }
         </Auxiliary>

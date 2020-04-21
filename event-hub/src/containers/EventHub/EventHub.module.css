@@ -7,6 +7,11 @@ tr {
     margin: 0;
 }
 
+.CalendarHeader span:hover,
+tbody td:hover {
+    color: red;
+}
+
 table {
     margin: auto;
 }
@@ -66,6 +71,7 @@ h1 {
     border-radius: 2%; */
     color: white;
     border: 1px solid #C0C0C0;
+    cursor: pointer;
 }
 
 .EventDay {
@@ -74,6 +80,7 @@ h1 {
     background-color: #FFD700;
     color: white;
     border: 1px solid #C0C0C0;
+    cursor: pointer;
 }
 
 .EventCurrentDay {
@@ -82,15 +89,7 @@ h1 {
     background-color: #FFD700;
     color: #4285f4;
     border: 2px solid #4285f4;
-}
-
-.SelectedDay {
-    background-color:yellow;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 2%;
-    color: black;
+    cursor: pointer;
 }
 
 .MonthPopup {
