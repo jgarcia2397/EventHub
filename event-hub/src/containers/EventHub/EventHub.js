@@ -11,7 +11,6 @@ import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateEventPopup from '../../components/CreateEventPopup/CreateEventPopup';
-import event from '../../components/Event/Event';
 
 class EventHub extends Component {
     state = {
@@ -21,20 +20,20 @@ class EventHub extends Component {
         showYearSelector: false,
         selectedDay: 0,
         isDaySelected: false,
-        eventList: []
+        events: []
     };
 
     componentDidMount() {
         axios.get('./events.json?orderBy="eventTimestamp"')
             .then(res => {
-                const fetchedEventList = [];
+                const fetchedEvents = [];
                 for (let key in res.data) {
-                    fetchedEventList.push({
+                    fetchedEvents.push({
                         ...res.data[key],
                         id: key
                     });
                 }
-                fetchedEventList.sort((a, b) => {
+                fetchedEvents.sort((a, b) => {
                     if (moment(b.eventTimestamp).isBefore(a.eventTimestamp)){
                         return 1;
                     } else if (moment(a.eventTimestamp).isBefore(b.eventTimestamp)){
@@ -43,7 +42,7 @@ class EventHub extends Component {
                         return 0;
                     }
                 });
-                this.setState({eventList: fetchedEventList});
+                this.setState({events: fetchedEvents});
             })
             .catch(err => {
                 console.log(err);
@@ -88,11 +87,11 @@ class EventHub extends Component {
 
     getDaysOfMonth = () => {
         let days = [];
-        let eventDateList = [];
+        let eventDates = [];
 
-        for (let i = 0; i < this.state.eventList.length; i++) {
-            let date = this.state.eventList[i].eventDetails.month + " " + this.state.eventList[i].eventDetails.day + ", " + this.state.eventList[i].eventDetails.year;
-            eventDateList.push(date);
+        for (let i = 0; i < this.state.events.length; i++) {
+            let date = this.state.events[i].eventDetails.month + " " + this.state.events[i].eventDetails.day + ", " + this.state.events[i].eventDetails.year;
+            eventDates.push(date);
         }
 
         // current date
@@ -107,11 +106,11 @@ class EventHub extends Component {
             let day = "";
             var compareDate = dateObjectMonth + " " + d + ", " + dateObjectYear;
 
-            if ((eventDateList.indexOf(compareDate) > -1) && (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear)) {
+            if ((eventDates.indexOf(compareDate) > -1) && (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear)) {
                 day = classes.EventCurrentDay;
             } else if (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear) {
                 day = classes.CurrentDay;
-            } else if (eventDateList.indexOf(compareDate) > -1) {
+            } else if (eventDates.indexOf(compareDate) > -1) {
                 day = classes.EventDay;
             } else {
                 day = classes.Day;
@@ -310,7 +309,7 @@ class EventHub extends Component {
                 </Modal>
                 {calendar}
                 <h1>Your Events</h1>
-                <EventList eventList={this.state.eventList} />
+                <EventList eventList={this.state.events} />
             </Auxiliary>
         );
     }
