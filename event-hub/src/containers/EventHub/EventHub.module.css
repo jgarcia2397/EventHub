@@ -42,22 +42,18 @@ h1 {
 
 .EmptySlot {
     height: 24px;
+    border: 1px solid #C0C0C0;
 }
 
 .Day {
     text-align: center;
     height: 40px;
-}
-
-.Day {
     font-size: 0.8em;
-}
-
-.Day {
     cursor: pointer;
     width: 24px;
     height: 24px;
     line-height: 24px;
+    border: 1px solid #C0C0C0;
 }
 
 .CurrentDay {
@@ -69,7 +65,25 @@ h1 {
     line-height: 28px;
     border-radius: 2%; */
     color: white;
+    border: 1px solid #C0C0C0;
 }
+
+.EventDay {
+    text-align: center;
+    font-size: 0.8em;
+    background-color: #FFD700;
+    color: white;
+    border: 1px solid #C0C0C0;
+}
+
+.EventCurrentDay {
+    text-align: center;
+    font-size: 0.8em;
+    background-color: #FFD700;
+    color: #4285f4;
+    border: 2px solid #4285f4;
+}
+
 .SelectedDay {
     background-color:yellow;
     width: 28px;

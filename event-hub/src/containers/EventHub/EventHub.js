@@ -11,6 +11,7 @@ import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateEventPopup from '../../components/CreateEventPopup/CreateEventPopup';
+import event from '../../components/Event/Event';
 
 class EventHub extends Component {
     state = {
@@ -87,6 +88,12 @@ class EventHub extends Component {
 
     getDaysOfMonth = () => {
         let days = [];
+        let eventDateList = [];
+
+        for (let i = 0; i < this.state.eventList.length; i++) {
+            let date = this.state.eventList[i].eventDetails.month + " " + this.state.eventList[i].eventDetails.day + ", " + this.state.eventList[i].eventDetails.year;
+            eventDateList.push(date);
+        }
 
         // current date
         const currMonth = moment().format("MMMM");
@@ -96,22 +103,30 @@ class EventHub extends Component {
         const dateObjectMonth = this.state.dateObject.format("MMMM");
         const dateObjectYear = this.state.dateObject.format("YYYY");
 
-        // console.log("currMonth: " + currMonth + ", currYear: " + currYear);
-        // console.log("dateObjectMonth: " + dateObjectMonth + ", dateObjectYear: " + dateObjectYear);
-
         for (let d = 1; d <= this.getDays(); d++) {
-            let currentDay = (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear) ? classes.CurrentDay : classes.Day;
+            let day = "";
+            var compareDate = dateObjectMonth + " " + d + ", " + dateObjectYear;
+
+            if ((eventDateList.indexOf(compareDate) > -1) && (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear)) {
+                day = classes.EventCurrentDay;
+            } else if (d == this.getCurrentDay() && currMonth === dateObjectMonth && currYear === dateObjectYear) {
+                day = classes.CurrentDay;
+            } else if (eventDateList.indexOf(compareDate) > -1) {
+                day = classes.EventDay;
+            } else {
+                day = classes.Day;
+            }
+
             days.push(
                 <td 
                     key={d} 
-                    className={currentDay}
+                    className={day}
                     onClick={() => {this.onDayClick(d)}}
                 >
                     {d}
                 </td>
             );
         }
-        // console.log("Days: ", days);
         return days;
     }
 
