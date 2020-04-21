@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import axios from '../../axios-events';
 
 import classes from './EventHub.module.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
@@ -7,7 +8,7 @@ import Selector from '../../components/Selector/Selector';
 import DateHeader from '../../components/DateHeader/DateHeader';
 import DateButton from '../../components/DateButton/DateButton';
 import CalendarTable from '../../components/CalendarTable/CalendarTable';
-import EventList from './EventList/EventList';
+import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
 import CreateEventPopup from '../../components/CreateEventPopup/CreateEventPopup';
 
@@ -18,8 +19,35 @@ class EventHub extends Component {
         showMonthSelector: false,
         showYearSelector: false,
         selectedDay: 0,
-        isDaySelected: false
+        isDaySelected: false,
+        eventList: []
     };
+
+    componentDidMount() {
+        axios.get('./events.json?orderBy="eventTimestamp"')
+            .then(res => {
+                const fetchedEventList = [];
+                for (let key in res.data) {
+                    fetchedEventList.push({
+                        ...res.data[key],
+                        id: key
+                    });
+                }
+                fetchedEventList.sort((a, b) => {
+                    if (moment(b.eventTimestamp).isBefore(a.eventTimestamp)){
+                        return 1;
+                    } else if (moment(a.eventTimestamp).isBefore(b.eventTimestamp)){
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                });
+                this.setState({eventList: fetchedEventList});
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     getDays = () => {
         return this.state.dateObject.daysInMonth();
@@ -267,7 +295,7 @@ class EventHub extends Component {
                 </Modal>
                 {calendar}
                 <h1>Your Events</h1>
-                <EventList />
+                <EventList eventList={this.state.eventList} />
             </Auxiliary>
         );
     }
