@@ -23,18 +23,29 @@ class EventForm extends Component {
                 touched: false
             },
             month: {
-                elementType: 'timeInput',
+                elementType: 'select',
                 elementConfig: {
-                    type: 'text',
-                    placeholder: 'Month',
-                    label: "Enter date of the event: "
+                    label: "Enter date of the event: ",
+                    options: [
+                        {value: 'January', displayValue: 'January'}, 
+                        {value: 'February', displayValue: 'February'},
+                        {value: 'March', displayValue: 'March'},
+                        {value: 'April', displayValue: 'April'},
+                        {value: 'May', displayValue: 'May'},
+                        {value: 'June', displayValue: 'June'},
+                        {value: 'July', displayValue: 'July'},
+                        {value: 'August', displayValue: 'August'},
+                        {value: 'September', displayValue: 'September'},
+                        {value: 'October', displayValue: 'October'},
+                        {value: 'November', displayValue: 'November'},
+                        {value: 'December', displayValue: 'December'}
+                    ]
                 },
                 value: '',
                 validation: {
                     required: true
                 },
-                valid: false,
-                touched: false
+                valid: false
             },
             day: {
                 elementType: 'timeInput',
