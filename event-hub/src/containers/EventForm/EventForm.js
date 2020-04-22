@@ -42,10 +42,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             day: {
                 elementType: 'timeInput',
@@ -55,10 +53,12 @@ class EventForm extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    maxLength: 2
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                timeElement: true
             },
             year: {
                 elementType: 'timeInput',
@@ -68,10 +68,12 @@ class EventForm extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    exactLength: 4
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                timeElement: true
             },
             startHour: {
                 elementType: 'select',
@@ -93,10 +95,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             startMinute: {
                 elementType: 'select',
@@ -117,10 +117,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             startPeriod: {
                 elementType: 'select',
@@ -131,10 +129,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             endHour: {
                 elementType: 'select',
@@ -156,10 +152,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             endMinute: {
                 elementType: 'select',
@@ -180,10 +174,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             endPeriod: {
                 elementType: 'select',
@@ -194,10 +186,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                valid: false,
+                timeElement: true
             },
             place: {
                 elementType: 'input',
@@ -217,6 +207,22 @@ class EventForm extends Component {
         formIsValid: false
     }
 
+    checkValidity(value, rules) {
+        let isValid = true;
+
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+        if (rules.maxLength) {
+            isValid = (value.length > 0) && (value.length <= rules.maxLength) && isValid;
+        }
+        if (rules.exactLength) {
+            isValid = value.length == rules.exactLength && isValid;
+        }
+
+        return isValid;
+    }
+
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedEventForm = {
             ...this.state.eventForm
@@ -227,7 +233,9 @@ class EventForm extends Component {
         };
 
         updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedEventForm[inputIdentifier] = updatedFormElement;
+        console.log(updatedFormElement);
         this.setState({eventForm: updatedEventForm});
     }
 
@@ -276,6 +284,8 @@ class EventForm extends Component {
                         elementType={formElement.config.elementType} 
                         elementConfig={formElement.config.elementConfig} 
                         value={formElement.config.value}
+                        invalidElement={!formElement.config.valid}
+                        timeElement={formElement.config.timeElement}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <button>CREATE EVENT</button>
