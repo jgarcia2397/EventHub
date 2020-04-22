@@ -43,7 +43,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             day: {
                 elementType: 'timeInput',
@@ -58,7 +59,8 @@ class EventForm extends Component {
                 },
                 valid: false,
                 touched: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             year: {
                 elementType: 'timeInput',
@@ -73,7 +75,8 @@ class EventForm extends Component {
                 },
                 valid: false,
                 touched: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             startHour: {
                 elementType: 'select',
@@ -96,7 +99,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             startMinute: {
                 elementType: 'select',
@@ -118,7 +122,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             startPeriod: {
                 elementType: 'select',
@@ -130,7 +135,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             endHour: {
                 elementType: 'select',
@@ -153,7 +159,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             endMinute: {
                 elementType: 'select',
@@ -175,7 +182,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             endPeriod: {
                 elementType: 'select',
@@ -187,7 +195,8 @@ class EventForm extends Component {
                 },
                 value: '',
                 valid: false,
-                timeElement: true
+                timeElement: true,
+                touched: false
             },
             place: {
                 elementType: 'input',
@@ -234,6 +243,7 @@ class EventForm extends Component {
 
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
         updatedEventForm[inputIdentifier] = updatedFormElement;
         console.log(updatedFormElement);
         this.setState({eventForm: updatedEventForm});
@@ -286,6 +296,7 @@ class EventForm extends Component {
                         value={formElement.config.value}
                         invalidElement={!formElement.config.valid}
                         timeElement={formElement.config.timeElement}
+                        touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <button>CREATE EVENT</button>

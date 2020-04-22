@@ -10,6 +10,12 @@
     margin-bottom: 8px;
 }
 
+p {
+    font: inherit;
+    width: 100%;
+    text-align: center;
+}
+
 .InputElement {
     outline: none;
     border: 1px solid #ccc;

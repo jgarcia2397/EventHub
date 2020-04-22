@@ -4,13 +4,16 @@ import classes from './Input.module.css';
 
 const input = (props) => {
     let inputElement = null;
+    let validationError = null;
     const textInputClasses = [classes.InputElement];
     const timeInputClasses = [classes.TimeInputElement];
 
-    if (props.invalidElement && props.timeElement) {
+    if (props.invalidElement && props.timeElement && props.touched) {
         timeInputClasses.push(classes.Invalid);
-    } else if (props.invalidElement) {
+        validationError = <p>Please enter a valid value.</p>;
+    } else if (props.invalidElement && props.touched) {
         textInputClasses.push(classes.Invalid);
+        validationError = <p>Please enter a valid value.</p>;
     }
 
     switch (props.elementType) {
@@ -51,6 +54,7 @@ const input = (props) => {
     return (
         <div className={classes.Input}>
             <label className={classes.Label}>{props.elementConfig.label}</label>
+            {validationError}
             {inputElement}
         </div>
     );
