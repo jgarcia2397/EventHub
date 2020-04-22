@@ -42,7 +42,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -98,7 +99,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -121,7 +123,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -134,7 +137,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -158,7 +162,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -181,7 +186,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -194,7 +200,8 @@ class EventForm extends Component {
                     ]
                 },
                 value: '',
-                valid: false,
+                valid: true,
+                validation: {},
                 timeElement: true,
                 touched: false
             },
@@ -245,8 +252,12 @@ class EventForm extends Component {
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedEventForm[inputIdentifier] = updatedFormElement;
-        console.log(updatedFormElement);
-        this.setState({eventForm: updatedEventForm});
+
+        let formIsValid = true;
+        for (let inputIdentifier in updatedEventForm) {
+            formIsValid = updatedEventForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({eventForm: updatedEventForm, formIsValid: formIsValid});
     }
 
     createEventHandler = (event) => {
@@ -299,7 +310,7 @@ class EventForm extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                <button>CREATE EVENT</button>
+                <button disabled={!this.state.formIsValid}>CREATE EVENT</button>
             </form>
         );
 
