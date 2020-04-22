@@ -41,7 +41,7 @@ class EventForm extends Component {
                         {value: 'December', displayValue: 'December'}
                     ]
                 },
-                value: '',
+                value: 'January',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -56,7 +56,8 @@ class EventForm extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    maxLength: 2
+                    maxLength: 2,
+                    isNumeric: true
                 },
                 valid: false,
                 touched: false,
@@ -72,7 +73,8 @@ class EventForm extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    exactLength: 4
+                    exactLength: 4,
+                    isNumeric: true
                 },
                 valid: false,
                 touched: false,
@@ -98,7 +100,7 @@ class EventForm extends Component {
                         {value: '12', displayValue: '12'}
                     ]
                 },
-                value: '',
+                value: '1',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -122,7 +124,7 @@ class EventForm extends Component {
                         {value: '55', displayValue: '55'}
                     ]
                 },
-                value: '',
+                value: '00',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -136,7 +138,7 @@ class EventForm extends Component {
                         {value: 'PM', displayValue: 'PM'}
                     ]
                 },
-                value: '',
+                value: 'AM',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -161,7 +163,7 @@ class EventForm extends Component {
                         {value: '12', displayValue: '12'}
                     ]
                 },
-                value: '',
+                value: '1',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -185,7 +187,7 @@ class EventForm extends Component {
                         {value: '55', displayValue: '55'}
                     ]
                 },
-                value: '',
+                value: '00',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -199,7 +201,7 @@ class EventForm extends Component {
                         {value: 'PM', displayValue: 'PM'}
                     ]
                 },
-                value: '',
+                value: 'AM',
                 valid: true,
                 validation: {},
                 timeElement: true,
@@ -235,6 +237,10 @@ class EventForm extends Component {
         if (rules.exactLength) {
             isValid = value.length == rules.exactLength && isValid;
         }
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid;
+        }
 
         return isValid;
     }
@@ -257,6 +263,7 @@ class EventForm extends Component {
         for (let inputIdentifier in updatedEventForm) {
             formIsValid = updatedEventForm[inputIdentifier].valid && formIsValid;
         }
+        console.log("isValid: " + updatedFormElement.valid);
         this.setState({eventForm: updatedEventForm, formIsValid: formIsValid});
     }
 
