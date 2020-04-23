@@ -300,12 +300,8 @@ class EventForm extends Component {
         
         let datesAreValid = this.state.dateAndTimeValid;
         if (Object.keys(updatedFormElement.validation).length === 0) {
-            console.log("goodbye");
-            //console.log(updatedFormElement.validation);
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
         } else {
-            console.log("hello");
-            //console.log(updatedFormElement.validation);
             updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         }
 
@@ -328,9 +324,7 @@ class EventForm extends Component {
             formData[formElementIdentifier] = this.state.eventForm[formElementIdentifier].value;
         }
 
-        // let dateData = firebase.firestore.Timestamp.fromDate(new Date(formData.month + " " + formData.day + ", " + formData.year));
         let dateData = new Date(formData.month + " " + formData.day + ", " + formData.year);
-        // console.log("dateData: " + dateData);
 
         const eventDetails = {
             eventDetails: formData,
