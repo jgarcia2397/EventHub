@@ -8,9 +8,9 @@ const input = (props) => {
     const textInputClasses = [classes.InputElement];
     const timeInputClasses = [classes.TimeInputElement];
 
-    if (props.invalidElement && props.timeElement && props.touched) {
+    if ((props.invalidElement && props.timeElement && props.touched) || (props.invalidDateTime && props.timeElement)) {
         timeInputClasses.push(classes.Invalid);
-        validationError = <p>Please enter a valid value.</p>;
+        // validationError = <p>Please enter a valid value.</p>;
     } else if (props.invalidElement && props.touched) {
         textInputClasses.push(classes.Invalid);
         validationError = <p>Please enter a valid value.</p>;

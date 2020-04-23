@@ -351,11 +351,11 @@ class EventForm extends Component {
             });
         }
 
-        // let invalidDateTimeMsg = null;
-        // let dateTimeValidity = this.checkDateAndTimeValidity();
-        // if (!dateTimeValidity) {
-        //     invalidDateTimeMsg = <p>Invalid date or start/end time.</p>
-        // }
+        let invalidDateTimeMsg = null;
+        let dateTimeValidity = this.state.dateAndTimeValid;
+        if (!dateTimeValidity) {
+            invalidDateTimeMsg = <p>Invalid date or start/end time.</p>
+        }
 
         let form = (
             <form onSubmit={this.createEventHandler}>
@@ -366,11 +366,12 @@ class EventForm extends Component {
                         elementConfig={formElement.config.elementConfig} 
                         value={formElement.config.value}
                         invalidElement={!formElement.config.valid}
+                        invalidDateTime={!this.state.dateAndTimeValid}
                         timeElement={formElement.config.timeElement}
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                {/* {invalidDateTimeMsg} */}
+                {invalidDateTimeMsg}
                 <button disabled={!this.state.formIsValid}>CREATE EVENT</button>
             </form>
         );
