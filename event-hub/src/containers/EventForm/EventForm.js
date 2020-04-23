@@ -61,7 +61,8 @@ class EventForm extends Component {
                     required: true,
                     maxLength: 2,
                     isNumeric: true,
-                    isDateTimeInput: true
+                    isDateTimeInput: true,
+                    dayCheck: true
                 },
                 valid: false,
                 touched: false,
@@ -243,7 +244,7 @@ class EventForm extends Component {
         dateAndTimeValid: false
     }
 
-    checkValidity(value, rules) {
+    checkTextInputValidity(value, rules) {
         let isValid = true;
 
         if (rules.required) {
@@ -258,6 +259,22 @@ class EventForm extends Component {
         if (rules.isNumeric) {
             const pattern = /^\d+$/;
             isValid = pattern.test(value) && isValid;
+        }
+
+        return isValid;
+    }
+
+    checkDayInputValidity(updatedForm, dayValue, rules) {
+        let isValid = true;
+
+        let updatedMonth = updatedForm.month.value;
+        let updatedYear = updatedForm.year.value;
+        let dateString = updatedMonth + " " + updatedYear;
+        let momentObj = moment(dateString, "MMMM Y").daysInMonth();
+        // console.log("dateString : " + dateString + ", momentObj: " + momentObj);
+
+        if (rules.dayCheck) {
+            isValid = dayValue <= momentObj;
         }
 
         return isValid;
@@ -287,9 +304,9 @@ class EventForm extends Component {
                         )
                         .format("MMMM D YYYY, h:mm a");
 
-        console.log("currentDate: " + currentDate);
-        console.log("startDate: " + startDate);
-        console.log("endDate: " + endDate);
+        // console.log("currentDate: " + currentDate);
+        // console.log("startDate: " + startDate);
+        // console.log("endDate: " + endDate);
 
         if (moment(startDate).isBefore(currentDate) || moment(endDate).isBefore(startDate) || startDate === "Invalid date" || endDate === "Invalid date") {
             isValid = false;
@@ -317,21 +334,26 @@ class EventForm extends Component {
         let datesAreValid = this.state.dateAndTimeValid;
         // if (Object.keys(updatedFormElement.validation).length === 0) {
         if (updatedFormElement.validation.isDateTimeDropdown) {
-            console.log("goodbye");
+            // console.log("goodbye");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
+        } else if (updatedFormElement.validation.isDateTimeInput && updatedFormElement.validation.dayCheck) {
+            // console.log("dayCheck");
+            datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
+            updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation)
+                                        && this.checkDayInputValidity(updatedEventForm, updatedFormElement.value, updatedFormElement.validation);
         } else if (updatedFormElement.validation.isDateTimeInput) {
-            console.log("hello");
+            // console.log("hello");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
-            updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+            updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation);
         } else {
-            updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+            updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation);
         }
 
         let formIsValid = true;
         for (let inputIdentifier in updatedEventForm) {
             formIsValid = updatedEventForm[inputIdentifier].valid && formIsValid;
         }
-        console.log("form: " + formIsValid + ", " + "dates: " + datesAreValid);
+        // console.log("form: " + formIsValid + ", " + "dates: " + datesAreValid);
         formIsValid = datesAreValid && formIsValid;
 
         this.setState({eventForm: updatedEventForm, formIsValid: formIsValid, dateAndTimeValid: datesAreValid});
