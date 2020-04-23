@@ -398,7 +398,7 @@ class EventForm extends Component {
         let invalidDateTimeMsg = null;
         let dateTimeValidity = this.state.dateAndTimeValid;
         if (!dateTimeValidity) {
-            invalidDateTimeMsg = <p>Invalid date or start/end time.</p>
+            invalidDateTimeMsg = <p><strong>Invalid date or start/end time.</strong></p>
         }
 
         let form = (
