@@ -44,7 +44,9 @@ class EventForm extends Component {
                 },
                 value: 'January',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -58,7 +60,8 @@ class EventForm extends Component {
                 validation: {
                     required: true,
                     maxLength: 2,
-                    isNumeric: true
+                    isNumeric: true,
+                    isDateTimeInput: true
                 },
                 valid: false,
                 touched: false,
@@ -75,7 +78,8 @@ class EventForm extends Component {
                 validation: {
                     required: true,
                     exactLength: 4,
-                    isNumeric: true
+                    isNumeric: true,
+                    isDateTimeInput: true
                 },
                 valid: false,
                 touched: false,
@@ -103,7 +107,9 @@ class EventForm extends Component {
                 },
                 value: '1',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -127,7 +133,9 @@ class EventForm extends Component {
                 },
                 value: '00',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -141,7 +149,9 @@ class EventForm extends Component {
                 },
                 value: 'AM',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -166,7 +176,9 @@ class EventForm extends Component {
                 },
                 value: '1',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -190,7 +202,9 @@ class EventForm extends Component {
                 },
                 value: '00',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -204,7 +218,9 @@ class EventForm extends Component {
                 },
                 value: 'AM',
                 valid: true,
-                validation: {},
+                validation: {
+                    isDateTimeDropdown: true
+                },
                 timeElement: true,
                 touched: false
             },
@@ -299,8 +315,14 @@ class EventForm extends Component {
         updatedEventForm[inputIdentifier] = updatedFormElement;
         
         let datesAreValid = this.state.dateAndTimeValid;
-        if (Object.keys(updatedFormElement.validation).length === 0) {
+        // if (Object.keys(updatedFormElement.validation).length === 0) {
+        if (updatedFormElement.validation.isDateTimeDropdown) {
+            console.log("goodbye");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
+        } else if (updatedFormElement.validation.isDateTimeInput) {
+            console.log("hello");
+            datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
+            updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         } else {
             updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         }
