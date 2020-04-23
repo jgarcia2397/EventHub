@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
@@ -222,7 +223,8 @@ class EventForm extends Component {
                 touched: false
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        dateAndTimeValid: false
     }
 
     checkValidity(value, rules) {
@@ -245,6 +247,28 @@ class EventForm extends Component {
         return isValid;
     }
 
+    checkDateAndTimeValidity() {
+        let isValid = false;
+
+        let currentDate = moment().format("MMMM D YYYY, h:mm a");
+        // let startDate = moment().format(this.state.eventForm.month.value + " " + this.state.eventForm.day.value + " " + this.state.eventForm.year.value + ", " + this.state.eventForm.startHour.value + ":" + this.state.eventForm.startMinute.value + " " + this.state.eventForm.startPeriod.value);
+        // let endDate = moment().format(this.state.eventForm.month.value + " " + this.state.eventForm.day.value + " " + this.state.eventForm.year.value + ", " + this.state.eventForm.endHour.value + ":" + this.state.eventForm.endMinute.value + " " + this.state.eventForm.endPeriod.value);
+        let startDate = moment(this.state.eventForm.month.value + " " + this.state.eventForm.day.value + " " + this.state.eventForm.year.value + ", " + this.state.eventForm.startHour.value + ":" + this.state.eventForm.startMinute.value + " " + this.state.eventForm.startPeriod.value).format("MMMM D YYYY, h:mm a");
+        let endDate = moment(this.state.eventForm.month.value + " " + this.state.eventForm.day.value + " " + this.state.eventForm.year.value + ", " + this.state.eventForm.endHour.value + ":" + this.state.eventForm.endMinute.value + " " + this.state.eventForm.endPeriod.value).format("MMMM D YYYY, h:mm a");
+
+        console.log("currentDate: " + currentDate);
+        console.log("startDate: " + startDate);
+        console.log("endDate: " + endDate);
+
+        if (moment(startDate).isBefore(currentDate) || moment(endDate).isBefore(startDate) || startDate === "Invalid date" || endDate === "Invalid date") {
+            isValid = false;
+        } else {
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
     inputChangedHandler = (event, inputIdentifier) => {
         const updatedEventForm = {
             ...this.state.eventForm
@@ -260,10 +284,14 @@ class EventForm extends Component {
         updatedEventForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true;
+        //let datesAreValid = this.checkDateAndTimeValidity();
         for (let inputIdentifier in updatedEventForm) {
             formIsValid = updatedEventForm[inputIdentifier].valid && formIsValid;
         }
-        console.log("isValid: " + updatedFormElement.valid);
+        //console.log("form: " + formIsValid + ", " + "dates: " + datesAreValid);
+        //formIsValid = datesAreValid && formIsValid;
+
+        //this.setState({eventForm: updatedEventForm, formIsValid: formIsValid, dateAndTimeValid: datesAreValid});
         this.setState({eventForm: updatedEventForm, formIsValid: formIsValid});
     }
 
@@ -304,6 +332,12 @@ class EventForm extends Component {
             });
         }
 
+        let invalidDateTimeMsg = null;
+        let dateTimeValidity = this.checkDateAndTimeValidity();
+        if (!dateTimeValidity) {
+            invalidDateTimeMsg = <p>Invalid date or start/end time.</p>
+        }
+
         let form = (
             <form onSubmit={this.createEventHandler}>
                 {formElementsArray.map(formElement => (
@@ -317,6 +351,7 @@ class EventForm extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
+                {invalidDateTimeMsg}
                 <button disabled={!this.state.formIsValid}>CREATE EVENT</button>
             </form>
         );
