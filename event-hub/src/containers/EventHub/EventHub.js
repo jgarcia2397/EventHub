@@ -20,7 +20,9 @@ class EventHub extends Component {
         showYearSelector: false,
         selectedDay: 0,
         isDaySelected: false,
-        events: []
+        events: [],
+        deletingEvent: false,
+        eventIdToBeDeleted: null
     };
 
     componentDidMount() {
@@ -248,15 +250,21 @@ class EventHub extends Component {
 
     onCreateEventCancel = () => {
         this.setState({
-            isDaySelected: false
+            isDaySelected: false,
+            deletingEvent: false
         });
     }
 
-    onDeleteEvent = (eventId) => {
+    onDeleteEventClick = (eventId) => {
+        this.setState({eventIdToBeDeleted: eventId, deletingEvent: true});
+    }
+
+    onDeleteEventConfirm = (eventId) => {
         axios.delete('/events/' + eventId + '.json')
             .then(res => {
                 // console.log(res);
                 this.getEventsFromBackend();
+                this.setState({deletingEvent: false});
             })
             .catch(err => {
                 console.log(err);
@@ -309,16 +317,19 @@ class EventHub extends Component {
 
         let createEventPopup = null;
         createEventPopup = <CreateEventPopup
+                                isDeleting={this.state.deletingEvent}
                                 month={this.state.dateObject.format("MMMM")}
                                 day={this.state.selectedDay}
                                 year={this.state.dateObject.format("YYYY")}
                                 onContinue={this.onCreateEventContinue}
-                                onCancel={this.onCreateEventCancel} />
+                                onCancel={this.onCreateEventCancel}
+                                onDelete={this.onDeleteEventConfirm}
+                                deleteId={this.state.eventIdToBeDeleted} />
 
         return (
             <Auxiliary>
                 <Modal 
-                    show={this.state.isDaySelected}
+                    show={this.state.isDaySelected || this.state.deletingEvent}
                     close={this.onCreateEventCancel}>
                         {createEventPopup}
                 </Modal>
@@ -326,7 +337,7 @@ class EventHub extends Component {
                 <h1>Your Events</h1>
                 <EventList 
                     eventList={this.state.events}
-                    onDelete={this.onDeleteEvent} />
+                    onDelete={this.onDeleteEventClick} />
             </Auxiliary>
         );
     }
