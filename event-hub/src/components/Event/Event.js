@@ -23,7 +23,7 @@ const event = (props) => {
             </div>
             <div className={classes.ButtonSide}>
                 <button>See Guest List</button>
-                <button>Delete Event</button>
+                <button onClick={() => props.delete(props.eventId)}>Delete Event</button>
             </div>
         </div>
     );

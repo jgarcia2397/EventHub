@@ -9,8 +9,10 @@ const eventList = (props) => {
             {props.eventList.map(event => (
                 <Event 
                     key={event.id}
+                    eventId={event.id}
                     details={event.eventDetails}
-                    numGuests={event.numberOfGuests} />
+                    numGuests={event.numberOfGuests}
+                    delete={props.onDelete} />
             ))}
         </div>
     );

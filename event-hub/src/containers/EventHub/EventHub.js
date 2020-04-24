@@ -24,7 +24,11 @@ class EventHub extends Component {
     };
 
     componentDidMount() {
-        axios.get('./events.json?orderBy="eventTimestamp"')
+        this.getEventsFromBackend();
+    }
+
+    getEventsFromBackend = () => {
+        axios.get('/events.json?orderBy="eventTimestamp"')
             .then(res => {
                 const fetchedEvents = [];
                 for (let key in res.data) {
@@ -248,6 +252,17 @@ class EventHub extends Component {
         });
     }
 
+    onDeleteEvent = (eventId) => {
+        axios.delete('/events/' + eventId + '.json')
+            .then(res => {
+                // console.log(res);
+                this.getEventsFromBackend();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     render () {
         let calendar = null;
         calendar = (
@@ -309,7 +324,9 @@ class EventHub extends Component {
                 </Modal>
                 {calendar}
                 <h1>Your Events</h1>
-                <EventList eventList={this.state.events} />
+                <EventList 
+                    eventList={this.state.events}
+                    onDelete={this.onDeleteEvent} />
             </Auxiliary>
         );
     }
