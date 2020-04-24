@@ -3,3 +3,13 @@
     font-size: 2.2em;
     cursor: pointer;
 }
+
+.MonthHalf {
+    float: left;
+    width: 50%;
+}
+
+.YearHalf {
+    float: right;
+    width: 50%;
+}

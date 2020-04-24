@@ -23,8 +23,9 @@ h1 {
 
 .CalendarContainer {
     border: 2px solid skyblue;
-    margin: 150px auto;
-    width: 70%;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 150px auto 75px;
+    width: 55%;
 }
 
 .Calendar {
@@ -46,18 +47,17 @@ h1 {
 }
 
 .EmptySlot {
-    height: 24px;
+    width: 14%;
+    line-height: 350%;
     border: 1px solid #C0C0C0;
 }
 
 .Day {
     text-align: center;
-    height: 40px;
     font-size: 0.8em;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+    width: 14%; 
+    line-height: 350%;
     border: 1px solid #C0C0C0;
 }
 
@@ -65,10 +65,8 @@ h1 {
     text-align: center;
     font-size: 0.8em;
     background-color: #4285f4;
-    /* width: 28px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 2%; */
+    width: 14%;
+    line-height: 350%;
     color: white;
     border: 1px solid #C0C0C0;
     cursor: pointer;
@@ -81,6 +79,8 @@ h1 {
     color: white;
     border: 1px solid #C0C0C0;
     cursor: pointer;
+    width: 14%;
+    line-height: 350%;
 }
 
 .EventCurrentDay {
@@ -90,6 +90,8 @@ h1 {
     color: #4285f4;
     border: 2px solid #4285f4;
     cursor: pointer;
+    width: 14%;
+    line-height: 350%;
 }
 
 .MonthPopup {

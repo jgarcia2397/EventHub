@@ -6,19 +6,21 @@ import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 const dateHeader = (props) => {
     return (
         <Auxiliary>
-            <td 
-                onClick={() => {props.toggleMonthSel()}} 
-                colSpan="3">
-                    <span className={classes.LabelMonth}>
-                        {props.month}
-                    </span>
-            </td>
-            <td 
-                onClick={() => {props.toggleYearSel()}}
-                colSpan="2">
-                    <span className={classes.LabelYear}>
-                        {props.year}
-                    </span>
+            <td colSpan="5">
+                <div 
+                    className={classes.MonthHalf}
+                    onClick={() => {props.toggleMonthSel()}}>
+                        <span className={classes.LabelMonth}>
+                            {props.month}
+                        </span>
+                </div>
+                <div 
+                    className={classes.YearHalf}
+                    onClick={() => {props.toggleYearSel()}}>
+                        <span className={classes.LabelYear}>
+                            {props.year}
+                        </span>
+                </div>
             </td>
         </Auxiliary>
     );
