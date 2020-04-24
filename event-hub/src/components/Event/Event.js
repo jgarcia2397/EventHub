@@ -23,6 +23,7 @@ const event = (props) => {
             </div>
             <div className={classes.ButtonSide}>
                 <button>See Guest List</button>
+                <button>Delete Event</button>
             </div>
         </div>
     );

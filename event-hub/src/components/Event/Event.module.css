@@ -16,9 +16,13 @@
 .ButtonSide {
     width: 30%;
     float: right;
-    padding: 75px 0px 0px;
+    padding: 65px 0px 0px;
 }
 
 p {
     text-align: left;
+}
+
+button {
+    width: 80%;
 }
