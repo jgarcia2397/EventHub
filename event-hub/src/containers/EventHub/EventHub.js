@@ -10,7 +10,7 @@ import DateButton from '../../components/DateButton/DateButton';
 import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
-import CreateEventPopup from '../../components/CreateEventPopup/CreateEventPopup';
+import EventPopup from '../../components/EventPopup/EventPopup';
 
 class EventHub extends Component {
     state = {
@@ -315,8 +315,8 @@ class EventHub extends Component {
             </div>    
         );
 
-        let createEventPopup = null;
-        createEventPopup = <CreateEventPopup
+        let eventPopup = null;
+        eventPopup = <EventPopup
                                 isDeleting={this.state.deletingEvent}
                                 month={this.state.dateObject.format("MMMM")}
                                 day={this.state.selectedDay}
@@ -331,7 +331,7 @@ class EventHub extends Component {
                 <Modal 
                     show={this.state.isDaySelected || this.state.deletingEvent}
                     close={this.onCreateEventCancel}>
-                        {createEventPopup}
+                        {eventPopup}
                 </Modal>
                 {calendar}
                 <h1>Your Events</h1>
