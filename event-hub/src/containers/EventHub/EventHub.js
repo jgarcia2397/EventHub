@@ -317,14 +317,14 @@ class EventHub extends Component {
 
         let eventPopup = null;
         eventPopup = <EventPopup
-                                isDeleting={this.state.deletingEvent}
-                                month={this.state.dateObject.format("MMMM")}
-                                day={this.state.selectedDay}
-                                year={this.state.dateObject.format("YYYY")}
-                                onContinue={this.onCreateEventContinue}
-                                onCancel={this.onCreateEventCancel}
-                                onDelete={this.onDeleteEventConfirm}
-                                deleteId={this.state.eventIdToBeDeleted} />
+                        isDeleting={this.state.deletingEvent}
+                        month={this.state.dateObject.format("MMMM")}
+                        day={this.state.selectedDay}
+                        year={this.state.dateObject.format("YYYY")}
+                        onContinue={this.onCreateEventContinue}
+                        onCancel={this.onCreateEventCancel}
+                        onDelete={this.onDeleteEventConfirm}
+                        deleteId={this.state.eventIdToBeDeleted} />
 
         return (
             <Auxiliary>
