@@ -7,7 +7,7 @@ const navigationItems = (props) => (
     <div className={classes.NavigationItems}>
         <NavigationItem link="/" exact>Your EventHub</NavigationItem>
         <NavigationItem link="/createEventForm">Create Event</NavigationItem>
-        <NavigationItem link="/" exact>Your Group Chats</NavigationItem>
+        <NavigationItem link="/chats" exact>Your Group Chats</NavigationItem>
         <NavigationItem link="/auth">Sign In/Out</NavigationItem>
     </div>
 );
