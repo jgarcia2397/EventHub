@@ -5,11 +5,10 @@ import classes from './NavigationItems.module.css';
 
 const navigationItems = (props) => (
     <div className={classes.NavigationItems}>
-        <h3>Create Event</h3>
-        <h3>|</h3>
-        <h3>Your Events</h3>
-        <h3>|</h3>
-        <h3>Sign In/Out</h3>
+        <NavigationItem link="/" exact>Your EventHub</NavigationItem>
+        <NavigationItem link="/createEventForm" exact>Create Event</NavigationItem>
+        <NavigationItem link="/" exact>Your Group Chats</NavigationItem>
+        <NavigationItem link="/" exact>Sign In/Out</NavigationItem>
     </div>
 );
 
