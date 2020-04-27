@@ -38,7 +38,9 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignUp: true
+        isSignUp: true,
+        token: null,
+        userId: null
     }
 
     checkTextInputValidity(value, rules) {
@@ -75,6 +77,8 @@ class Auth extends Component {
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
+                this.setState({token: response.data.idToken, userId: response.data.localId});
+                console.log(this.state);
             })
             .catch(err => {
                 console.log(err);
