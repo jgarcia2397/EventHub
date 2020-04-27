@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
@@ -36,7 +37,8 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        isSignUp: true
     }
 
     checkTextInputValidity(value, rules) {
@@ -58,7 +60,31 @@ class Auth extends Component {
 
     signInHandler = (event) => {
         event.preventDefault();
-        this.props.history.push('/');
+        
+        const authData = {
+            email: this.state.authForm.email.value,
+            password: this.state.authForm.password.value,
+            returnSecureToken: true
+        }
+
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc';
+        if (!this.state.isSignUp) {
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc';
+        }
+        
+        axios.post(url, authData)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return { isSignUp: !prevState.isSignUp }
+        });
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -106,13 +132,17 @@ class Auth extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                <button>SIGN IN</button>
+                <button>{this.state.isSignUp ? 'SIGN UP' : 'SIGN IN'}</button>
             </form>
         );
 
         return (
             <div className={classes.Auth}>
                 {form}
+                <div className={classes.AuthSwitch}>
+                    <label>{this.state.isSignUp ? 'Already have an account? Sign in now!' : 'Don\'t have an account? Sign up now!'}</label>
+                    <button onClick={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</button>
+                </div>
             </div>
         );
     }
