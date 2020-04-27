@@ -15,7 +15,8 @@ class Auth extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    isEmail: true
                 },
                 valid: false,
                 touched: false
@@ -29,7 +30,8 @@ class Auth extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    minLength: 8
                 },
                 valid: false,
                 touched: false
@@ -37,12 +39,51 @@ class Auth extends Component {
         }
     }
 
+    checkTextInputValidity(value, rules) {
+        let isValid = true;
+
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+        if (rules.minLength) {
+            isValid = (value.length > 0) && (value.length >= rules.minLength) && isValid;
+        }
+        if (rules.isEmail) {
+            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        isValid = pattern.test(value) && isValid;
+        }
+
+        return isValid;
+    }
+
     signInHandler = (event) => {
         event.preventDefault();
         this.props.history.push('/');
     }
 
-    inputChangedHandler = (event, inputIdentifier) => {}
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedAuthForm = {
+            ...this.state.authForm
+        };
+
+        const updatedFormElement = {
+            ...updatedAuthForm[inputIdentifier]
+        };
+
+        updatedFormElement.value = event.target.value;
+
+        updatedFormElement.touched = true;
+        updatedAuthForm[inputIdentifier] = updatedFormElement;
+        
+        updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation);
+
+        let formIsValid = true;
+        for (let inputIdentifier in updatedAuthForm) {
+            formIsValid = updatedAuthForm[inputIdentifier].valid && formIsValid;
+        }
+
+        this.setState({authForm: updatedAuthForm, formIsValid: formIsValid});
+    }
 
     render () {
         const formElementsArray = [];
