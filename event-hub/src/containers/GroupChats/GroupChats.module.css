@@ -1,0 +1,23 @@
+.GroupChat {
+    margin: 0px 50px;
+}
+
+.MessageForm {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+.MessageForm input {
+    width: 65%;
+}
+
+.MessageForm button {
+    width: 15%;
+}
+
+.MessageList {
+    display: block;
+    overflow-y: scroll;
+    height: 1000px;
+} 

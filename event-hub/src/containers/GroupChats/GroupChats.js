@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../axios-events';
 
+import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 
 class GroupChats extends Component {
@@ -76,9 +77,11 @@ class GroupChats extends Component {
         );
 
         return (
-            <div>
-                {chatWindow}
-                <form onSubmit={this.msgSubmitHandler}>
+            <div className={classes.GroupChat}>
+                <div className={classes.MessageList}>
+                    {chatWindow}
+                </div>
+                <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
                     <input onChange={this.inputChangedHandler} value={this.state.content}></input>
                     {this.state.error ? <p>{this.state.writeError}</p> : null}
                     <button type="submit" disabled={this.state.content === ''}>Send</button>
