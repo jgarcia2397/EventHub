@@ -81,7 +81,7 @@ class GroupChats extends Component {
                 <form onSubmit={this.msgSubmitHandler}>
                     <input onChange={this.inputChangedHandler} value={this.state.content}></input>
                     {this.state.error ? <p>{this.state.writeError}</p> : null}
-                    <button type="submit">Send</button>
+                    <button type="submit" disabled={this.state.content === ''}>Send</button>
                 </form>
             </div>
         );
