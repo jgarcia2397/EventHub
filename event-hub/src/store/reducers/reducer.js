@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SELECT_MONTH:
             let monthNo = state.monthList.indexOf(action.monthName); 
             let updatedDateObject = Object.assign({}, state.dateObject);
-            updatedDateObject = moment(state.dateObject).set("month", monthNo); 
+            updatedDateObject = moment(updatedDateObject).set("month", monthNo); 
             
             return {
                 ...state,
@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
             };
         case actionTypes.SELECT_YEAR:
             let updatedDateObject = Object.assign({}, state.dateObject);
-            updatedDateObject = moment(state.dateObject).set("year", year); 
+            updatedDateObject = moment(updatedDateObject).set("year", year); 
 
             return {
                 ...state,
