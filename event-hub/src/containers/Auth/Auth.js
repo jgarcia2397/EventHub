@@ -60,6 +60,16 @@ class Auth extends Component {
         return isValid;
     }
 
+    authLogout = () => {
+        this.setState({token: null, userId: null});
+    }
+
+    checkAuthTimeout = (expirationTime) => {
+        setTimeout(() => {
+            this.authLogout();
+        }, expirationTime * 1000);
+    }
+
     signInHandler = (event) => {
         event.preventDefault();
         
@@ -78,7 +88,8 @@ class Auth extends Component {
             .then(response => {
                 console.log(response);
                 this.setState({token: response.data.idToken, userId: response.data.localId});
-                console.log(this.state);
+                this.checkAuthTimeout(response.data.expiresIn);
+                // console.log(this.state);
             })
             .catch(err => {
                 console.log(err);
