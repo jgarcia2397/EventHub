@@ -13,22 +13,32 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.SELECT_MONTH:
             let monthNo = state.monthList.indexOf(action.monthName); 
-            let updatedDateObject = Object.assign({}, state.dateObject);
-            updatedDateObject = moment(updatedDateObject).set("month", monthNo); 
+            let updatedDateObjectMonth = Object.assign({}, state.dateObject);
+            updatedDateObjectMonth = moment(updatedDateObjectMonth).set("month", monthNo); 
             
             return {
                 ...state,
-                dateObject: updatedDateObject,
+                dateObject: updatedDateObjectMonth,
                 showMonthSelector: !state.showMonthSelector
             };
         case actionTypes.SELECT_YEAR:
-            let updatedDateObject = Object.assign({}, state.dateObject);
-            updatedDateObject = moment(updatedDateObject).set("year", year); 
+            let updatedDateObjectYear = Object.assign({}, state.dateObject);
+            updatedDateObjectYear = moment(updatedDateObjectYear).set("year", action.year); 
 
             return {
                 ...state,
-                dateObject: updatedDateObject,
+                dateObject: updatedDateObjectYear,
+                showYearSelector: !state.showYearSelector
+            };
+        case actionTypes.TOGGLE_MONTH_SELECTOR:
+            return {
+                ...state,
                 showMonthSelector: !state.showMonthSelector
+            };
+        case actionTypes.TOGGLE_YEAR_SELECTOR:
+            return {
+                ...state,
+                showYearSelector: !state.showYearSelector
             };
         default:
             return state;

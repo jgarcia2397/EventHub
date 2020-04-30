@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from '../../axios-events';
+import { connect } from 'react-redux';
 
+import * as actionTypes from '../../store/actions/actionTypes';
 import classes from './EventHub.module.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Selector from '../../components/Selector/Selector';
@@ -56,23 +58,28 @@ class EventHub extends Component {
     }
 
     getDays = () => {
-        return this.state.dateObject.daysInMonth();
+        // return this.state.dateObject.daysInMonth();
+        return this.props.date.daysInMonth();
     }
 
     getCurrentDay = () => {
-        return this.state.dateObject.format("D");
+        // return this.state.dateObject.format("D");
+        return this.props.date.format("D");
     }
 
     getMonth = () => {
-        return this.state.dateObject.format("MMMM");
+        // return this.state.dateObject.format("MMMM");
+        return this.props.date.format("MMMM");
     }
 
     getYear = () => {
-        return this.state.dateObject.format("Y");
+        // return this.state.dateObject.format("Y");
+        return this.props.date.format("Y");
     }
 
     getFirstDayOfMonth = () => {
-        let dateObject = this.state.dateObject;
+        // let dateObject = this.state.dateObject;
+        let dateObject = this.props.date;
         let firstDay = moment(dateObject).startOf("month").format("d");
 
         return firstDay;
@@ -105,8 +112,10 @@ class EventHub extends Component {
         const currYear = moment().format("YYYY");
 
         // selected calendar date, dateObject in state updated everytime new date selected
-        const dateObjectMonth = this.state.dateObject.format("MMMM");
-        const dateObjectYear = this.state.dateObject.format("YYYY");
+        // const dateObjectMonth = this.state.dateObject.format("MMMM");
+        // const dateObjectYear = this.state.dateObject.format("YYYY");
+        const dateObjectMonth = this.props.date.format("MMMM");
+        const dateObjectYear = this.props.date.format("YYYY");
 
         for (let d = 1; d <= this.getDays(); d++) {
             let day = "";
@@ -283,8 +292,10 @@ class EventHub extends Component {
                                 nextClick={this.onNext}
                                 type="prev" />
                             <DateHeader
-                                toggleMonthSel={this.toggleMonthSelector}
-                                toggleYearSel={this.toggleYearSelector}
+                                // toggleMonthSel={this.toggleMonthSelector}
+                                // toggleYearSel={this.toggleYearSelector}
+                                toggleMonthSel={this.props.onToggleMonthSel}
+                                toggleYearSel={this.props.onToggleYearSel}
                                 month={this.getMonth()}
                                 year={this.getYear()} />
                             <DateButton
@@ -296,20 +307,27 @@ class EventHub extends Component {
                             <td colSpan="7">
                                 <table>
                                     <Selector 
-                                        showMonthSelector={this.state.showMonthSelector}
-                                        showYearSelector={this.state.showYearSelector}
-                                        listOfMonths={this.state.monthList}
-                                        selectedMonth={this.selectMonth}
+                                        // showMonthSelector={this.state.showMonthSelector}
+                                        showMonthSelector={this.props.showMonthSel}
+                                        // showYearSelector={this.state.showYearSelector}
+                                        showYearSelector={this.props.showYearSel}
+                                        // listOfMonths={this.state.monthList}
+                                        listOfMonths={this.props.months}
+                                        // selectedMonth={this.selectMonth}
+                                        selectedMonth={this.props.onMonthSelected}
                                         currentYear={this.getYear()}
                                         yearRange={this.getYearRange}
-                                        selectedYear={this.selectYear} />
+                                        // selectedYear={this.selectYear}
+                                        selectedYear={this.props.onYearSelected} />
                                 </table>
                             </td>
                         </tr>
                     </thead>
                     <CalendarTable
-                        showMonthSel={this.state.showMonthSelector}
-                        showYearSel={this.state.showYearSelector}
+                        // showMonthSel={this.state.showMonthSelector}
+                        // showYearSel={this.state.showYearSelector}
+                        showMonthSel={this.props.showMonthSel}
+                        showYearSel={this.props.showYearSel}
                         calendar={this.createCalendar} />
                 </table>
             </div>    
@@ -318,9 +336,11 @@ class EventHub extends Component {
         let eventPopup = null;
         eventPopup = <EventPopup
                         isDeleting={this.state.deletingEvent}
-                        month={this.state.dateObject.format("MMMM")}
+                        // month={this.state.dateObject.format("MMMM")}
+                        month={this.props.date.format("MMMM")}
                         day={this.state.selectedDay}
-                        year={this.state.dateObject.format("YYYY")}
+                        // year={this.state.dateObject.format("YYYY")}
+                        year={this.props.date.format("YYYY")}
                         onContinue={this.onCreateEventContinue}
                         onCancel={this.onCreateEventCancel}
                         onDelete={this.onDeleteEventConfirm}
@@ -343,4 +363,22 @@ class EventHub extends Component {
     }
 }
 
-export default EventHub;
+const mapStateToProps = state => {
+    return {
+        date: state.dateObject,
+        months: state.monthList,
+        showMonthSel: state.showMonthSelector,
+        showYearSel: state.showYearSelector
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onMonthSelected: (newMonth) => dispatch({type: actionTypes.SELECT_MONTH, monthName: newMonth}),
+        onYearSelected: (newYear) => dispatch({type: actionTypes.SELECT_YEAR, year: newYear}),
+        onToggleMonthSel: () => dispatch({type: actionTypes.TOGGLE_MONTH_SELECTOR}),
+        onToggleYearSel: () => dispatch({type: actionTypes.TOGGLE_YEAR_SELECTOR})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventHub);
