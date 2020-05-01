@@ -16,10 +16,10 @@ import EventPopup from '../../components/EventPopup/EventPopup';
 
 class EventHub extends Component {
     state = {
-        dateObject: moment(),
-        monthList: moment.months(),
-        showMonthSelector: false,
-        showYearSelector: false,
+        // dateObject: moment(),
+        // monthList: moment.months(),
+        // showMonthSelector: false,
+        // showYearSelector: false,
         selectedDay: 0,
         isDaySelected: false,
         events: [],
@@ -181,37 +181,37 @@ class EventHub extends Component {
         return calendarDays;
     }
 
-    selectMonth = (month) => {
-        let monthNo = this.state.monthList.indexOf(month); 
-        let dateObject = Object.assign({}, this.state.dateObject);
-        dateObject = moment(dateObject).set("month", monthNo); 
-        this.setState({
-            dateObject: dateObject,
-            showMonthSelector: !this.state.showMonthSelector 
-        });
-    }
+    // selectMonth = (month) => {
+    //     let monthNo = this.state.monthList.indexOf(month); 
+    //     let dateObject = Object.assign({}, this.state.dateObject);
+    //     dateObject = moment(dateObject).set("month", monthNo); 
+    //     this.setState({
+    //         dateObject: dateObject,
+    //         showMonthSelector: !this.state.showMonthSelector 
+    //     });
+    // }
 
-    selectYear = (year) => {
-        // console.log("[selectYear] year: " + year);
-        let dateObject = Object.assign({}, this.state.dateObject);
-        dateObject = moment(dateObject).set("year", year); 
-        this.setState({
-            dateObject: dateObject,
-            showYearSelector: !this.state.showYearSelector 
-        });
-    }
+    // selectYear = (year) => {
+    //     // console.log("[selectYear] year: " + year);
+    //     let dateObject = Object.assign({}, this.state.dateObject);
+    //     dateObject = moment(dateObject).set("year", year); 
+    //     this.setState({
+    //         dateObject: dateObject,
+    //         showYearSelector: !this.state.showYearSelector 
+    //     });
+    // }
 
-    toggleMonthSelector = () => {
-        this.setState({
-            showMonthSelector: !this.state.showMonthSelector
-        });
-    }
+    // toggleMonthSelector = () => {
+    //     this.setState({
+    //         showMonthSelector: !this.state.showMonthSelector
+    //     });
+    // }
 
-    toggleYearSelector = () => {
-        this.setState({
-            showYearSelector: !this.state.showYearSelector
-        });
-    }
+    // toggleYearSelector = () => {
+    //     this.setState({
+    //         showYearSelector: !this.state.showYearSelector
+    //     });
+    // }
 
     getYearRange(startYear, stopYear) {
         var yearArray = [];
@@ -229,29 +229,29 @@ class EventHub extends Component {
         return yearArray;
     }
 
-    onPrev = () => {
-        let curr = "";
-        if (this.state.showYearSelector) {
-            curr = "year";
-        } else {
-            curr = "month";
-        }
-        this.setState({
-            dateObject: this.state.dateObject.subtract(1, curr)
-        });
-    };
+    // onPrev = () => {
+    //     let curr = "";
+    //     if (this.state.showYearSelector) {
+    //         curr = "year";
+    //     } else {
+    //         curr = "month";
+    //     }
+    //     this.setState({
+    //         dateObject: this.state.dateObject.subtract(1, curr)
+    //     });
+    // };
 
-    onNext = () => {
-        let curr = "";
-        if (this.state.showYearSelector) {
-            curr = "year";
-        } else {
-            curr = "month";
-        }
-        this.setState({
-            dateObject: this.state.dateObject.add(1, curr)
-        });
-    };
+    // onNext = () => {
+    //     let curr = "";
+    //     if (this.state.showYearSelector) {
+    //         curr = "year";
+    //     } else {
+    //         curr = "month";
+    //     }
+    //     this.setState({
+    //         dateObject: this.state.dateObject.add(1, curr)
+    //     });
+    // };
 
     onCreateEventContinue = () => {
         this.props.history.push('/createEventForm');
@@ -288,8 +288,10 @@ class EventHub extends Component {
                     <thead className={classes.CalendarHeader}>
                         <tr>
                             <DateButton
-                                prevClick={this.onPrev}
-                                nextClick={this.onNext}
+                                // prevClick={this.onPrev}
+                                // nextClick={this.onNext}
+                                prevClick={this.props.onDatePrevClick}
+                                nextClick={this.props.onDateNextClick}
                                 type="prev" />
                             <DateHeader
                                 // toggleMonthSel={this.toggleMonthSelector}
@@ -299,8 +301,10 @@ class EventHub extends Component {
                                 month={this.getMonth()}
                                 year={this.getYear()} />
                             <DateButton
-                                prevClick={this.onPrev}
-                                nextClick={this.onNext}
+                                // prevClick={this.onPrev}
+                                // nextClick={this.onNext}
+                                prevClick={this.props.onDatePrevClick}
+                                nextClick={this.props.onDateNextClick}
                                 type="next" />
                         </tr>
                         <tr>
@@ -377,7 +381,9 @@ const mapDispatchToProps = dispatch => {
         onMonthSelected: (newMonth) => dispatch({type: actionTypes.SELECT_MONTH, monthName: newMonth}),
         onYearSelected: (newYear) => dispatch({type: actionTypes.SELECT_YEAR, year: newYear}),
         onToggleMonthSel: () => dispatch({type: actionTypes.TOGGLE_MONTH_SELECTOR}),
-        onToggleYearSel: () => dispatch({type: actionTypes.TOGGLE_YEAR_SELECTOR})
+        onToggleYearSel: () => dispatch({type: actionTypes.TOGGLE_YEAR_SELECTOR}),
+        onDatePrevClick: () => dispatch({type: actionTypes.ON_PREV_CALENDAR_CLICK}),
+        onDateNextClick: () => dispatch({type: actionTypes.ON_NEXT_CALENDAR_CLICK})
     }
 }
 
