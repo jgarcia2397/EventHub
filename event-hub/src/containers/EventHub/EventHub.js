@@ -28,34 +28,35 @@ class EventHub extends Component {
     };
 
     componentDidMount() {
-        this.getEventsFromBackend();
+        // this.getEventsFromBackend();
+        this.props.onInitEventList();
     }
 
-    getEventsFromBackend = () => {
-        axios.get('/events.json?orderBy="eventTimestamp"')
-            .then(res => {
-                const fetchedEvents = [];
-                for (let key in res.data) {
-                    fetchedEvents.push({
-                        ...res.data[key],
-                        id: key
-                    });
-                }
-                fetchedEvents.sort((a, b) => {
-                    if (moment(b.eventTimestamp).isBefore(a.eventTimestamp)){
-                        return 1;
-                    } else if (moment(a.eventTimestamp).isBefore(b.eventTimestamp)){
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                });
-                this.setState({events: fetchedEvents});
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+    // getEventsFromBackend = () => {
+    //     axios.get('/events.json?orderBy="eventTimestamp"')
+    //         .then(res => {
+    //             const fetchedEvents = [];
+    //             for (let key in res.data) {
+    //                 fetchedEvents.push({
+    //                     ...res.data[key],
+    //                     id: key
+    //                 });
+    //             }
+    //             fetchedEvents.sort((a, b) => {
+    //                 if (moment(b.eventTimestamp).isBefore(a.eventTimestamp)){
+    //                     return 1;
+    //                 } else if (moment(a.eventTimestamp).isBefore(b.eventTimestamp)){
+    //                     return -1;
+    //                 } else {
+    //                     return 0;
+    //                 }
+    //             });
+    //             this.setState({events: fetchedEvents});
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         });
+    // }
 
     getDays = () => {
         // return this.state.dateObject.daysInMonth();
@@ -102,8 +103,8 @@ class EventHub extends Component {
         let days = [];
         let eventDates = [];
 
-        for (let i = 0; i < this.state.events.length; i++) {
-            let date = this.state.events[i].eventDetails.month + " " + this.state.events[i].eventDetails.day + ", " + this.state.events[i].eventDetails.year;
+        for (let i = 0; i < this.props.events.length; i++) {
+            let date = this.props.events[i].eventDetails.month + " " + this.props.events[i].eventDetails.day + ", " + this.props.events[i].eventDetails.year;
             eventDates.push(date);
         }
 
@@ -360,7 +361,7 @@ class EventHub extends Component {
                 {calendar}
                 <h1>Your Events</h1>
                 <EventList 
-                    eventList={this.state.events}
+                    eventList={this.props.events}
                     onDelete={this.onDeleteEventClick} />
             </Auxiliary>
         );
@@ -372,7 +373,9 @@ const mapStateToProps = state => {
         date: state.dateObject,
         months: state.monthList,
         showMonthSel: state.showMonthSelector,
-        showYearSel: state.showYearSelector
+        showYearSel: state.showYearSelector,
+        events: state.events,
+        error: state.error
     };
 }
 
@@ -383,7 +386,8 @@ const mapDispatchToProps = dispatch => {
         onToggleMonthSel: () => dispatch(eventHubActions.toggleMonthSelector()),
         onToggleYearSel: () => dispatch(eventHubActions.toggleYearSelector()),
         onDatePrevClick: () => dispatch(eventHubActions.onPrevCalendarClick()),
-        onDateNextClick: () => dispatch(eventHubActions.onNextCalendarClick())
+        onDateNextClick: () => dispatch(eventHubActions.onNextCalendarClick()),
+        onInitEventList: () => dispatch(eventHubActions.initEventList())
     }
 }
 

@@ -4,7 +4,8 @@ export {
     toggleMonthSelector,
     toggleYearSelector,
     onPrevCalendarClick,
-    onNextCalendarClick
+    onNextCalendarClick,
+    initEventList
 } from './eventHub';
 
 export {} from './eventForm';

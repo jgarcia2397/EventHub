@@ -6,7 +6,9 @@ const initialState = {
     dateObject: moment(),
     monthList: moment.months(),
     showMonthSelector: false,
-    showYearSelector: false
+    showYearSelector: false,
+    events: [],
+    error: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -63,6 +65,17 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 dateObject: updatedDateObjectNext
+            };
+        case actionTypes.SET_EVENT_LIST:
+            return {
+                ...state,
+                events: action.events,
+                error: false
+            };
+        case actionTypes.FETCH_EVENT_LIST_FAILED:
+            return {
+                ...state,
+                error: true
             };
         default:
             return state;
