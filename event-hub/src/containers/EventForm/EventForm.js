@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
 import axios from '../../axios-events';
+import * as eventFormActions from '../../store/actions/index';
 
 class EventForm extends Component {
 
@@ -376,14 +378,16 @@ class EventForm extends Component {
             eventTimestamp: dateData
         }
 
-        axios.post('/events.json', eventDetails)
-            .then(response => {
-                // console.log(response);
-                this.props.history.push('/');
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        this.props.onCreateEvent(eventDetails);
+
+        // axios.post('/events.json', eventDetails)
+        //     .then(response => {
+        //         // console.log(response);
+        //         this.props.history.push('/');
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
     }
 
     render () {
@@ -428,4 +432,8 @@ class EventForm extends Component {
     }
 }
 
-export default EventForm;
+const mapDispatchToProps = dispatch => {
+    onCreateEvent: (eventDetails) => dispatch(eventFormActions.createEventStart(eventDetails))
+};
+
+export default connect(null, mapDispatchToProps)(EventForm);

@@ -8,4 +8,6 @@ export {
     initEventList
 } from './eventHub';
 
-export {} from './eventForm';
+export {
+    createEventStart
+} from './eventForm';
