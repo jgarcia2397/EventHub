@@ -3,7 +3,7 @@ import moment from 'moment';
 import axios from '../../axios-events';
 import { connect } from 'react-redux';
 
-import * as actionTypes from '../../store/actions/actionTypes';
+import * as eventHubActions from '../../store/actions/index';
 import classes from './EventHub.module.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Selector from '../../components/Selector/Selector';
@@ -378,12 +378,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMonthSelected: (newMonth) => dispatch({type: actionTypes.SELECT_MONTH, monthName: newMonth}),
-        onYearSelected: (newYear) => dispatch({type: actionTypes.SELECT_YEAR, year: newYear}),
-        onToggleMonthSel: () => dispatch({type: actionTypes.TOGGLE_MONTH_SELECTOR}),
-        onToggleYearSel: () => dispatch({type: actionTypes.TOGGLE_YEAR_SELECTOR}),
-        onDatePrevClick: () => dispatch({type: actionTypes.ON_PREV_CALENDAR_CLICK}),
-        onDateNextClick: () => dispatch({type: actionTypes.ON_NEXT_CALENDAR_CLICK})
+        onMonthSelected: (newMonth) => dispatch(eventHubActions.selectMonth(newMonth)),
+        onYearSelected: (newYear) => dispatch(eventHubActions.selectYear(newYear)),
+        onToggleMonthSel: () => dispatch(eventHubActions.toggleMonthSelector()),
+        onToggleYearSel: () => dispatch(eventHubActions.toggleYearSelector()),
+        onDatePrevClick: () => dispatch(eventHubActions.onPrevCalendarClick()),
+        onDateNextClick: () => dispatch(eventHubActions.onNextCalendarClick())
     }
 }
 
