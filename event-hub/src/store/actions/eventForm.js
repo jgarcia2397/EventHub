@@ -16,11 +16,18 @@ export const createEventFailed = (error) => {
     };
 };
 
-export const createEventStart = (eventDetails) => {
+export const createEventStart = () => {
+    return {
+        type: actionTypes.CREATE_EVENT_START
+    };
+};
+
+export const createEvent = (eventDetails) => {
     return dispatch => {
+        dispatch(createEventStart());
         axios.post('/events.json', eventDetails)
             .then(response => {
-                // this.props.history.push('/');
+                // this.props.history.push('/');        // add this back in or fix using other method
                 dispatch(createEventSuccess(response.data, eventDetails));
             })
             .catch(error => {

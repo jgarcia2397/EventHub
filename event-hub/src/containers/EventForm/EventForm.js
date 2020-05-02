@@ -432,8 +432,16 @@ class EventForm extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    onCreateEvent: (eventDetails) => dispatch(eventFormActions.createEventStart(eventDetails))
-};
+const mapStateToProps = state => {
+    return {
+        loading: state.loading      // to be used later when Spinner is added
+    };
+}
 
-export default connect(null, mapDispatchToProps)(EventForm);
+const mapDispatchToProps = dispatch => {
+    return {
+        onCreateEvent: (eventDetails) => dispatch(eventFormActions.createEvent(eventDetails))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventForm);
