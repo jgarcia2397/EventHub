@@ -7,10 +7,10 @@ import { createStore } from 'redux';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import reducer from './store/reducers/reducer';
+import eventHubReducer from './store/reducers/eventHub';
 
 const store = createStore(
-  reducer,
+  eventHubReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
