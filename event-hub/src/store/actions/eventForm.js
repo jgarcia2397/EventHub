@@ -1,6 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-events';
 
+export const createEventInit = () => {
+    return {
+        type: actionTypes.CREATE_EVENT_INIT
+    };
+};
+
 export const createEventSuccess = (id, eventDetails) => {
     return {
         type: actionTypes.CREATE_EVENT_SUCCESS,

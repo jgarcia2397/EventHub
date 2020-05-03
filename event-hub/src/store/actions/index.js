@@ -9,5 +9,6 @@ export {
 } from './eventHub';
 
 export {
-    createEvent
+    createEvent,
+    createEventInit
 } from './eventForm';

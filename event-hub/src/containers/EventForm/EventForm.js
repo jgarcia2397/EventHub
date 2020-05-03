@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 import classes from './EventForm.module.css';
@@ -391,6 +392,8 @@ class EventForm extends Component {
     }
 
     render () {
+        const eventCreatedRedirect = this.props.eventCreated ? <Redirect to="/" /> : null;
+
         const formElementsArray = [];
         for (let key in this.state.eventForm) {
             formElementsArray.push({
@@ -426,6 +429,7 @@ class EventForm extends Component {
 
         return (
             <div className={classes.EventForm}>
+                {eventCreatedRedirect}
                 {form}
             </div>
         );
@@ -434,7 +438,8 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.eventForm.loading      // to be used later when Spinner is added
+        loading: state.eventForm.loading,      // to be used later when Spinner is added
+        eventCreated: state.eventForm.eventCreated
     };
 }
 
