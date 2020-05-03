@@ -434,7 +434,7 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.loading      // to be used later when Spinner is added
+        loading: state.eventForm.loading      // to be used later when Spinner is added
     };
 }
 

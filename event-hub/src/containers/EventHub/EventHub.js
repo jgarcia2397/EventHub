@@ -370,12 +370,12 @@ class EventHub extends Component {
 
 const mapStateToProps = state => {
     return {
-        date: state.dateObject,
-        months: state.monthList,
-        showMonthSel: state.showMonthSelector,
-        showYearSel: state.showYearSelector,
-        events: state.events,
-        error: state.error
+        date: state.eventHub.dateObject,
+        months: state.eventHub.monthList,
+        showMonthSel: state.eventHub.showMonthSelector,
+        showYearSel: state.eventHub.showYearSelector,
+        events: state.eventHub.events,
+        error: state.eventHub.error
     };
 }
 

@@ -28,7 +28,7 @@ export const createEvent = (eventDetails) => {
         axios.post('/events.json', eventDetails)
             .then(response => {
                 // this.props.history.push('/');        // add this back in or fix using other method
-                dispatch(createEventSuccess(response.data, eventDetails));
+                dispatch(createEventSuccess(response.data.name, eventDetails));
             })
             .catch(error => {
                 // console.log(error);
