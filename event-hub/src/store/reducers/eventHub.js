@@ -66,16 +66,14 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 dateObject: updatedDateObjectNext
             };
-        case actionTypes.SET_EVENT_LIST:
+        case actionTypes.FETCH_EVENT_LIST_SUCCESS:
             return {
                 ...state,
-                events: action.events,
-                error: false
+                events: action.events
             };
         case actionTypes.FETCH_EVENT_LIST_FAILED:
             return {
-                ...state,
-                error: true
+                ...state
             };
         default:
             return state;

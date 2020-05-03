@@ -40,21 +40,29 @@ export const onNextCalendarClick = () => {
     };
 };
 
-export const setEventList = (events) => {
+export const fetchEventListStart = (events) => {
     return {
-        type: actionTypes.SET_EVENT_LIST,
+        type: actionTypes.FETCH_EVENT_LIST_START
+    };
+};
+
+export const fetchEventListSuccess = (events) => {
+    return {
+        type: actionTypes.FETCH_EVENT_LIST_SUCCESS,
         events: events
     };
 };
 
-export const fetchEventListFailed = () => {
+export const fetchEventListFailed = (error) => {
     return {
-        type: actionTypes.FETCH_EVENT_LIST_FAILED
+        type: actionTypes.FETCH_EVENT_LIST_FAILED,
+        error: error
     };
 };
 
 export const initEventList = () => {
     return dispatch => {
+        dispatch(fetchEventListStart());
         axios.get('/events.json?orderBy="eventTimestamp"')
             .then(res => {
                 const fetchedEvents = [];
@@ -73,10 +81,10 @@ export const initEventList = () => {
                         return 0;
                     }
                 });
-                dispatch(setEventList(fetchedEvents));
+                dispatch(fetchEventListSuccess(fetchedEvents));
             })
             .catch(err => {
-                dispatch(fetchEventListFailed());
+                dispatch(fetchEventListFailed(err));
                 // console.log(err);
             });
     };
