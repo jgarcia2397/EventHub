@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import { updateObject } from '../utility';
 
 const initialState = {
     events: [],
@@ -6,36 +7,35 @@ const initialState = {
     eventCreated: false
 }
 
+const createEventInit = (state, action) => {
+    return updateObject(state, {eventCreated: false});
+};
+
+const createEventStart = (state, action) => {
+    return updateObject(state, {loading: true});
+};
+
+const createEventSuccess = (state, action) => {
+    const newEvent = updateObject(action.eventDetails, {id: action.eventId});
+    const updatedObject = {
+        loading: false,
+        eventCreated: true,
+        events: state.events.concat(newEvent)
+    };
+    return updateObject(state, updatedObject);
+};
+
+const createEventFailed = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.CREATE_EVENT_INIT:
-            return {
-                ...state,
-                eventCreated: false
-            };
-        case actionTypes.CREATE_EVENT_START:
-            return {
-                ...state,
-                loading: true
-            };
-        case actionTypes.CREATE_EVENT_SUCCESS:
-            const newEvent = {
-                ...action.eventDetails,
-                id: action.eventId
-            };
-            return {
-                ...state,
-                loading: false,
-                eventCreated: true,
-                events: state.events.concat(newEvent)
-            };
-        case actionTypes.CREATE_EVENT_FAILED:
-            return {
-                ...state,
-                loading: false
-            };
-        default:
-            return state;
+        case actionTypes.CREATE_EVENT_INIT: return createEventInit(state, action);     
+        case actionTypes.CREATE_EVENT_START: return createEventStart(state, action);    
+        case actionTypes.CREATE_EVENT_SUCCESS: return createEventSuccess(state, action);  
+        case actionTypes.CREATE_EVENT_FAILED: return createEventFailed(state, action);    
+        default: return state;
     }
 };
 
