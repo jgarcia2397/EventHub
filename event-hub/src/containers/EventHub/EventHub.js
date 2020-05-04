@@ -32,6 +32,15 @@ class EventHub extends Component {
         this.props.onInitEventList();
     }
 
+    componentDidUpdate(prevProps) {
+        // this.getEventsFromBackend();
+        // console.log("this.props.events: " + this.props.events.length);
+        // console.log("prevProps.events: " + prevProps.events.length);
+        if (this.props.events.length !== prevProps.events.length) {
+            this.props.onInitEventList();
+        }
+    }
+
     // getEventsFromBackend = () => {
     //     axios.get('/events.json?orderBy="eventTimestamp"')
     //         .then(res => {
@@ -271,15 +280,17 @@ class EventHub extends Component {
     }
 
     onDeleteEventConfirm = (eventId) => {
-        axios.delete('/events/' + eventId + '.json')
-            .then(res => {
-                // console.log(res);
-                this.getEventsFromBackend();
-                this.setState({deletingEvent: false});
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        this.props.onDeleteEvent(eventId);
+        this.setState({deletingEvent: false});
+        // axios.delete('/events/' + eventId + '.json')
+        //     .then(res => {
+        //         // console.log(res);
+        //         this.getEventsFromBackend();
+        //         this.setState({deletingEvent: false});
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
     }
 
     render () {
@@ -389,7 +400,8 @@ const mapDispatchToProps = dispatch => {
         onDatePrevClick: () => dispatch(actions.onPrevCalendarClick()),
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
         onInitEventList: () => dispatch(actions.initEventList()),
-        onInitCreateEvent: () => dispatch(actions.createEventInit())
+        onInitCreateEvent: () => dispatch(actions.createEventInit()),
+        onDeleteEvent: (eventId) => dispatch(actions.deleteEvent(eventId))
     }
 }
 

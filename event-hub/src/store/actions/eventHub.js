@@ -89,3 +89,38 @@ export const initEventList = () => {
             });
     };
 };
+
+export const deleteEventStart = () => {
+    return {
+        type: actionTypes.DELETE_EVENT_START
+    };
+};
+
+export const deleteEventSuccess = (id) => {
+    return {
+        type: actionTypes.DELETE_EVENT_SUCCESS,
+        eventId: id
+    };
+};
+
+export const deleteEventFailed = (error) => {
+    return {
+        type: actionTypes.DELETE_EVENT_FAILED,
+        error: error
+    };
+};
+
+export const deleteEvent = (eventId) => {
+    return dispatch => {
+        dispatch(deleteEventStart());
+        console.log(eventId);
+        axios.delete('/events/' + eventId + '.json')
+            .then(res => {
+                dispatch(deleteEventSuccess(eventId));
+            })
+            .catch(err => {
+                // console.log(err);
+                dispatch(deleteEventFailed(err));
+            });
+    };
+};

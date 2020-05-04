@@ -83,6 +83,11 @@ const onNextCalendarClick = (state, action) => {
     return updateObject(state, updatedStateNextClick);
 };
 
+const fetchEventListStart = (state, action) => {
+    const updatedStateFetchStart = state;
+    return updateObject(state, updatedStateFetchStart);
+};
+
 const fetchEventListSuccess = (state, action) => {
     const updatedStateFetchSuccess = {
         events: action.events
@@ -95,6 +100,26 @@ const fetchEventListFail = (state, action) => {
     return updateObject(state, updatedStateFetchFail);
 };
 
+const deleteEventStart = (state, action) => {
+    const updatedStateDeleteStart = state;
+    return updateObject(state, updatedStateDeleteStart);
+};
+
+const deleteEventSuccess = (state, action) => {
+    const eventsCopy = [...state.events];
+    const deletedEvent = eventsCopy.splice(eventsCopy.findIndex(events => events.key == action.eventId));
+    const updatedEvents = updateObject(state.events, deletedEvent);
+    const updatedStateDeleteSuccess = {
+        events: updatedEvents
+    };
+    return updateObject(state, updatedStateDeleteSuccess);
+};
+
+const deleteEventFail = (state, action) => {
+    const updatedStateDeleteFail = state;
+    return updateObject(state, updatedStateDeleteFail);
+};
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.SELECT_MONTH: return selectMonth(state, action);
@@ -103,8 +128,12 @@ const reducer = (state = initialState, action) => {
         case actionTypes.TOGGLE_YEAR_SELECTOR: return toggleYearSelector(state,action);
         case actionTypes.ON_PREV_CALENDAR_CLICK: return onPrevCalendarClick(state,action);
         case actionTypes.ON_NEXT_CALENDAR_CLICK: return onNextCalendarClick(state,action);
+        case actionTypes.FETCH_EVENT_LIST_START: return fetchEventListStart(state,action);
         case actionTypes.FETCH_EVENT_LIST_SUCCESS: return fetchEventListSuccess(state,action);
         case actionTypes.FETCH_EVENT_LIST_FAILED: return fetchEventListFail(state,action);
+        case actionTypes.DELETE_EVENT_START: return deleteEventStart(state, action);    
+        case actionTypes.DELETE_EVENT_SUCCESS: return deleteEventSuccess(state, action);  
+        case actionTypes.DELETE_EVENT_FAILED: return deleteEventFail(state, action); 
         default: return state;
     }
 };

@@ -5,7 +5,8 @@ export {
     toggleYearSelector,
     onPrevCalendarClick,
     onNextCalendarClick,
-    initEventList
+    initEventList,
+    deleteEvent
 } from './eventHub';
 
 export {
