@@ -13,3 +13,7 @@ export {
     createEvent,
     createEventInit
 } from './eventForm';
+
+export {
+    auth
+} from './auth';

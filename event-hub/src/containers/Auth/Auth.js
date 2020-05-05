@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
+import * as actions from '../../store/actions/index';
 import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 
@@ -72,28 +74,7 @@ class Auth extends Component {
 
     signInHandler = (event) => {
         event.preventDefault();
-        
-        const authData = {
-            email: this.state.authForm.email.value,
-            password: this.state.authForm.password.value,
-            returnSecureToken: true
-        }
-
-        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc';
-        if (!this.state.isSignUp) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc';
-        }
-        
-        axios.post(url, authData)
-            .then(response => {
-                console.log(response);
-                this.setState({token: response.data.idToken, userId: response.data.localId});
-                this.checkAuthTimeout(response.data.expiresIn);
-                // console.log(this.state);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        this.props.onAuth(this.state.authForm.email.value, this.state.authForm.password.value, this.state.isSignUp);
     }
 
     switchAuthModeHandler = () => {
@@ -163,4 +144,10 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
