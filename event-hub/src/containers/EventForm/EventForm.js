@@ -6,7 +6,7 @@ import moment from 'moment';
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
 import axios from '../../axios-events';
-import * as eventFormActions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 
 class EventForm extends Component {
 
@@ -382,6 +382,7 @@ class EventForm extends Component {
 
             this.props.onCreateEvent(eventDetails, this.props.token);
         } else {
+            this.props.onSetAuthRedirectPath('/createEventForm');
             this.props.history.push('/auth');
         }
 
@@ -451,7 +452,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCreateEvent: (eventDetails, token) => dispatch(eventFormActions.createEvent(eventDetails, token))
+        onCreateEvent: (eventDetails, token) => dispatch(actions.createEvent(eventDetails, token)),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
 

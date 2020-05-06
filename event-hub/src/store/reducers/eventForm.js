@@ -4,15 +4,16 @@ import { updateObject } from '../utility';
 const initialState = {
     events: [],
     loading: false,      // to be used later when Spinner is added
-    eventCreated: false
+    eventCreated: false,
+    creatingEvent: false
 }
 
 const createEventInit = (state, action) => {
-    return updateObject(state, {eventCreated: false});
+    return updateObject(state, {eventCreated: false, creatingEvent: true});
 };
 
 const createEventStart = (state, action) => {
-    return updateObject(state, {loading: true});
+    return updateObject(state, {loading: true, creatingEvent: false});
 };
 
 const createEventSuccess = (state, action) => {
@@ -20,13 +21,14 @@ const createEventSuccess = (state, action) => {
     const updatedObject = {
         loading: false,
         eventCreated: true,
+        creatingEvent: false,
         events: state.events.concat(newEvent)
     };
     return updateObject(state, updatedObject);
 };
 
 const createEventFailed = (state, action) => {
-    return updateObject(state, {loading: false});
+    return updateObject(state, {loading: false, creatingEvent: false});
 };
 
 const reducer = (state = initialState, action) => {

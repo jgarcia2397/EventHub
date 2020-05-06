@@ -7,7 +7,9 @@ const toolbar = (props) => (
     <header className={classes.Toolbar}>
         <div>EventHub</div>
         <div>
-            <NavigationItems isAuth={props.auth} />
+            <NavigationItems 
+                isAuth={props.auth}
+                createEvent={props.onCreateEvent} />
         </div>
     </header>
 );

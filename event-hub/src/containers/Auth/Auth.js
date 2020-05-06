@@ -45,6 +45,12 @@ class Auth extends Component {
         userId: null
     }
 
+    componentDidMount() {
+        if (!this.props.creatingEvent && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath();
+        }
+    }
+
     checkTextInputValidity(value, rules) {
         let isValid = true;
 
@@ -134,7 +140,7 @@ class Auth extends Component {
 
         let authRedirect = null;
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to="/" />;
+            authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
         return (
@@ -152,13 +158,16 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        creatingEvent: state.eventForm.creatingEvent,
+        authRedirectPath: state.auth.authRedirectPath
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     }
 }
 
