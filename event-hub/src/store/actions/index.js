@@ -15,5 +15,6 @@ export {
 } from './eventForm';
 
 export {
-    auth
+    auth,
+    logout
 } from './auth';
