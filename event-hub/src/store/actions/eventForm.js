@@ -28,10 +28,10 @@ export const createEventStart = () => {
     };
 };
 
-export const createEvent = (eventDetails) => {
+export const createEvent = (eventDetails, token) => {
     return dispatch => {
         dispatch(createEventStart());
-        axios.post('/events.json', eventDetails)
+        axios.post('/events.json?auth=' + token, eventDetails)
             .then(response => {
                 // this.props.history.push('/');        // add this back in or fix using other method
                 dispatch(createEventSuccess(response.data.name, eventDetails));

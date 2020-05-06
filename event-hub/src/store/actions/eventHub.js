@@ -60,10 +60,10 @@ export const fetchEventListFailed = (error) => {
     };
 };
 
-export const initEventList = () => {
+export const initEventList = (token) => {
     return dispatch => {
         dispatch(fetchEventListStart());
-        axios.get('/events.json?orderBy="eventTimestamp"')
+        axios.get('/events.json?auth=' + token + '&orderBy="eventTimestamp"')
             .then(res => {
                 const fetchedEvents = [];
                 for (let key in res.data) {

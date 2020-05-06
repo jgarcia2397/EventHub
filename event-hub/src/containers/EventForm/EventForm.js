@@ -379,7 +379,7 @@ class EventForm extends Component {
             eventTimestamp: dateData
         }
 
-        this.props.onCreateEvent(eventDetails);
+        this.props.onCreateEvent(eventDetails, this.props.token);
 
         // axios.post('/events.json', eventDetails)
         //     .then(response => {
@@ -439,13 +439,14 @@ class EventForm extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.eventForm.loading,      // to be used later when Spinner is added
-        eventCreated: state.eventForm.eventCreated
+        eventCreated: state.eventForm.eventCreated,
+        token: state.auth.token
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCreateEvent: (eventDetails) => dispatch(eventFormActions.createEvent(eventDetails))
+        onCreateEvent: (eventDetails, token) => dispatch(eventFormActions.createEvent(eventDetails, token))
     }
 }
 

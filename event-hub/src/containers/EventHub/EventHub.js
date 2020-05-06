@@ -29,7 +29,7 @@ class EventHub extends Component {
 
     componentDidMount() {
         // this.getEventsFromBackend();
-        this.props.onInitEventList();
+        this.props.onInitEventList(this.props.token);
     }
 
     componentDidUpdate(prevProps) {
@@ -37,7 +37,7 @@ class EventHub extends Component {
         // console.log("this.props.events: " + this.props.events.length);
         // console.log("prevProps.events: " + prevProps.events.length);
         if (this.props.events.length !== prevProps.events.length) {
-            this.props.onInitEventList();
+            this.props.onInitEventList(this.props.token);
         }
     }
 
@@ -387,7 +387,8 @@ const mapStateToProps = state => {
         showMonthSel: state.eventHub.showMonthSelector,
         showYearSel: state.eventHub.showYearSelector,
         events: state.eventHub.events,
-        error: state.eventHub.error
+        error: state.eventHub.error,
+        token: state.auth.token
     };
 }
 
@@ -399,7 +400,7 @@ const mapDispatchToProps = dispatch => {
         onToggleYearSel: () => dispatch(actions.toggleYearSelector()),
         onDatePrevClick: () => dispatch(actions.onPrevCalendarClick()),
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
-        onInitEventList: () => dispatch(actions.initEventList()),
+        onInitEventList: (token) => dispatch(actions.initEventList(token)),
         onInitCreateEvent: () => dispatch(actions.createEventInit()),
         onDeleteEvent: (eventId) => dispatch(actions.deleteEvent(eventId))
     }
