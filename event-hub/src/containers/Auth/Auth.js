@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
 import classes from './Auth.module.css';
@@ -132,8 +132,14 @@ class Auth extends Component {
             </form>
         );
 
+        let authRedirect = null;
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to="/" />;
+        }
+
         return (
             <div className={classes.Auth}>
+                {authRedirect}
                 {form}
                 <div className={classes.AuthSwitch}>
                     <label>{this.state.isSignUp ? 'Already have an account? Sign in now!' : 'Don\'t have an account? Sign up now!'}</label>
@@ -144,10 +150,16 @@ class Auth extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null
+    };
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

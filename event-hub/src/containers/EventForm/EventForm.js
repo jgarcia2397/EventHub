@@ -366,20 +366,24 @@ class EventForm extends Component {
     createEventHandler = (event) => {
         event.preventDefault();
 
-        const formData = {};
-        for (let formElementIdentifier in this.state.eventForm) {
-            formData[formElementIdentifier] = this.state.eventForm[formElementIdentifier].value;
+        if (this.props.isAuthenticated) {
+            const formData = {};
+            for (let formElementIdentifier in this.state.eventForm) {
+                formData[formElementIdentifier] = this.state.eventForm[formElementIdentifier].value;
+            }
+
+            let dateData = new Date(formData.month + " " + formData.day + ", " + formData.year);
+
+            const eventDetails = {
+                eventDetails: formData,
+                numberOfGuests: 0,
+                eventTimestamp: dateData
+            }
+
+            this.props.onCreateEvent(eventDetails, this.props.token);
+        } else {
+            this.props.history.push('/auth');
         }
-
-        let dateData = new Date(formData.month + " " + formData.day + ", " + formData.year);
-
-        const eventDetails = {
-            eventDetails: formData,
-            numberOfGuests: 0,
-            eventTimestamp: dateData
-        }
-
-        this.props.onCreateEvent(eventDetails, this.props.token);
 
         // axios.post('/events.json', eventDetails)
         //     .then(response => {
@@ -423,7 +427,7 @@ class EventForm extends Component {
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 {invalidDateTimeMsg}
-                <button disabled={!this.state.formIsValid}>CREATE EVENT</button>
+                <button disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'CREATE EVENT' : 'LOGIN TO CREATE EVENT'}</button>
             </form>
         );
 
@@ -440,7 +444,8 @@ const mapStateToProps = state => {
     return {
         loading: state.eventForm.loading,      // to be used later when Spinner is added
         eventCreated: state.eventForm.eventCreated,
-        token: state.auth.token
+        token: state.auth.token,
+        isAuthenticated: state.auth.token !== null
     };
 }
 
