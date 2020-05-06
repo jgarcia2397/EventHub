@@ -8,7 +8,10 @@ const navigationItems = (props) => (
         <NavigationItem link="/" exact>Your EventHub</NavigationItem>
         <NavigationItem link="/createEventForm">Create Event</NavigationItem>
         <NavigationItem link="/chats" exact>Your Group Chats</NavigationItem>
-        <NavigationItem link="/auth">Sign In/Out</NavigationItem>
+        { props.isAuth 
+            ? <NavigationItem link="/logout">Logout</NavigationItem>
+            : <NavigationItem link="/auth">Login</NavigationItem>
+        }
     </div>
 );
 
