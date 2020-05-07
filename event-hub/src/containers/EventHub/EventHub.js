@@ -25,20 +25,22 @@ class EventHub extends Component {
 
     componentDidMount() {
         const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
         if (this.props.token === null) {
-            this.props.onInitEventList(token);
+            this.props.onInitEventList(token, userId);
         } else {
-            this.props.onInitEventList(this.props.token);
+            this.props.onInitEventList(this.props.token, this.props.userId);
         }
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.events.length !== prevProps.events.length) {
             const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
             if (this.props.token === null) {
-                this.props.onInitEventList(token);
+                this.props.onInitEventList(token, userId);
             } else {
-                this.props.onInitEventList(this.props.token);
+                this.props.onInitEventList(this.props.token, this.props.userId);
             }
         }
     }
@@ -167,38 +169,6 @@ class EventHub extends Component {
         return calendarDays;
     }
 
-    // selectMonth = (month) => {
-    //     let monthNo = this.state.monthList.indexOf(month); 
-    //     let dateObject = Object.assign({}, this.state.dateObject);
-    //     dateObject = moment(dateObject).set("month", monthNo); 
-    //     this.setState({
-    //         dateObject: dateObject,
-    //         showMonthSelector: !this.state.showMonthSelector 
-    //     });
-    // }
-
-    // selectYear = (year) => {
-    //     // console.log("[selectYear] year: " + year);
-    //     let dateObject = Object.assign({}, this.state.dateObject);
-    //     dateObject = moment(dateObject).set("year", year); 
-    //     this.setState({
-    //         dateObject: dateObject,
-    //         showYearSelector: !this.state.showYearSelector 
-    //     });
-    // }
-
-    // toggleMonthSelector = () => {
-    //     this.setState({
-    //         showMonthSelector: !this.state.showMonthSelector
-    //     });
-    // }
-
-    // toggleYearSelector = () => {
-    //     this.setState({
-    //         showYearSelector: !this.state.showYearSelector
-    //     });
-    // }
-
     getYearRange(startYear, stopYear) {
         var yearArray = [];
         // console.log("[getYearRange] startYear: ", startYear);
@@ -214,30 +184,6 @@ class EventHub extends Component {
         }
         return yearArray;
     }
-
-    // onPrev = () => {
-    //     let curr = "";
-    //     if (this.state.showYearSelector) {
-    //         curr = "year";
-    //     } else {
-    //         curr = "month";
-    //     }
-    //     this.setState({
-    //         dateObject: this.state.dateObject.subtract(1, curr)
-    //     });
-    // };
-
-    // onNext = () => {
-    //     let curr = "";
-    //     if (this.state.showYearSelector) {
-    //         curr = "year";
-    //     } else {
-    //         curr = "month";
-    //     }
-    //     this.setState({
-    //         dateObject: this.state.dateObject.add(1, curr)
-    //     });
-    // };
 
     onCreateEventContinue = () => {
         this.props.onInitCreateEvent();
@@ -258,15 +204,6 @@ class EventHub extends Component {
     onDeleteEventConfirm = (eventId) => {
         this.props.onDeleteEvent(eventId);
         this.setState({deletingEvent: false});
-        // axios.delete('/events/' + eventId + '.json')
-        //     .then(res => {
-        //         // console.log(res);
-        //         this.getEventsFromBackend();
-        //         this.setState({deletingEvent: false});
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
     }
 
     render () {
@@ -364,7 +301,8 @@ const mapStateToProps = state => {
         showYearSel: state.eventHub.showYearSelector,
         events: state.eventHub.events,
         error: state.eventHub.error,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
     };
 }
 
@@ -376,7 +314,7 @@ const mapDispatchToProps = dispatch => {
         onToggleYearSel: () => dispatch(actions.toggleYearSelector()),
         onDatePrevClick: () => dispatch(actions.onPrevCalendarClick()),
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
-        onInitEventList: (token) => dispatch(actions.initEventList(token)),
+        onInitEventList: (token, userId) => dispatch(actions.initEventList(token, userId)),
         onInitCreateEvent: () => dispatch(actions.createEventInit()),
         onDeleteEvent: (eventId) => dispatch(actions.deleteEvent(eventId))
     }

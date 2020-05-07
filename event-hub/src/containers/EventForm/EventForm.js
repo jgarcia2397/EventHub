@@ -377,7 +377,8 @@ class EventForm extends Component {
             const eventDetails = {
                 eventDetails: formData,
                 numberOfGuests: 0,
-                eventTimestamp: dateData
+                eventTimestamp: dateData,
+                userId: this.props.userId
             }
 
             this.props.onCreateEvent(eventDetails, this.props.token);
@@ -385,15 +386,6 @@ class EventForm extends Component {
             this.props.onSetAuthRedirectPath('/createEventForm');
             this.props.history.push('/auth');
         }
-
-        // axios.post('/events.json', eventDetails)
-        //     .then(response => {
-        //         // console.log(response);
-        //         this.props.history.push('/');
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
     }
 
     render () {
@@ -446,6 +438,7 @@ const mapStateToProps = state => {
         loading: state.eventForm.loading,      // to be used later when Spinner is added
         eventCreated: state.eventForm.eventCreated,
         token: state.auth.token,
+        userId: state.auth.userId,
         isAuthenticated: state.auth.token !== null
     };
 }

@@ -60,10 +60,15 @@ export const fetchEventListFailed = (error) => {
     };
 };
 
-export const initEventList = (token) => {
+export const initEventList = (token, userId) => {
     return dispatch => {
         dispatch(fetchEventListStart());
-        axios.get('/events.json?auth=' + token + '&orderBy="eventTimestamp"')
+
+        // this will only get events created by a specific user, will need to add functionality to get event if you did not create event, but you are invited by creator
+        const queryParams = 'auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+
+        // axios.get('/events.json?auth=' + token + '&orderBy="eventTimestamp"')
+        axios.get('/events.json?' + queryParams)
             .then(res => {
                 const fetchedEvents = [];
                 for (let key in res.data) {
