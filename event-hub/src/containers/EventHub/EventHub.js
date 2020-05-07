@@ -16,10 +16,6 @@ import EventPopup from '../../components/EventPopup/EventPopup';
 
 class EventHub extends Component {
     state = {
-        // dateObject: moment(),
-        // monthList: moment.months(),
-        // showMonthSelector: false,
-        // showYearSelector: false,
         selectedDay: 0,
         isDaySelected: false,
         events: [],
@@ -28,44 +24,24 @@ class EventHub extends Component {
     };
 
     componentDidMount() {
-        // this.getEventsFromBackend();
-        this.props.onInitEventList(this.props.token);
-    }
-
-    componentDidUpdate(prevProps) {
-        // this.getEventsFromBackend();
-        // console.log("this.props.events: " + this.props.events.length);
-        // console.log("prevProps.events: " + prevProps.events.length);
-        if (this.props.events.length !== prevProps.events.length) {
+        const token = localStorage.getItem('token');
+        if (this.props.token === null) {
+            this.props.onInitEventList(token);
+        } else {
             this.props.onInitEventList(this.props.token);
         }
     }
 
-    // getEventsFromBackend = () => {
-    //     axios.get('/events.json?orderBy="eventTimestamp"')
-    //         .then(res => {
-    //             const fetchedEvents = [];
-    //             for (let key in res.data) {
-    //                 fetchedEvents.push({
-    //                     ...res.data[key],
-    //                     id: key
-    //                 });
-    //             }
-    //             fetchedEvents.sort((a, b) => {
-    //                 if (moment(b.eventTimestamp).isBefore(a.eventTimestamp)){
-    //                     return 1;
-    //                 } else if (moment(a.eventTimestamp).isBefore(b.eventTimestamp)){
-    //                     return -1;
-    //                 } else {
-    //                     return 0;
-    //                 }
-    //             });
-    //             this.setState({events: fetchedEvents});
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    // }
+    componentDidUpdate(prevProps) {
+        if (this.props.events.length !== prevProps.events.length) {
+            const token = localStorage.getItem('token');
+            if (this.props.token === null) {
+                this.props.onInitEventList(token);
+            } else {
+                this.props.onInitEventList(this.props.token);
+            }
+        }
+    }
 
     getDays = () => {
         // return this.state.dateObject.daysInMonth();
