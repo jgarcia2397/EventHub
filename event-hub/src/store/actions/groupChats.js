@@ -7,12 +7,14 @@ export const sendMsgStart = () => {
     };
 };
 
-export const sendMsgSuccess = (content, msgTimestamp, userId) => {
+export const sendMsgSuccess = (id, msgDetails) => {
     return {
         type: actionTypes.SEND_MSG_SUCCESS,
-        content: content,
-        msgTimestamp: msgTimestamp,
-        userId: userId
+        msgId: id,
+        msgDetails: msgDetails
+        // content: content,
+        // msgTimestamp: msgTimestamp,
+        // userId: userId
     };
 };
 
@@ -30,7 +32,7 @@ export const sendMsg = (msgDetails) => {
         axios.post('/groupchats.json', msgDetails)
             .then(res => {
                 console.log(res);
-                dispatch(sendMsgSuccess(res.data.content, res.data.msgTimestamp, res.data.userId));
+                dispatch(sendMsgSuccess(res.data.name, msgDetails));
                 // this.setState({content: ''});
                 // this.getChatsFromBackend();
             })
