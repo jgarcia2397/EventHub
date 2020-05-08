@@ -20,3 +20,5 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth';
+
+export {} from './groupChats';

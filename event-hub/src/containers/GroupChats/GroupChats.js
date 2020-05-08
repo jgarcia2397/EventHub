@@ -13,7 +13,7 @@ class GroupChats extends Component {
     }
 
     componentDidMount() {
-        this.getChatsFromBackend();
+        // this.getChatsFromBackend();
     }
 
     // shouldComponentUpdate(nextProps, nextState) {
@@ -21,21 +21,21 @@ class GroupChats extends Component {
     // }
 
     getChatsFromBackend = () => {
-        axios.get('/groupchats.json')
-            .then(res => {
-                const fetchedChats = [];
-                for (let key in res.data) {
-                    fetchedChats.push({
-                        ...res.data[key],
-                        id: key
-                    });
-                }
-                this.setState({chats: fetchedChats});
-            })
-            .catch(err => {
-                console.log(err);
-                this.setState({ readError: err.message });
-            });
+        // axios.get('/groupchats.json')
+        //     .then(res => {
+        //         const fetchedChats = [];
+        //         for (let key in res.data) {
+        //             fetchedChats.push({
+        //                 ...res.data[key],
+        //                 id: key
+        //             });
+        //         }
+        //         this.setState({chats: fetchedChats});
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         this.setState({ readError: err.message });
+        //     });
     }
 
     inputChangedHandler = (event) => {
@@ -53,16 +53,16 @@ class GroupChats extends Component {
         }
 
         this.setState({writeError: null});
-        axios.post('/groupchats.json', msgDetails)
-            .then(res => {
-                console.log(res);
-                this.setState({content: ''});
-                this.getChatsFromBackend();
-            })
-            .catch(err => {
-                console.log(err);
-                this.setState({ writeError: err.message });
-            });
+        // axios.post('/groupchats.json', msgDetails)
+        //     .then(res => {
+        //         console.log(res);
+        //         this.setState({content: ''});
+        //         this.getChatsFromBackend();
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //         this.setState({ writeError: err.message });
+        //     });
     }
 
     render () {
