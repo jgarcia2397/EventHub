@@ -43,7 +43,8 @@ class GroupChats extends Component {
                 <ChatMessage
                     key={chatMsg.id}
                     timestamp={chatMsg.msgTimestamp}
-                    content={chatMsg.content} />
+                    content={chatMsg.content}
+                    isYourMsg={chatMsg.userId === this.props.userId} />
             ))
         );
 
