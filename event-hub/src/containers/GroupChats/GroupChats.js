@@ -1,45 +1,25 @@
 import React, { Component } from 'react';
-import axios from '../../axios-events';
+import { connect } from 'react-redux';
 
+import * as actions from '../../store/actions/index';
 import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 
 class GroupChats extends Component {
-    state = {
-        chats: [],
-        content: '',
-        readError: null,
-        writeError: null
-    }
-
-    componentDidMount() {
-        // this.getChatsFromBackend();
-    }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextState.chats !== this.state.chats;
+    // state = {
+    //     chats: [],
+    //     content: '',
+    //     readError: null,
+    //     writeError: null
     // }
 
-    getChatsFromBackend = () => {
-        // axios.get('/groupchats.json')
-        //     .then(res => {
-        //         const fetchedChats = [];
-        //         for (let key in res.data) {
-        //             fetchedChats.push({
-        //                 ...res.data[key],
-        //                 id: key
-        //             });
-        //         }
-        //         this.setState({chats: fetchedChats});
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         this.setState({ readError: err.message });
-        //     });
+    componentDidMount() {
+        this.props.onFetchChats();
     }
 
     inputChangedHandler = (event) => {
-        this.setState({content: event.target.value});
+        // this.setState({content: event.target.value});
+        this.props.onChatInputChanged(event.target.value);
     }
 
     msgSubmitHandler = (event) => {
@@ -49,28 +29,18 @@ class GroupChats extends Component {
 
         const msgDetails = {
             msgTimestamp: msgTimestamp,
-            content: this.state.content
+            content: this.props.content
         }
 
-        this.setState({writeError: null});
-        // axios.post('/groupchats.json', msgDetails)
-        //     .then(res => {
-        //         console.log(res);
-        //         this.setState({content: ''});
-        //         this.getChatsFromBackend();
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         this.setState({ writeError: err.message });
-        //     });
+        this.props.onSendMsg(msgDetails);
     }
 
     render () {
         let chatWindow = null;
         chatWindow = (
-            this.state.chats.map(chatMsg => (
+            this.props.chats.map(chatMsg => (
                 <ChatMessage
-                    key={chatMsg.msgTimestamp}
+                    key={chatMsg.id}
                     timestamp={chatMsg.msgTimestamp}
                     content={chatMsg.content} />
             ))
@@ -82,13 +52,28 @@ class GroupChats extends Component {
                     {chatWindow}
                 </div>
                 <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
-                    <input onChange={this.inputChangedHandler} value={this.state.content}></input>
-                    {this.state.error ? <p>{this.state.writeError}</p> : null}
-                    <button type="submit" disabled={this.state.content === ''}>Send</button>
+                    <input onChange={this.inputChangedHandler} value={this.props.content}></input>
+                    {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
+                    <button type="submit" disabled={this.props.content === ''}>Send</button>
                 </form>
             </div>
         );
     }
 }
 
-export default GroupChats;
+const mapStateToProps = state => {
+    return {
+        chats: state.chats.chats,
+        content: state.chats.content
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSendMsg: (msgDetails) => dispatch(actions.sendMsg(msgDetails)),
+        onFetchChats: () => dispatch(actions.fetchChats()),
+        onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GroupChats);

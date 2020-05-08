@@ -21,4 +21,8 @@ export {
     authCheckState
 } from './auth';
 
-export {} from './groupChats';
+export {
+    sendMsg,
+    fetchChats,
+    chatInputChanged
+} from './groupChats';

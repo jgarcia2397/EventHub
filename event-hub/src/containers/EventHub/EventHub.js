@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import axios from '../../axios-events';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';

@@ -1,5 +1,12 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios';
+import axios from '../../axios-events';
+
+export const chatInputChanged = (content) => {
+    return {
+        type: actionTypes.CHAT_INPUT_CHANGED,
+        content: content
+    };
+};
 
 export const sendMsgStart = () => {
     return {
@@ -12,9 +19,6 @@ export const sendMsgSuccess = (id, msgDetails) => {
         type: actionTypes.SEND_MSG_SUCCESS,
         msgId: id,
         msgDetails: msgDetails
-        // content: content,
-        // msgTimestamp: msgTimestamp,
-        // userId: userId
     };
 };
 

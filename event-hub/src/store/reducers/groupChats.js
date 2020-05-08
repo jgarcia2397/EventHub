@@ -10,6 +10,10 @@ const initialState = {
     writeError: null
 };
 
+export const chatInputChanged = (state, action) => {
+    return updateObject(state, {content: action.content});
+};
+
 export const sendMsgStart = (state, action) => {
     return updateObject(state, {singleMsgLoading: true});
 };
@@ -19,7 +23,7 @@ export const sendMsgSuccess = (state, action) => {
     const updatedMsgObject = {
         content: '',
         singleMsgLoading: false,
-        writeError: false,
+        writeError: null,
         chats: state.chats.concat(newMsgDetails)
     };
 
@@ -27,7 +31,7 @@ export const sendMsgSuccess = (state, action) => {
 };
 
 export const sendMsgFailed = (state, action) => {
-    return updateObject(state, {writeError: true, singleMsgLoading: false});
+    return updateObject(state, {writeError: action.error, singleMsgLoading: false});
 };
 
 export const fetchChatsStart = (state, action) => {
@@ -36,17 +40,20 @@ export const fetchChatsStart = (state, action) => {
 
 export const fetchChatsSuccess = (state, action) => {
     const updatedGroupChat = {
-        chats: action.chats
+        chats: action.chats,
+        readError: null,
+        chatsLoading: false
     };
     return updateObject(state, updatedGroupChat);
 };
 
 export const fetchChatsFailed = (state, action) => {
-    return updateObject(state, {readError: true, chatsLoading: false});
+    return updateObject(state, {readError: action.error, chatsLoading: false});
 };
 
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.CHAT_INPUT_CHANGED: return chatInputChanged(state, action);
         case actionTypes.SEND_MSG_START: return sendMsgStart(state, action);
         case actionTypes.SEND_MSG_SUCCESS: return sendMsgSuccess(state, action);
         case actionTypes.SEND_MSG_FAILED: return sendMsgFailed(state, action);

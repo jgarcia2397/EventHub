@@ -86,6 +86,7 @@ export const initEventList = (token, userId) => {
                         return 0;
                     }
                 });
+                console.log(res);
                 dispatch(fetchEventListSuccess(fetchedEvents));
             })
             .catch(err => {

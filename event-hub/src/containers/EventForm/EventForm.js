@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
-import axios from '../../axios-events';
 import * as actions from '../../store/actions/index';
 
 class EventForm extends Component {
