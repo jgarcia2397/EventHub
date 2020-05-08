@@ -29,7 +29,8 @@ class GroupChats extends Component {
 
         const msgDetails = {
             msgTimestamp: msgTimestamp,
-            content: this.props.content
+            content: this.props.content,
+            userId: this.props.userId
         }
 
         this.props.onSendMsg(msgDetails);
@@ -64,7 +65,8 @@ class GroupChats extends Component {
 const mapStateToProps = state => {
     return {
         chats: state.chats.chats,
-        content: state.chats.content
+        content: state.chats.content,
+        userId: state.auth.userId
     };
 };
 
