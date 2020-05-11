@@ -116,11 +116,14 @@ export const deleteEventFailed = (error) => {
     };
 };
 
-export const deleteEvent = (eventId) => {
+export const deleteEvent = (eventId, token) => {
     return dispatch => {
         dispatch(deleteEventStart());
         console.log(eventId);
-        axios.delete('/events/' + eventId + '.json')
+
+        const queryParams = 'auth=' + token;
+
+        axios.delete('/events/' + eventId + '.json?' + queryParams)
             .then(res => {
                 dispatch(deleteEventSuccess(eventId));
             })

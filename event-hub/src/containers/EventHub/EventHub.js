@@ -205,7 +205,7 @@ class EventHub extends Component {
     }
 
     onDeleteEventConfirm = (eventId) => {
-        this.props.onDeleteEvent(eventId);
+        this.props.onDeleteEvent(eventId, this.props.token);
         this.setState({deletingEvent: false});
     }
 
@@ -319,7 +319,7 @@ const mapDispatchToProps = dispatch => {
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
         onInitEventList: (token, userId) => dispatch(actions.initEventList(token, userId)),
         onInitCreateEvent: (month, day, year) => dispatch(actions.createEventInit(month, day, year)),
-        onDeleteEvent: (eventId) => dispatch(actions.deleteEvent(eventId))
+        onDeleteEvent: (eventId, token) => dispatch(actions.deleteEvent(eventId, token))
     }
 }
 
