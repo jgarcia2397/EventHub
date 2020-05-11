@@ -13,7 +13,8 @@ const eventList = (props) => {
                     eventId={event.id}
                     details={event.eventDetails}
                     numGuests={event.numberOfGuests}
-                    delete={props.onDelete} />
+                    delete={props.onDelete}
+                    onCheckGuestsChat={props.onCheckGuestsOrChat} />
             ))}
         </div>
     );

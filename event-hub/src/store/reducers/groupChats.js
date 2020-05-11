@@ -2,12 +2,17 @@ import { updateObject } from '../utility';
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
+    chatId: '',
     chats: [],
     content: '',
     chatsLoading: false,
     singleMsgLoading: false,
     readError: null,
     writeError: null
+};
+
+export const setChatEventId = (state, action) => {
+    return updateObject(state, {chatId: action.chatId});
 };
 
 export const chatInputChanged = (state, action) => {
@@ -60,6 +65,7 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_CHATS_START: return fetchChatsStart(state, action);
         case actionTypes.FETCH_CHATS_SUCCESS: return fetchChatsSuccess(state, action);
         case actionTypes.FETCH_CHATS_FAILED: return fetchChatsFailed(state, action);
+        case actionTypes.SET_CHAT_EVENT_ID: return setChatEventId(state, action);
         default: return state;
     }
 };

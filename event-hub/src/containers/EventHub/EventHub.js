@@ -204,6 +204,11 @@ class EventHub extends Component {
         this.setState({eventIdToBeDeleted: eventId, deletingEvent: true});
     }
 
+    onCheckGuestsOrChatClick = (eventId) => {
+        this.props.onCheckGuestsChat(eventId);
+        this.props.history.push('/chats');
+    }
+
     onDeleteEventConfirm = (eventId) => {
         this.props.onDeleteEvent(eventId, this.props.token);
         this.setState({deletingEvent: false});
@@ -290,7 +295,8 @@ class EventHub extends Component {
                 <h1>Your Events</h1>
                 <EventList 
                     eventList={this.props.events}
-                    onDelete={this.onDeleteEventClick} />
+                    onDelete={this.onDeleteEventClick}
+                    onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
             </Auxiliary>
         );
     }
@@ -319,7 +325,8 @@ const mapDispatchToProps = dispatch => {
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
         onInitEventList: (token, userId) => dispatch(actions.initEventList(token, userId)),
         onInitCreateEvent: (month, day, year) => dispatch(actions.createEventInit(month, day, year)),
-        onDeleteEvent: (eventId, token) => dispatch(actions.deleteEvent(eventId, token))
+        onDeleteEvent: (eventId, token) => dispatch(actions.deleteEvent(eventId, token)),
+        onCheckGuestsChat: (eventId) => dispatch(actions.setChatEventId(eventId))
     }
 }
 

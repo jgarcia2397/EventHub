@@ -22,7 +22,7 @@ const event = (props) => {
                 <p>You have invited {props.numGuests} guests</p>
             </div>
             <div className={classes.ButtonSide}>
-                <button>See Guest List</button>
+                <button onClick={() => props.onCheckGuestsChat(props.eventId)}>Guest List/Chat</button>
                 <button>Update Event</button>
                 <button onClick={() => props.delete(props.eventId)}>Delete Event</button>
             </div>

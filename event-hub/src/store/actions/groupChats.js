@@ -1,6 +1,13 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-events';
 
+export const setChatEventId = (eventId) => {
+    return {
+        type: actionTypes.SET_CHAT_EVENT_ID,
+        chatId: eventId
+    };
+};
+
 export const chatInputChanged = (content) => {
     return {
         type: actionTypes.CHAT_INPUT_CHANGED,
@@ -30,10 +37,14 @@ export const sendMsgFailed = (error) => {
 };
 
 // Add token as parameter here later
-export const sendMsg = (msgDetails) => {
+export const sendMsg = (msgDetails, chatId, token) => {
     return dispatch => {
         dispatch(sendMsgStart());
-        axios.post('/groupchats.json', msgDetails)
+
+        const queryParams = 'auth=' + token;
+
+        // axios.post('/groupchats.json', msgDetails)
+        axios.post('/events/' + chatId + '/chats.json?' + queryParams, msgDetails)
             .then(res => {
                 console.log(res);
                 dispatch(sendMsgSuccess(res.data.name, msgDetails));
@@ -68,10 +79,14 @@ export const fetchChatsFailed = (error) => {
     };
 };
 
-export const fetchChats = () => {
+export const fetchChats = (chatId, token) => {
     return dispatch => {
         dispatch(fetchChatsStart());
-        axios.get('/groupchats.json')
+
+        const queryParams = 'auth=' + token;
+
+        // axios.get('/groupchats.json')
+        axios.get('/events/' + chatId + '/chats.json?' + queryParams)
             .then(res => {
                 const fetchedChats = [];
                 for (let key in res.data) {

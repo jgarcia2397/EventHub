@@ -14,7 +14,7 @@ class GroupChats extends Component {
     // }
 
     componentDidMount() {
-        this.props.onFetchChats();
+        this.props.onFetchChats(this.props.chatId, this.props.token);
     }
 
     inputChangedHandler = (event) => {
@@ -33,7 +33,7 @@ class GroupChats extends Component {
             userId: this.props.userId
         }
 
-        this.props.onSendMsg(msgDetails);
+        this.props.onSendMsg(msgDetails, this.props.chatId, this.props.token);
     }
 
     render () {
@@ -67,14 +67,16 @@ const mapStateToProps = state => {
     return {
         chats: state.chats.chats,
         content: state.chats.content,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        chatId: state.chats.chatId,
+        token: state.auth.token
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSendMsg: (msgDetails) => dispatch(actions.sendMsg(msgDetails)),
-        onFetchChats: () => dispatch(actions.fetchChats()),
+        onSendMsg: (msgDetails, chatId, token) => dispatch(actions.sendMsg(msgDetails, chatId, token)),
+        onFetchChats: (chatId, token) => dispatch(actions.fetchChats(chatId, token)),
         onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content))
     };
 };

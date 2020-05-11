@@ -24,5 +24,6 @@ export {
 export {
     sendMsg,
     fetchChats,
-    chatInputChanged
+    chatInputChanged,
+    setChatEventId
 } from './groupChats';
