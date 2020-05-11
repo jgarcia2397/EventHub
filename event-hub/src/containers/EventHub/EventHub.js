@@ -185,7 +185,11 @@ class EventHub extends Component {
     }
 
     onCreateEventContinue = () => {
-        this.props.onInitCreateEvent();
+        let monthVal = this.props.date.format("MMMM");
+        let dayVal = this.state.selectedDay;
+        let yearVal = this.props.date.format("YYYY");
+
+        this.props.onInitCreateEvent(monthVal, dayVal, yearVal);
         this.props.history.push('/createEventForm');
     }
 
@@ -314,7 +318,7 @@ const mapDispatchToProps = dispatch => {
         onDatePrevClick: () => dispatch(actions.onPrevCalendarClick()),
         onDateNextClick: () => dispatch(actions.onNextCalendarClick()),
         onInitEventList: (token, userId) => dispatch(actions.initEventList(token, userId)),
-        onInitCreateEvent: () => dispatch(actions.createEventInit()),
+        onInitCreateEvent: (month, day, year) => dispatch(actions.createEventInit(month, day, year)),
         onDeleteEvent: (eventId) => dispatch(actions.deleteEvent(eventId))
     }
 }

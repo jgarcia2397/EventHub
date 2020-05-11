@@ -1,9 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-events';
 
-export const createEventInit = () => {
+export const createEventInit = (month, day, year) => {
     return {
-        type: actionTypes.CREATE_EVENT_INIT
+        type: actionTypes.CREATE_EVENT_INIT,
+        month: month,
+        day: day,
+        year: year
     };
 };
 

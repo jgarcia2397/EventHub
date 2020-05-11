@@ -44,13 +44,13 @@ class EventForm extends Component {
                         {value: 'December', displayValue: 'December'}
                     ]
                 },
-                value: 'January',
+                value: this.props.monthInputVal !== '' ? this.props.monthInputVal : 'January',
                 valid: true,
                 validation: {
                     isDateTimeDropdown: true
                 },
                 timeElement: true,
-                touched: false
+                touched: this.props.monthInputVal !== '' ? true : false
             },
             day: {
                 elementType: 'timeInput',
@@ -58,7 +58,7 @@ class EventForm extends Component {
                     type: 'text',
                     placeholder: 'Day'
                 },
-                value: '',
+                value: this.props.dayInputVal !== '' ? this.props.dayInputVal : '',
                 validation: {
                     required: true,
                     maxLength: 2,
@@ -66,10 +66,9 @@ class EventForm extends Component {
                     isDateTimeInput: true,
                     dayCheck: true
                 },
-                valid: false,
-                touched: false,
-                timeElement: true,
-                touched: false
+                valid: this.props.dayInputVal !== '' ? true : false,
+                touched: this.props.dayInputVal !== '' ? true : false,
+                timeElement: true
             },
             year: {
                 elementType: 'timeInput',
@@ -77,17 +76,16 @@ class EventForm extends Component {
                     type: 'text',
                     placeholder: 'Year'
                 },
-                value: '',
+                value: this.props.yearInputVal !== '' ? this.props.yearInputVal : '',
                 validation: {
                     required: true,
                     exactLength: 4,
                     isNumeric: true,
                     isDateTimeInput: true
                 },
-                valid: false,
-                touched: false,
-                timeElement: true,
-                touched: false
+                valid: this.props.yearInputVal !== '' ? true : false,
+                touched: this.props.yearInputVal !== '' ? true : false,
+                timeElement: true
             },
             startHour: {
                 elementType: 'select',
@@ -438,7 +436,10 @@ const mapStateToProps = state => {
         eventCreated: state.eventForm.eventCreated,
         token: state.auth.token,
         userId: state.auth.userId,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        monthInputVal: state.eventForm.initialMonthVal,
+        dayInputVal: state.eventForm.initialDayVal,
+        yearInputVal: state.eventForm.initialYearVal
     };
 }
 

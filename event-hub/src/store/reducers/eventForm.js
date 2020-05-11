@@ -5,11 +5,20 @@ const initialState = {
     events: [],
     loading: false,      // to be used later when Spinner is added
     eventCreated: false,
-    creatingEvent: false
+    creatingEvent: false,
+    initialMonthVal: '',
+    initialDayVal: '',
+    initialYearVal: ''
 }
 
 const createEventInit = (state, action) => {
-    return updateObject(state, {eventCreated: false, creatingEvent: true});
+    return updateObject(state, {
+        eventCreated: false, 
+        creatingEvent: true,
+        initialMonthVal: action.month,
+        initialDayVal: action.day,
+        initialYearVal: action.year
+    });
 };
 
 const createEventStart = (state, action) => {
