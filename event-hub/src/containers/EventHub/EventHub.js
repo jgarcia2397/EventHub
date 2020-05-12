@@ -292,11 +292,22 @@ class EventHub extends Component {
                         {eventPopup}
                 </Modal>
                 {calendar}
-                <h1>Your Events</h1>
-                <EventList 
-                    eventList={this.props.events}
-                    onDelete={this.onDeleteEventClick}
-                    onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
+                <div className={classes.Events}>
+                    <div className={classes.YourEvents}>
+                        <h1>Your Events</h1>
+                        <EventList 
+                            eventList={this.props.events}
+                            onDelete={this.onDeleteEventClick}
+                            onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
+                    </div>
+                    <div className={classes.InvitedTo}>
+                        <h1>Invited To</h1>
+                        <EventList 
+                            eventList={this.props.events}
+                            onDelete={this.onDeleteEventClick}
+                            onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
+                    </div>
+                </div>
             </Auxiliary>
         );
     }

@@ -115,3 +115,14 @@ h1 {
 .EditorYear {
     max-width: 3.6em;
 }
+
+.Events {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.YourEvents,
+.InvitedTo {
+    width: 50%;
+}
