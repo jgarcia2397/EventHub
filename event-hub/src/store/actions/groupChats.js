@@ -105,3 +105,55 @@ export const fetchChats = (chatId, token) => {
             });
     };
 };
+
+
+export const sendGuestInviteStart = () => {
+    return {
+        type: actionTypes.SEND_GUEST_INVITE_START
+    };
+};
+
+export const sendGuestInviteSuccess = (invitedUser) => {
+    return {
+        type: actionTypes.SEND_GUEST_INVITE_SUCCESS,
+        user: invitedUser
+    };
+};
+
+export const sendGuestInviteFailed = (error) => {
+    return {
+        type: actionTypes.SEND_GUEST_INVITE_FAILED,
+        error: error
+    };
+};
+
+export const sendGuestInvite = (tokenOfInvited, chatId, userToken) => {
+    return dispatch => {
+        dispatch(sendGuestInviteStart());
+        // console.log("token: " + token);
+
+        const accountLookup = {
+            idToken: tokenOfInvited
+        };
+
+        const queryParams = 'auth=' + userToken;
+
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc', accountLookup)
+            .then(res => {
+                console.log(res);
+                dispatch(sendGuestInviteSuccess(res.data.users));
+
+                axios.post('/events/' + chatId + '/members.json?' + queryParams, res.data.users)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(sendGuestInviteFailed(err));
+            });
+    };
+};

@@ -7,8 +7,10 @@ const initialState = {
     content: '',
     chatsLoading: false,
     singleMsgLoading: false,
+    inviteLoading: false,
     readError: null,
-    writeError: null
+    writeError: null,
+    members: []
 };
 
 export const setChatEventId = (state, action) => {
@@ -56,6 +58,24 @@ export const fetchChatsFailed = (state, action) => {
     return updateObject(state, {readError: action.error, chatsLoading: false});
 };
 
+
+export const sendGuestInviteStart = (state, action) => {
+    return updateObject(state, {inviteLoading: true});
+};
+
+export const sendGuestInviteSuccess = (state, action) => {
+    const updatedMemberObject = {
+        inviteLoading: false,
+        members: state.members.concat(action.user)
+    };
+
+    return updateObject(state, updatedMemberObject);
+};
+
+export const sendGuestInviteFailed = (state, action) => {
+    return updateObject(state, {inviteLoading: false});
+};
+
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CHAT_INPUT_CHANGED: return chatInputChanged(state, action);
@@ -66,6 +86,9 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_CHATS_SUCCESS: return fetchChatsSuccess(state, action);
         case actionTypes.FETCH_CHATS_FAILED: return fetchChatsFailed(state, action);
         case actionTypes.SET_CHAT_EVENT_ID: return setChatEventId(state, action);
+        case actionTypes.SEND_GUEST_INVITE_START: return sendGuestInviteStart(state, action);
+        case actionTypes.SEND_GUEST_INVITE_SUCCESS: return sendGuestInviteSuccess(state, action);
+        case actionTypes.SEND_GUEST_INVITE_FAILED: return sendGuestInviteFailed(state, action);
         default: return state;
     }
 };

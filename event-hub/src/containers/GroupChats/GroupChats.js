@@ -7,12 +7,9 @@ import ChatMessage from '../../components/ChatMessage/ChatMessage';
 import GuestList from '../../components/GuestList/GuestList';
 
 class GroupChats extends Component {
-    // state = {
-    //     chats: [],
-    //     content: '',
-    //     readError: null,
-    //     writeError: null
-    // }
+    state = {
+        inviteInputContent: ''
+    }
 
     componentDidMount() {
         this.props.onFetchChats(this.props.chatId, this.props.token);
@@ -37,6 +34,17 @@ class GroupChats extends Component {
         this.props.onSendMsg(msgDetails, this.props.chatId, this.props.token);
     }
 
+    inviteSubmitHandler = (event) => {
+        event.preventDefault();
+        this.props.onSendGuestInvite(this.state.inviteInputContent, this.props.chatId, this.props.token);
+        this.setState({inviteInputContent: ''});
+    }
+
+    inviteInputChangedHandler = (event) => {
+        this.setState({inviteInputContent: event.target.value});
+        console.log(this.state.inviteInputContent);
+    }
+
     render () {
         let chatWindow = null;
         chatWindow = (
@@ -51,7 +59,10 @@ class GroupChats extends Component {
 
         return (
             <div className={classes.ChatsPage}>
-                <GuestList />
+                <GuestList
+                    inputChanged={this.inviteInputChangedHandler}
+                    val={this.state.inviteInputContent}
+                    onInvite={this.inviteSubmitHandler} />
                 <div className={classes.GroupChat}>
                     <div className={classes.MessageList}>
                         {chatWindow}
@@ -73,7 +84,8 @@ const mapStateToProps = state => {
         content: state.chats.content,
         userId: state.auth.userId,
         chatId: state.chats.chatId,
-        token: state.auth.token
+        token: state.auth.token,
+        chatMembers: state.chats.members
     };
 };
 
@@ -81,7 +93,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onSendMsg: (msgDetails, chatId, token) => dispatch(actions.sendMsg(msgDetails, chatId, token)),
         onFetchChats: (chatId, token) => dispatch(actions.fetchChats(chatId, token)),
-        onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content))
+        onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content)),
+        onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken))
     };
 };
 

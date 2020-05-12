@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './GuestList.module.css';
 
-const guestList = () => {
+const guestList = (props) => {
     let guestList = null;
     guestList = (
         <div className={classes.GuestList}>
@@ -13,8 +13,8 @@ const guestList = () => {
                 <p>Captain Price</p>
             </div>
             <form className={classes.InviteForm}>
-                <input></input>
-                <button type="submit">Invite</button>
+                <input onChange={props.inputChanged} value={props.val}></input>
+                <button type="submit" onClick={props.onInvite}>Invite</button>
             </form>
         </div>
     );
