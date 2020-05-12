@@ -36,8 +36,29 @@ export const createEvent = (eventDetails, token) => {
         dispatch(createEventStart());
         axios.post('/events.json?auth=' + token, eventDetails)
             .then(response => {
-                // this.props.history.push('/');        // add this back in or fix using other method
+                // console.log(response.data.name);
                 dispatch(createEventSuccess(response.data.name, eventDetails));
+
+                const accountLookup = {
+                    idToken: token
+                };
+                const queryParams = 'auth=' + token;
+
+                // This is for adding event creator as initial member to members node of event
+                axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc', accountLookup)
+                .then(res => {
+                    // console.log(res);
+                    axios.post('/events/' + response.data.name + '/members.json?' + queryParams, res.data.users)
+                        .then(res => {
+                            console.log(res);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
             })
             .catch(error => {
                 // console.log(error);
