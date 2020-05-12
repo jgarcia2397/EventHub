@@ -1,5 +1,14 @@
+.ChatsPage {
+    /* margin: 0px 50px; */
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
 .GroupChat {
-    margin: 0px 50px;
+    /* margin: 0px 50px; */
+    width: 80%;
+    align-items: center;
 }
 
 .MessageForm {

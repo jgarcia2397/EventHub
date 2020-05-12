@@ -1,0 +1,34 @@
+.GuestList {
+    width: 20%;
+    height: 980px;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid grey;
+    box-shadow: 1px 1px lightgray;
+}
+
+.GuestList h3 {
+    text-align: center;
+}
+
+.GuestList p {
+    width: 100px;
+    height: 20px;
+    border: 1px solid grey;
+    box-shadow: 1px 1px lightgray;
+}
+
+.Guests {
+    overflow-y: scroll;
+    height: 850px;
+}
+
+.InviteForm {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.InviteForm input {
+    width: 100%;
+}

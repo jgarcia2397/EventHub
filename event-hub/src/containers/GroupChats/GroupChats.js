@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
+import GuestList from '../../components/GuestList/GuestList';
 
 class GroupChats extends Component {
     // state = {
@@ -49,15 +50,18 @@ class GroupChats extends Component {
         );
 
         return (
-            <div className={classes.GroupChat}>
-                <div className={classes.MessageList}>
-                    {chatWindow}
+            <div className={classes.ChatsPage}>
+                <GuestList />
+                <div className={classes.GroupChat}>
+                    <div className={classes.MessageList}>
+                        {chatWindow}
+                    </div>
+                    <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
+                        <input onChange={this.inputChangedHandler} value={this.props.content}></input>
+                        {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
+                        <button type="submit" disabled={this.props.content === ''}>Send</button>
+                    </form>
                 </div>
-                <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
-                    <input onChange={this.inputChangedHandler} value={this.props.content}></input>
-                    {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
-                    <button type="submit" disabled={this.props.content === ''}>Send</button>
-                </form>
             </div>
         );
     }
