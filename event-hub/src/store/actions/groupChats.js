@@ -186,9 +186,10 @@ export const fetchChatMembers = (chatId, token) => {
 
         axios.get('/events/' + chatId + '/members.json?' + queryParams)
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 const fetchedMembers = [];
                 for (let key in res.data) {
+                    // console.log(res.data[key]);
                     fetchedMembers.push({
                         ...res.data[key],
                         id: key
@@ -197,7 +198,7 @@ export const fetchChatMembers = (chatId, token) => {
                 dispatch(fetchChatMembersSuccess(fetchedMembers));
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
                 dispatch(fetchChatMembersFailed(err));
             });
     };

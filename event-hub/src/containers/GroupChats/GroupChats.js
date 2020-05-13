@@ -63,7 +63,8 @@ class GroupChats extends Component {
                 <GuestList
                     inputChanged={this.inviteInputChangedHandler}
                     val={this.state.inviteInputContent}
-                    onInvite={this.inviteSubmitHandler} />
+                    onInvite={this.inviteSubmitHandler}
+                    guests={this.props.chatMembers} />
                 <div className={classes.GroupChat}>
                     <div className={classes.MessageList}>
                         {chatWindow}

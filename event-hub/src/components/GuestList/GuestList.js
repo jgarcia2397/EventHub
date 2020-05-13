@@ -8,9 +8,9 @@ const guestList = (props) => {
         <div className={classes.GuestList}>
             <h3>Guest List</h3>
             <div className={classes.Guests}>
-                <p>Josh</p>
-                <p>Bob Belcher</p>
-                <p>Captain Price</p>
+                {props.guests.map(guest => (
+                    <p key={guest[0].localId}>{guest[0].email.split("@")[0]}</p>
+                ))}
             </div>
             <form className={classes.InviteForm}>
                 <input onChange={props.inputChanged} value={props.val}></input>
