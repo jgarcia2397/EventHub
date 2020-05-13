@@ -86,12 +86,63 @@ export const initEventList = (token, userId) => {
                         return 0;
                     }
                 });
-                console.log(res);
+                //console.log(res);
                 dispatch(fetchEventListSuccess(fetchedEvents));
             })
             .catch(err => {
                 dispatch(fetchEventListFailed(err));
-                console.log(err);
+                //console.log(err);
+            });
+    };
+};
+
+export const fetchGuestEventListStart = () => {
+    return {
+        type: actionTypes.FETCH_GUEST_EVENT_LIST_START
+    };
+};
+
+export const fetchGuestEventListSuccess = (guestEvents) => {
+    return {
+        type: actionTypes.FETCH_GUEST_EVENT_LIST_SUCCESS,
+        guestEvents: guestEvents
+    };
+};
+
+export const fetchGuestEventListFailed = (error) => {
+    return {
+        type: actionTypes.FETCH_GUEST_EVENT_LIST_FAILED,
+        error: error
+    };
+};
+
+export const initGuestEventList = (token, userId) => {
+    return dispatch => {
+        dispatch(fetchGuestEventListStart());
+
+        const queryParams = 'auth=' + token;
+
+        axios.get('/events.json?' + queryParams)
+            .then(res => {
+                const fetchedGuestEvents = [];
+                for (let key in res.data) {
+                    if (userId !== res.data[key].userId) {
+                        for (let keyTwo in res.data[key].members) {
+                            if (userId === res.data[key].members[keyTwo][0].localId) {
+                                fetchedGuestEvents.push({
+                                    ...res.data[key],
+                                    id: key
+                                });
+                            }
+                        }
+                    }
+                }
+                //console.log(res);
+                dispatch(fetchGuestEventListSuccess(fetchedGuestEvents));
+            })
+            .catch(err => {
+                dispatch(fetchGuestEventListFailed(err));
+                //console.log(err);
             });
     };
 };

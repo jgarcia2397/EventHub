@@ -27,8 +27,10 @@ class EventHub extends Component {
         const userId = localStorage.getItem('userId');
         if (this.props.token === null) {
             this.props.onInitEventList(token, userId);
+            this.props.onInitGuestEventList(token, userId);
         } else {
             this.props.onInitEventList(this.props.token, this.props.userId);
+            this.props.onInitGuestEventList(this.props.token, this.props.userId);
         }
     }
 
@@ -38,8 +40,10 @@ class EventHub extends Component {
             const userId = localStorage.getItem('userId');
             if (this.props.token === null) {
                 this.props.onInitEventList(token, userId);
+                this.props.onInitGuestEventList(token, userId);
             } else {
                 this.props.onInitEventList(this.props.token, this.props.userId);
+                this.props.onInitGuestEventList(this.props.token, this.props.userId);
             }
         }
     }
@@ -303,7 +307,7 @@ class EventHub extends Component {
                     <div className={classes.InvitedTo}>
                         <h1>Invited To</h1>
                         <EventList 
-                            eventList={this.props.events}
+                            eventList={this.props.guestEvents}
                             onDelete={this.onDeleteEventClick}
                             onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
                     </div>
@@ -320,6 +324,7 @@ const mapStateToProps = state => {
         showMonthSel: state.eventHub.showMonthSelector,
         showYearSel: state.eventHub.showYearSelector,
         events: state.eventHub.events,
+        guestEvents: state.eventHub.guestEvents,
         error: state.eventHub.error,
         token: state.auth.token,
         userId: state.auth.userId
@@ -337,7 +342,8 @@ const mapDispatchToProps = dispatch => {
         onInitEventList: (token, userId) => dispatch(actions.initEventList(token, userId)),
         onInitCreateEvent: (month, day, year) => dispatch(actions.createEventInit(month, day, year)),
         onDeleteEvent: (eventId, token) => dispatch(actions.deleteEvent(eventId, token)),
-        onCheckGuestsChat: (eventId) => dispatch(actions.setChatEventId(eventId))
+        onCheckGuestsChat: (eventId) => dispatch(actions.setChatEventId(eventId)),
+        onInitGuestEventList: (token, userId) => dispatch(actions.initGuestEventList(token, userId))
     }
 }
 

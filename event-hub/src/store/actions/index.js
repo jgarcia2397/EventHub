@@ -6,6 +6,7 @@ export {
     onPrevCalendarClick,
     onNextCalendarClick,
     initEventList,
+    initGuestEventList,
     deleteEvent
 } from './eventHub';
 

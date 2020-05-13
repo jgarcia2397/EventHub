@@ -9,6 +9,7 @@ const initialState = {
     showMonthSelector: false,
     showYearSelector: false,
     events: [],
+    guestEvents: [],
     error: false
 };
 
@@ -100,6 +101,23 @@ const fetchEventListFail = (state, action) => {
     return updateObject(state, updatedStateFetchFail);
 };
 
+const fetchGuestEventListStart = (state, action) => {
+    const updatedStateFetchGuestStart = state;
+    return updateObject(state, updatedStateFetchGuestStart);
+};
+
+const fetchGuestEventListSuccess = (state, action) => {
+    const updatedStateFetchGuestSuccess = {
+        guestEvents: action.guestEvents
+    }
+    return updateObject(state, updatedStateFetchGuestSuccess);
+};
+
+const fetchGuestEventListFail = (state, action) => {
+    const updatedStateFetchGuestFail = state;
+    return updateObject(state, updatedStateFetchGuestFail);
+};
+
 const deleteEventStart = (state, action) => {
     const updatedStateDeleteStart = state;
     return updateObject(state, updatedStateDeleteStart);
@@ -131,6 +149,9 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_EVENT_LIST_START: return fetchEventListStart(state,action);
         case actionTypes.FETCH_EVENT_LIST_SUCCESS: return fetchEventListSuccess(state,action);
         case actionTypes.FETCH_EVENT_LIST_FAILED: return fetchEventListFail(state,action);
+        case actionTypes.FETCH_GUEST_EVENT_LIST_START: return fetchGuestEventListStart(state,action);
+        case actionTypes.FETCH_GUEST_EVENT_LIST_SUCCESS: return fetchGuestEventListSuccess(state,action);
+        case actionTypes.FETCH_GUEST_EVENT_LIST_FAILED: return fetchGuestEventListFail(state,action);
         case actionTypes.DELETE_EVENT_START: return deleteEventStart(state, action);    
         case actionTypes.DELETE_EVENT_SUCCESS: return deleteEventSuccess(state, action);  
         case actionTypes.DELETE_EVENT_FAILED: return deleteEventFail(state, action); 
