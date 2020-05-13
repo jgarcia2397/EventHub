@@ -157,3 +157,48 @@ export const sendGuestInvite = (tokenOfInvited, chatId, userToken) => {
             });
     };
 };
+
+export const fetchChatMembersStart = () => {
+    return {
+        type: actionTypes.FETCH_CHAT_MEMBERS_START
+    };
+};
+
+export const fetchChatMembersSuccess = (members) => {
+    return {
+        type: actionTypes.FETCH_CHAT_MEMBERS_SUCCESS,
+        members: members
+    };
+};
+
+export const fetchChatMembersFailed = (error) => {
+    return {
+        type: actionTypes.FETCH_CHAT_MEMBERS_FAILED,
+        error: error
+    };
+};
+
+export const fetchChatMembers = (chatId, token) => {
+    return dispatch => {
+        dispatch(fetchChatMembersStart());
+
+        const queryParams = 'auth=' + token;
+
+        axios.get('/events/' + chatId + '/members.json?' + queryParams)
+            .then(res => {
+                console.log(res.data);
+                const fetchedMembers = [];
+                for (let key in res.data) {
+                    fetchedMembers.push({
+                        ...res.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchChatMembersSuccess(fetchedMembers));
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(fetchChatMembersFailed(err));
+            });
+    };
+};

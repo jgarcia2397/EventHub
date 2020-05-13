@@ -12,6 +12,7 @@ class GroupChats extends Component {
     }
 
     componentDidMount() {
+        this.props.onFetchChatMembers(this.props.chatId, this.props.token);
         this.props.onFetchChats(this.props.chatId, this.props.token);
     }
 
@@ -94,7 +95,8 @@ const mapDispatchToProps = dispatch => {
         onSendMsg: (msgDetails, chatId, token) => dispatch(actions.sendMsg(msgDetails, chatId, token)),
         onFetchChats: (chatId, token) => dispatch(actions.fetchChats(chatId, token)),
         onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content)),
-        onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken))
+        onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken)),
+        onFetchChatMembers: (chatId, token) => dispatch(actions.fetchChatMembers(chatId, token))
     };
 };
 

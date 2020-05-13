@@ -8,6 +8,7 @@ const initialState = {
     chatsLoading: false,
     singleMsgLoading: false,
     inviteLoading: false,
+    membersLoading: false,
     readError: null,
     writeError: null,
     members: []
@@ -58,7 +59,6 @@ export const fetchChatsFailed = (state, action) => {
     return updateObject(state, {readError: action.error, chatsLoading: false});
 };
 
-
 export const sendGuestInviteStart = (state, action) => {
     return updateObject(state, {inviteLoading: true});
 };
@@ -76,6 +76,23 @@ export const sendGuestInviteFailed = (state, action) => {
     return updateObject(state, {inviteLoading: false});
 };
 
+export const fetchChatMembersStart = (state, action) => {
+    return updateObject(state, {membersLoading: true});
+};
+
+export const fetchChatMembersSuccess = (state, action) => {
+    const updatedGuestList = {
+        members: action.members,
+        readError: null,
+        membersLoading: false
+    };
+    return updateObject(state, updatedGuestList);
+};
+
+export const fetchChatMembersFailed = (state, action) => {
+    return updateObject(state, {readError: action.error, membersLoading: false});
+};
+
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.CHAT_INPUT_CHANGED: return chatInputChanged(state, action);
@@ -89,6 +106,9 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.SEND_GUEST_INVITE_START: return sendGuestInviteStart(state, action);
         case actionTypes.SEND_GUEST_INVITE_SUCCESS: return sendGuestInviteSuccess(state, action);
         case actionTypes.SEND_GUEST_INVITE_FAILED: return sendGuestInviteFailed(state, action);
+        case actionTypes.FETCH_CHAT_MEMBERS_START: return fetchChatMembersStart(state, action);
+        case actionTypes.FETCH_CHAT_MEMBERS_SUCCESS: return fetchChatMembersSuccess(state, action);
+        case actionTypes.FETCH_CHAT_MEMBERS_FAILED: return fetchChatMembersFailed(state, action);
         default: return state;
     }
 };

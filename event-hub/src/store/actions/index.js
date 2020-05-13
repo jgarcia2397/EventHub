@@ -26,5 +26,6 @@ export {
     fetchChats,
     chatInputChanged,
     setChatEventId,
-    sendGuestInvite
+    sendGuestInvite,
+    fetchChatMembers
 } from './groupChats';
