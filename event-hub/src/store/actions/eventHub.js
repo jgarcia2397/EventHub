@@ -128,7 +128,7 @@ export const initGuestEventList = (token, userId) => {
                 for (let key in res.data) {
                     if (userId !== res.data[key].userId) {
                         for (let keyTwo in res.data[key].members) {
-                            if (userId === res.data[key].members[keyTwo][0].localId) {
+                            if (userId === res.data[key].members[keyTwo].userId) {
                                 fetchedGuestEvents.push({
                                     ...res.data[key],
                                     id: key
