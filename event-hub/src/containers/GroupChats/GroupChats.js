@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => {
         onSendMsg: (msgDetails, chatId, token) => dispatch(actions.sendMsg(msgDetails, chatId, token)),
         onFetchChats: (chatId, token) => dispatch(actions.fetchChats(chatId, token)),
         onChatInputChanged: (content) => dispatch(actions.chatInputChanged(content)),
-        onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken)),
+        onSendGuestInvite: (newUserEmail, chatId, userToken) => dispatch(actions.sendGuestInvite(newUserEmail, chatId, userToken)),
         onFetchChatMembers: (chatId, token) => dispatch(actions.fetchChatMembers(chatId, token))
     };
 };

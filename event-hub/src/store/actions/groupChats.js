@@ -127,37 +127,35 @@ export const sendGuestInviteFailed = (error) => {
     };
 };
 
-export const sendGuestInvite = (tokenOfInvited, chatId, userToken) => {
+export const sendGuestInvite = (newUserEmail, chatId, userToken) => {
     return dispatch => {
         dispatch(sendGuestInviteStart());
-        // console.log("token: " + token);
 
-        const accountLookup = {
-            idToken: tokenOfInvited
-        };
+        // const accountLookup = {
+        //     idToken: tokenOfInvited
+        // };
 
         const queryParams = 'auth=' + userToken;
+        const queryParamsUsers = 'orderBy="email"&equalTo="' + newUserEmail + '"';
 
-        // axios.get('/users.json')
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
 
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc', accountLookup)
+        axios.get('/users.json?' + queryParamsUsers)
             .then(res => {
                 console.log(res);
-                dispatch(sendGuestInviteSuccess(res.data.users));
-
-                axios.post('/events/' + chatId + '/members.json?' + queryParams, res.data.users)
+                let newGuest = null;
+                for (let key in res.data) {
+                    newGuest = res.data[key];
+                }
+                // console.log("newGuest: " + newGuest.email + ", " + newGuest.userId);
+                
+                axios.post('/events/' + chatId + '/members.json?' + queryParams, newGuest)
                     .then(res => {
-                        console.log(res);
+                        //console.log(res);
                     })
                     .catch(err => {
                         console.log(err);
                     });
+                dispatch(sendGuestInviteSuccess(newGuest));
             })
             .catch(err => {
                 console.log(err);

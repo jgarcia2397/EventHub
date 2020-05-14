@@ -9,7 +9,7 @@ const guestList = (props) => {
             <h3>Guest List</h3>
             <div className={classes.Guests}>
                 {props.guests.map(guest => (
-                    <p key={guest[0].localId}>{guest[0].email.split("@")[0]}</p>
+                    <p key={guest.id}>{guest.email.split("@")[0]}</p>
                 ))}
             </div>
             <form className={classes.InviteForm}>

@@ -31,7 +31,7 @@ export const createEventStart = () => {
     };
 };
 
-export const createEvent = (eventDetails, token) => {
+export const createEvent = (eventDetails, token, userId) => {
     return dispatch => {
         dispatch(createEventStart());
         axios.post('/events.json?auth=' + token, eventDetails)
@@ -39,26 +39,28 @@ export const createEvent = (eventDetails, token) => {
                 // console.log(response.data.name);
                 dispatch(createEventSuccess(response.data.name, eventDetails));
 
-                const accountLookup = {
-                    idToken: token
-                };
                 const queryParams = 'auth=' + token;
 
                 // This is for adding event creator as initial member to members node of event
-                axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc', accountLookup)
-                .then(res => {
-                    // console.log(res);
-                    axios.post('/events/' + response.data.name + '/members.json?' + queryParams, res.data.users)
-                        .then(res => {
-                            console.log(res);
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+                axios.get('/users.json')
+                    .then(res => {
+                        let originalUser = null;
+                        for (let key in res.data) {
+                            if (userId === res.data[key].userId) {
+                                originalUser = res.data[key];
+                            }
+                        }
+                        axios.post('/events/' + response.data.name + '/members.json?' + queryParams, originalUser)
+                            .then(res => {
+                                console.log(res);
+                            })
+                            .catch(err => {
+                                dispatch(createEventFailed(err));
+                            });
+                    })
+                    .catch(err => {
+                        dispatch(createEventFailed(err));
+                    });
             })
             .catch(error => {
                 // console.log(error);

@@ -378,7 +378,7 @@ class EventForm extends Component {
                 userId: this.props.userId
             }
 
-            this.props.onCreateEvent(eventDetails, this.props.token);
+            this.props.onCreateEvent(eventDetails, this.props.token, this.props.userId);
             //this.props.onSendGuestInvite(this.props.token, this.props.eventId, this.props.token);
         } else {
             this.props.onSetAuthRedirectPath('/createEventForm');
@@ -447,7 +447,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCreateEvent: (eventDetails, token) => dispatch(actions.createEvent(eventDetails, token)),
+        onCreateEvent: (eventDetails, token, userId) => dispatch(actions.createEvent(eventDetails, token, userId)),
         onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
         //onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken))
     }
