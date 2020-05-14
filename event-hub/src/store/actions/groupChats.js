@@ -138,6 +138,14 @@ export const sendGuestInvite = (tokenOfInvited, chatId, userToken) => {
 
         const queryParams = 'auth=' + userToken;
 
+        // axios.get('/users.json')
+        //     .then(res => {
+        //         console.log(res);
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     })
+
         axios.post('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCMiumycDHNEhxQSSL7DtlXTQioeLYKKJc', accountLookup)
             .then(res => {
                 console.log(res);
