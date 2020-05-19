@@ -83,6 +83,17 @@ h1 {
     line-height: 350%;
 }
 
+.GuestEventDay {
+    text-align: center;
+    font-size: 0.8em;
+    background-color: #DC143C;
+    color: white;
+    border: 1px solid #C0C0C0;
+    cursor: pointer;
+    width: 14%;
+    line-height: 350%;
+}
+
 .EventCurrentDay {
     text-align: center;
     font-size: 0.8em;

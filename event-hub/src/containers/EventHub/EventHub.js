@@ -93,10 +93,16 @@ class EventHub extends Component {
     getDaysOfMonth = () => {
         let days = [];
         let eventDates = [];
+        let guestEventDates = [];
 
         for (let i = 0; i < this.props.events.length; i++) {
             let date = this.props.events[i].eventDetails.month + " " + this.props.events[i].eventDetails.day + ", " + this.props.events[i].eventDetails.year;
             eventDates.push(date);
+        }
+
+        for (let j = 0; j < this.props.guestEvents.length; j++) {
+            let date = this.props.guestEvents[j].eventDetails.month + " " + this.props.guestEvents[j].eventDetails.day + ", " + this.props.guestEvents[j].eventDetails.year;
+            guestEventDates.push(date);
         }
 
         // current date
@@ -119,6 +125,8 @@ class EventHub extends Component {
                 day = classes.CurrentDay;
             } else if (eventDates.indexOf(compareDate) > -1) {
                 day = classes.EventDay;
+            } else if (guestEventDates.indexOf(compareDate) > -1) {
+                day = classes.GuestEventDay;
             } else {
                 day = classes.Day;
             }
