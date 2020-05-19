@@ -304,6 +304,7 @@ class EventHub extends Component {
             guestEventList = <Spinner />
         } else {
             guestEventList = <EventList 
+                isGuestList
                 eventList={this.props.guestEvents}
                 onDelete={this.onDeleteEventClick}
                 onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />;
