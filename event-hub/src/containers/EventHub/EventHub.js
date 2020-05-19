@@ -12,6 +12,7 @@ import CalendarTable from '../../components/CalendarTable/CalendarTable';
 import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
 import EventPopup from '../../components/EventPopup/EventPopup';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class EventHub extends Component {
     state = {
@@ -288,6 +289,26 @@ class EventHub extends Component {
                         onDelete={this.onDeleteEventConfirm}
                         deleteId={this.state.eventIdToBeDeleted} />
 
+        let eventList = null;
+        if (this.props.eventListLoading || this.props.deleteLoading) {
+            eventList = <Spinner />
+        } else {
+            eventList = <EventList 
+                    eventList={this.props.events}
+                    onDelete={this.onDeleteEventClick}
+                    onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />;
+        }
+
+        let guestEventList = null;
+        if (this.props.guestEventListLoading) {
+            guestEventList = <Spinner />
+        } else {
+            guestEventList = <EventList 
+                eventList={this.props.guestEvents}
+                onDelete={this.onDeleteEventClick}
+                onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />;
+        }
+
         return (
             <Auxiliary>
                 <Modal 
@@ -299,17 +320,11 @@ class EventHub extends Component {
                 <div className={classes.Events}>
                     <div className={classes.YourEvents}>
                         <h1>Your Events</h1>
-                        <EventList 
-                            eventList={this.props.events}
-                            onDelete={this.onDeleteEventClick}
-                            onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
+                        {eventList}
                     </div>
                     <div className={classes.InvitedTo}>
                         <h1>Invited To</h1>
-                        <EventList 
-                            eventList={this.props.guestEvents}
-                            onDelete={this.onDeleteEventClick}
-                            onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />
+                        {guestEventList}
                     </div>
                 </div>
             </Auxiliary>
@@ -327,7 +342,10 @@ const mapStateToProps = state => {
         guestEvents: state.eventHub.guestEvents,
         error: state.eventHub.error,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        eventListLoading: state.eventHub.eventListLoading,
+        guestEventListLoading: state.eventHub.guestEventListLoading,
+        deleteLoading: state.eventHub.deleteLoading
     };
 }
 

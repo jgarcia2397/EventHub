@@ -9,8 +9,11 @@ const initialState = {
     showMonthSelector: false,
     showYearSelector: false,
     events: [],
+    eventListLoading: false,
     guestEvents: [],
-    error: false
+    guestEventListLoading: false,
+    error: false,
+    deleteLoading: false
 };
 
 const selectMonth = (state, action) => {
@@ -85,41 +88,53 @@ const onNextCalendarClick = (state, action) => {
 };
 
 const fetchEventListStart = (state, action) => {
-    const updatedStateFetchStart = state;
+    const updatedStateFetchStart = {
+        eventListLoading: true
+    };
     return updateObject(state, updatedStateFetchStart);
 };
 
 const fetchEventListSuccess = (state, action) => {
     const updatedStateFetchSuccess = {
-        events: action.events
+        events: action.events,
+        eventListLoading: false
     }
     return updateObject(state, updatedStateFetchSuccess);
 };
 
 const fetchEventListFail = (state, action) => {
-    const updatedStateFetchFail = state;
+    const updatedStateFetchFail = {
+        eventListLoading: false
+    };
     return updateObject(state, updatedStateFetchFail);
 };
 
 const fetchGuestEventListStart = (state, action) => {
-    const updatedStateFetchGuestStart = state;
+    const updatedStateFetchGuestStart = {
+        guestEventListLoading: true
+    };
     return updateObject(state, updatedStateFetchGuestStart);
 };
 
 const fetchGuestEventListSuccess = (state, action) => {
     const updatedStateFetchGuestSuccess = {
-        guestEvents: action.guestEvents
+        guestEvents: action.guestEvents,
+        guestEventListLoading: false
     }
     return updateObject(state, updatedStateFetchGuestSuccess);
 };
 
 const fetchGuestEventListFail = (state, action) => {
-    const updatedStateFetchGuestFail = state;
+    const updatedStateFetchGuestFail = {
+        guestEventListLoading: false
+    };
     return updateObject(state, updatedStateFetchGuestFail);
 };
 
 const deleteEventStart = (state, action) => {
-    const updatedStateDeleteStart = state;
+    const updatedStateDeleteStart = {
+        deleteLoading: true
+    };
     return updateObject(state, updatedStateDeleteStart);
 };
 
@@ -128,13 +143,16 @@ const deleteEventSuccess = (state, action) => {
     const deletedEvent = eventsCopy.splice(eventsCopy.findIndex(events => events.key == action.eventId));
     const updatedEvents = updateObject(state.events, deletedEvent);
     const updatedStateDeleteSuccess = {
-        events: updatedEvents
+        events: updatedEvents,
+        deleteLoading: false
     };
     return updateObject(state, updatedStateDeleteSuccess);
 };
 
 const deleteEventFail = (state, action) => {
-    const updatedStateDeleteFail = state;
+    const updatedStateDeleteFail = {
+        deleteLoading: false
+    };
     return updateObject(state, updatedStateDeleteFail);
 };
 
