@@ -4,6 +4,16 @@
     overflow-y: scroll;
     width: 75%;
     height: 600px;
-    border: 2px solid skyblue;
+    border: 2px solid #FFD700;
+    box-shadow: 0 2px 3px #ccc;
+}
+
+.GuestList {
+    text-align: center;
+    margin: auto;
+    overflow-y: scroll;
+    width: 75%;
+    height: 600px;
+    border: 2px solid #DC143C;
     box-shadow: 0 2px 3px #ccc;
 }

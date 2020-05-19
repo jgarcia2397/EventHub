@@ -4,9 +4,15 @@ import classes from './EventList.module.css';
 import Event from '../Event/Event';
 
 const eventList = (props) => {
+    let listClassName = classes.List;
+    if (props.isGuestList) {
+        listClassName = classes.GuestList;
+    }
+
     let eventArray = Array.from(props.eventList);
+
     return (
-        <div className={classes.List}>
+        <div className={listClassName}>
             {eventArray.map(event => (
                 <Event 
                     key={event.id}

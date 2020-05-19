@@ -6,6 +6,7 @@ import classes from './Event.module.css';
 const event = (props) => {
     let modifyEventButtons = null;
     let buttonClass = classes.GuestButtonSide;
+    let eventClass = classes.GuestEvent;
 
     if (!props.isGuestEvent) {
         modifyEventButtons = (
@@ -15,10 +16,11 @@ const event = (props) => {
             </Auxiliary>
         );
         buttonClass = classes.ButtonSide;
+        eventClass = classes.Event;
     }
 
     return (
-        <div className={classes.Event}>
+        <div className={eventClass}>
             <div className={classes.Text}>
                 <p><strong>{props.details.month} {props.details.day}, {props.details.year}</strong></p>
                 <p><strong>{props.details.name}</strong> @ {props.details.place}</p>
