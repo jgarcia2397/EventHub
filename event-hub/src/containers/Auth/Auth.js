@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions/index';
 import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Auth extends Component {
     state = {
@@ -143,15 +144,24 @@ class Auth extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
-        return (
-            <div className={classes.Auth}>
-                {authRedirect}
-                {form}
-                <div className={classes.AuthSwitch}>
-                    <label>{this.state.isSignUp ? 'Already have an account? Sign in now!' : 'Don\'t have an account? Sign up now!'}</label>
-                    <button onClick={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</button>
+        let authWindow = null;
+        if (this.props.loading) {
+            authWindow = <Spinner />;
+        } else {
+            authWindow = (
+                <div className={classes.Auth}>
+                    {authRedirect}
+                    {form}
+                    <div className={classes.AuthSwitch}>
+                        <label>{this.state.isSignUp ? 'Already have an account? Sign in now!' : 'Don\'t have an account? Sign up now!'}</label>
+                        <button onClick={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</button>
+                    </div>
                 </div>
-            </div>
+            );
+        }
+
+        return (
+            authWindow
         );
     }
 }
@@ -160,7 +170,8 @@ const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null,
         creatingEvent: state.eventForm.creatingEvent,
-        authRedirectPath: state.auth.authRedirectPath
+        authRedirectPath: state.auth.authRedirectPath,
+        loading: state.auth.loading
     };
 }
 
