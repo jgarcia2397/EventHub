@@ -5,6 +5,7 @@ import * as actions from '../../store/actions/index';
 import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 import GuestList from '../../components/GuestList/GuestList';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class GroupChats extends Component {
     state = {
@@ -47,16 +48,18 @@ class GroupChats extends Component {
     }
 
     render () {
-        let chatWindow = null;
-        chatWindow = (
-            this.props.chats.map(chatMsg => (
-                <ChatMessage
-                    key={chatMsg.id}
-                    timestamp={chatMsg.msgTimestamp}
-                    content={chatMsg.content}
-                    isYourMsg={chatMsg.userId === this.props.userId} />
-            ))
-        );
+        let chatWindow = <Spinner />;
+        if (!this.props.chatsLoading) {
+            chatWindow = (
+                this.props.chats.map(chatMsg => (
+                    <ChatMessage
+                        key={chatMsg.id}
+                        timestamp={chatMsg.msgTimestamp}
+                        content={chatMsg.content}
+                        isYourMsg={chatMsg.userId === this.props.userId} />
+                ))
+            );
+        }
 
         return (
             <div className={classes.ChatsPage}>
@@ -64,7 +67,9 @@ class GroupChats extends Component {
                     inputChanged={this.inviteInputChangedHandler}
                     val={this.state.inviteInputContent}
                     onInvite={this.inviteSubmitHandler}
-                    guests={this.props.chatMembers} />
+                    guests={this.props.chatMembers}
+                    inviteLoading={this.props.inviteLoading}
+                    membersLoading={this.props.membersLoading} />
                 <div className={classes.GroupChat}>
                     <div className={classes.MessageList}>
                         {chatWindow}
@@ -87,7 +92,10 @@ const mapStateToProps = state => {
         userId: state.auth.userId,
         chatId: state.chats.chatId,
         token: state.auth.token,
-        chatMembers: state.chats.members
+        chatMembers: state.chats.members,
+        inviteLoading: state.chats.inviteLoading,
+        chatsLoading: state.chats.chatsLoading,
+        membersLoading: state.chats.membersLoading
     };
 };
 

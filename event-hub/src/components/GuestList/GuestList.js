@@ -1,21 +1,38 @@
 import React from 'react';
 
+import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './GuestList.module.css';
 
 const guestList = (props) => {
+    let inviteGuestForm = <Spinner />;
+    if (!props.inviteLoading) {
+            inviteGuestForm = (
+                <form className={classes.InviteForm}>
+                    <input onChange={props.inputChanged} value={props.val}></input>
+                    <button type="submit" onClick={props.onInvite}>Invite</button>
+                </form>
+            );
+    }
+
+    let guests = <Spinner />;
+    if (!props.membersLoading) {
+        guests = (
+            props.guests.map(guest => (
+                <p key={guest.id}>{guest.email.split("@")[0]}</p>
+            ))
+        );
+    }
+
     let guestList = null;
     guestList = (
         <div className={classes.GuestList}>
             <h3>Guest List</h3>
             <div className={classes.Guests}>
-                {props.guests.map(guest => (
-                    <p key={guest.id}>{guest.email.split("@")[0]}</p>
-                ))}
+                {guests}
             </div>
-            <form className={classes.InviteForm}>
-                <input onChange={props.inputChanged} value={props.val}></input>
-                <button type="submit" onClick={props.onInvite}>Invite</button>
-            </form>
+            <div>
+                {inviteGuestForm}
+            </div>
         </div>
     );
 
