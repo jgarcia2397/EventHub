@@ -3,7 +3,7 @@ import { updateObject } from '../utility';
 
 const initialState = {
     events: [],
-    loading: false,      // to be used later when Spinner is added
+    loading: false,      
     eventCreated: false,
     creatingEvent: false,
     initialMonthVal: '',

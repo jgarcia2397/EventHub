@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 
 class EventForm extends Component {
@@ -402,25 +403,28 @@ class EventForm extends Component {
         if (!dateTimeValidity) {
             invalidDateTimeMsg = <p><strong>Invalid date or start/end time.</strong></p>
         }
-
-        let form = (
-            <form onSubmit={this.createEventHandler}>
-                {formElementsArray.map(formElement => (
-                    <Input 
-                        key={formElement.id}
-                        elementType={formElement.config.elementType} 
-                        elementConfig={formElement.config.elementConfig} 
-                        value={formElement.config.value}
-                        invalidElement={!formElement.config.valid}
-                        invalidDateTime={!this.state.dateAndTimeValid}
-                        timeElement={formElement.config.timeElement}
-                        touched={formElement.config.touched}
-                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                ))}
-                {invalidDateTimeMsg}
-                <button disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'CREATE EVENT' : 'LOGIN TO CREATE EVENT'}</button>
-            </form>
-        );
+        let form = null;
+        form = <Spinner />;
+        if(!this.props.loading) {
+            form = (
+                <form onSubmit={this.createEventHandler}>
+                    {formElementsArray.map(formElement => (
+                        <Input 
+                            key={formElement.id}
+                            elementType={formElement.config.elementType} 
+                            elementConfig={formElement.config.elementConfig} 
+                            value={formElement.config.value}
+                            invalidElement={!formElement.config.valid}
+                            invalidDateTime={!this.state.dateAndTimeValid}
+                            timeElement={formElement.config.timeElement}
+                            touched={formElement.config.touched}
+                            changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                    ))}
+                    {invalidDateTimeMsg}
+                    <button disabled={!this.state.formIsValid}>{this.props.isAuthenticated ? 'CREATE EVENT' : 'LOGIN TO CREATE EVENT'}</button>
+                </form>
+            );
+        }
 
         return (
             <div className={classes.EventForm}>
@@ -433,7 +437,7 @@ class EventForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        loading: state.eventForm.loading,      // to be used later when Spinner is added
+        loading: state.eventForm.loading,      
         eventCreated: state.eventForm.eventCreated,
         token: state.auth.token,
         userId: state.auth.userId,
@@ -441,7 +445,6 @@ const mapStateToProps = state => {
         monthInputVal: state.eventForm.initialMonthVal,
         dayInputVal: state.eventForm.initialDayVal,
         yearInputVal: state.eventForm.initialYearVal
-        //eventId: state.chats.chatsId
     };
 }
 

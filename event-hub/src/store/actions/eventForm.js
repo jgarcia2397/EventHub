@@ -37,7 +37,7 @@ export const createEvent = (eventDetails, token, userId) => {
         axios.post('/events.json?auth=' + token, eventDetails)
             .then(response => {
                 // console.log(response.data.name);
-                dispatch(createEventSuccess(response.data.name, eventDetails));
+                // dispatch(createEventSuccess(response.data.name, eventDetails));
 
                 const queryParams = 'auth=' + token;
 
@@ -52,7 +52,8 @@ export const createEvent = (eventDetails, token, userId) => {
                         }
                         axios.post('/events/' + response.data.name + '/members.json?' + queryParams, originalUser)
                             .then(res => {
-                                console.log(res);
+                                // console.log(res);
+                                dispatch(createEventSuccess(response.data.name, eventDetails));
                             })
                             .catch(err => {
                                 dispatch(createEventFailed(err));
