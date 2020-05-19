@@ -4,7 +4,7 @@
     overflow-y: scroll;
     width: 75%;
     height: 600px;
-    border: 2px solid #FFD700;
+    border: 2px solid #F0E68C;
     box-shadow: 0 2px 3px #ccc;
 }
 
@@ -14,6 +14,6 @@
     overflow-y: scroll;
     width: 75%;
     height: 600px;
-    border: 2px solid #DC143C;
+    border: 2px solid #F08080;
     box-shadow: 0 2px 3px #ccc;
 }

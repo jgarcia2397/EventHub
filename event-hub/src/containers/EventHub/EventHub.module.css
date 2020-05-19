@@ -75,7 +75,7 @@ h1 {
 .EventDay {
     text-align: center;
     font-size: 0.8em;
-    background-color: #FFD700;
+    background-color: #F0E68C;
     color: white;
     border: 1px solid #C0C0C0;
     cursor: pointer;
@@ -86,7 +86,7 @@ h1 {
 .GuestEventDay {
     text-align: center;
     font-size: 0.8em;
-    background-color: #DC143C;
+    background-color: #F08080;
     color: white;
     border: 1px solid #C0C0C0;
     cursor: pointer;
@@ -97,7 +97,7 @@ h1 {
 .EventCurrentDay {
     text-align: center;
     font-size: 0.8em;
-    background-color: #FFD700;
+    background-color: #F0E68C;
     color: #4285f4;
     border: 2px solid #4285f4;
     cursor: pointer;
