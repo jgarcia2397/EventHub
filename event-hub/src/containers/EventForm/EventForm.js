@@ -458,5 +458,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(EventForm, axios));
-export default connect(mapStateToProps, mapDispatchToProps)(EventForm);
+export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(EventForm, axios));
+// export default connect(mapStateToProps, mapDispatchToProps)(EventForm);
