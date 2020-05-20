@@ -8,7 +8,8 @@ const initialState = {
     creatingEvent: false,
     initialMonthVal: '',
     initialDayVal: '',
-    initialYearVal: ''
+    initialYearVal: '',
+    error: false
 }
 
 const createEventInit = (state, action) => {
@@ -31,13 +32,14 @@ const createEventSuccess = (state, action) => {
         loading: false,
         eventCreated: true,
         creatingEvent: false,
-        events: state.events.concat(newEvent)
+        events: state.events.concat(newEvent),
+        error: false
     };
     return updateObject(state, updatedObject);
 };
 
 const createEventFailed = (state, action) => {
-    return updateObject(state, {loading: false, creatingEvent: false});
+    return updateObject(state, {loading: false, creatingEvent: false, error: true});
 };
 
 const reducer = (state = initialState, action) => {

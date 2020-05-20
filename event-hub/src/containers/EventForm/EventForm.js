@@ -6,6 +6,8 @@ import moment from 'moment';
 import classes from './EventForm.module.css';
 import Input from '../../components/UI/Input/Input';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import errorHandler from '../../hoc/errorHandler/errorHandler';
+import axios from '../../axios-events';
 import * as actions from '../../store/actions/index';
 
 class EventForm extends Component {
@@ -456,4 +458,5 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+// export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(EventForm, axios));
 export default connect(mapStateToProps, mapDispatchToProps)(EventForm);
