@@ -9,8 +9,7 @@ const initialState = {
     singleMsgLoading: false,
     inviteLoading: false,
     membersLoading: false,
-    readError: null,
-    writeError: null,
+    error: false,
     members: []
 };
 
@@ -31,7 +30,7 @@ export const sendMsgSuccess = (state, action) => {
     const updatedMsgObject = {
         content: '',
         singleMsgLoading: false,
-        writeError: null,
+        error: false,
         chats: state.chats.concat(newMsgDetails)
     };
 
@@ -39,7 +38,7 @@ export const sendMsgSuccess = (state, action) => {
 };
 
 export const sendMsgFailed = (state, action) => {
-    return updateObject(state, {writeError: action.error, singleMsgLoading: false});
+    return updateObject(state, {error: true, singleMsgLoading: false});
 };
 
 export const fetchChatsStart = (state, action) => {
@@ -49,14 +48,14 @@ export const fetchChatsStart = (state, action) => {
 export const fetchChatsSuccess = (state, action) => {
     const updatedGroupChat = {
         chats: action.chats,
-        readError: null,
+        error: false,
         chatsLoading: false
     };
     return updateObject(state, updatedGroupChat);
 };
 
 export const fetchChatsFailed = (state, action) => {
-    return updateObject(state, {readError: action.error, chatsLoading: false});
+    return updateObject(state, {error: true, chatsLoading: false});
 };
 
 export const sendGuestInviteStart = (state, action) => {
@@ -66,14 +65,15 @@ export const sendGuestInviteStart = (state, action) => {
 export const sendGuestInviteSuccess = (state, action) => {
     const updatedMemberObject = {
         inviteLoading: false,
-        members: state.members.concat(action.user)
+        members: state.members.concat(action.user),
+        error: false
     };
 
     return updateObject(state, updatedMemberObject);
 };
 
 export const sendGuestInviteFailed = (state, action) => {
-    return updateObject(state, {inviteLoading: false});
+    return updateObject(state, {inviteLoading: false, error: true});
 };
 
 export const fetchChatMembersStart = (state, action) => {
@@ -83,14 +83,14 @@ export const fetchChatMembersStart = (state, action) => {
 export const fetchChatMembersSuccess = (state, action) => {
     const updatedGuestList = {
         members: action.members,
-        readError: null,
+        error: false,
         membersLoading: false
     };
     return updateObject(state, updatedGuestList);
 };
 
 export const fetchChatMembersFailed = (state, action) => {
-    return updateObject(state, {readError: action.error, membersLoading: false});
+    return updateObject(state, {error: true, membersLoading: false});
 };
 
 export const reducer = (state = initialState, action) => {

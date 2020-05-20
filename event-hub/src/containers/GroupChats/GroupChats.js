@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
+import axios from '../../axios-events';
+import errorHandler from '../../hoc/errorHandler/errorHandler';
 import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 import GuestList from '../../components/GuestList/GuestList';
@@ -109,4 +111,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupChats);
+export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(GroupChats, axios));
