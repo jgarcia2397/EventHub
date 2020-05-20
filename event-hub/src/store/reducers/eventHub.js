@@ -97,14 +97,16 @@ const fetchEventListStart = (state, action) => {
 const fetchEventListSuccess = (state, action) => {
     const updatedStateFetchSuccess = {
         events: action.events,
-        eventListLoading: false
+        eventListLoading: false,
+        error: false
     }
     return updateObject(state, updatedStateFetchSuccess);
 };
 
 const fetchEventListFail = (state, action) => {
     const updatedStateFetchFail = {
-        eventListLoading: false
+        eventListLoading: false,
+        error: true
     };
     return updateObject(state, updatedStateFetchFail);
 };
@@ -119,14 +121,16 @@ const fetchGuestEventListStart = (state, action) => {
 const fetchGuestEventListSuccess = (state, action) => {
     const updatedStateFetchGuestSuccess = {
         guestEvents: action.guestEvents,
-        guestEventListLoading: false
+        guestEventListLoading: false,
+        error: false
     }
     return updateObject(state, updatedStateFetchGuestSuccess);
 };
 
 const fetchGuestEventListFail = (state, action) => {
     const updatedStateFetchGuestFail = {
-        guestEventListLoading: false
+        guestEventListLoading: false,
+        error: true
     };
     return updateObject(state, updatedStateFetchGuestFail);
 };
@@ -144,14 +148,16 @@ const deleteEventSuccess = (state, action) => {
     const updatedEvents = updateObject(state.events, deletedEvent);
     const updatedStateDeleteSuccess = {
         events: updatedEvents,
-        deleteLoading: false
+        deleteLoading: false,
+        error: false
     };
     return updateObject(state, updatedStateDeleteSuccess);
 };
 
 const deleteEventFail = (state, action) => {
     const updatedStateDeleteFail = {
-        deleteLoading: false
+        deleteLoading: false,
+        error: true
     };
     return updateObject(state, updatedStateDeleteFail);
 };

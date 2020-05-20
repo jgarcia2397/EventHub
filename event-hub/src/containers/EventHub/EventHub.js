@@ -3,6 +3,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
+import axios from '../../axios-events';
 import classes from './EventHub.module.css';
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import Selector from '../../components/Selector/Selector';
@@ -13,6 +14,7 @@ import EventList from '../../components/EventList/EventList';
 import Modal from '../../components/UI/Modal/Modal';
 import EventPopup from '../../components/EventPopup/EventPopup';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import errorHandler from '../../hoc/errorHandler/errorHandler';
 
 class EventHub extends Component {
     state = {
@@ -374,4 +376,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventHub);
+export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(EventHub, axios));

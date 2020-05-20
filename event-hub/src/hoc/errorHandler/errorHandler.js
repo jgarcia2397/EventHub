@@ -9,6 +9,7 @@ const errorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
+        // This is now deprecated, UNSAFE will supress the warning
         UNSAFE_componentWillMount () {
             this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({error: null});
