@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import * as actions from '../../store/actions/index';
+import axios from '../../axios-events';
+import errorHandler from '../../hoc/errorHandler/errorHandler';
 import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -182,4 +184,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(Auth, axios));
