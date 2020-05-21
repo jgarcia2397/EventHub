@@ -52,7 +52,7 @@ class GroupChats extends Component {
     }
 
     convertTimestampToMoment = (timestamp) => {
-        return moment(timestamp).format("ddd. MMM Do");
+        return moment(timestamp).format("ddd. MMM Do, h:mm a");
     }
 
     render () {
