@@ -9,6 +9,7 @@ import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
 import GuestList from '../../components/GuestList/GuestList';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 
 class GroupChats extends Component {
     state = {
@@ -71,25 +72,31 @@ class GroupChats extends Component {
         }
 
         return (
-            <div className={classes.ChatsPage}>
-                <GuestList
-                    inputChanged={this.inviteInputChangedHandler}
-                    val={this.state.inviteInputContent}
-                    onInvite={this.inviteSubmitHandler}
-                    guests={this.props.chatMembers}
-                    inviteLoading={this.props.inviteLoading}
-                    membersLoading={this.props.membersLoading} />
-                <div className={classes.GroupChat}>
-                    <div className={classes.MessageList}>
-                        {chatWindow}
-                    </div>
-                    <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
-                        <input onChange={this.inputChangedHandler} value={this.props.content}></input>
-                        {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
-                        <button type="submit" disabled={this.props.content === ''}>Send</button>
-                    </form>
+            <Auxiliary>
+                <div className={classes.ChatsHeader}>
+                    <h1>{this.props.eventName}</h1>
+                    <h3>{this.props.eventDate}</h3>
                 </div>
-            </div>
+                <div className={classes.ChatsPage}>
+                    <GuestList
+                        inputChanged={this.inviteInputChangedHandler}
+                        val={this.state.inviteInputContent}
+                        onInvite={this.inviteSubmitHandler}
+                        guests={this.props.chatMembers}
+                        inviteLoading={this.props.inviteLoading}
+                        membersLoading={this.props.membersLoading} />
+                    <div className={classes.GroupChat}>
+                        <div className={classes.MessageList}>
+                            {chatWindow}
+                        </div>
+                        <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
+                            <input onChange={this.inputChangedHandler} value={this.props.content}></input>
+                            {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
+                            <button type="submit" disabled={this.props.content === ''}>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </Auxiliary>
         );
     }
 }
@@ -105,7 +112,9 @@ const mapStateToProps = state => {
         chatMembers: state.chats.members,
         inviteLoading: state.chats.inviteLoading,
         chatsLoading: state.chats.chatsLoading,
-        membersLoading: state.chats.membersLoading
+        membersLoading: state.chats.membersLoading,
+        eventName: state.chats.eventName,
+        eventDate: state.chats.eventDate
     };
 };
 

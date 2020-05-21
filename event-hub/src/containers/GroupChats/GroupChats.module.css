@@ -5,6 +5,18 @@
     justify-content: space-between;
 }
 
+.ChatsHeader {
+    text-align: center;
+}
+
+.ChatsHeader h1 {
+    margin-bottom: 0;
+}
+
+.ChatsHeader h3 {
+    margin-top: 0;
+}
+
 .GroupChat {
     /* margin: 0px 50px; */
     width: 80%;
