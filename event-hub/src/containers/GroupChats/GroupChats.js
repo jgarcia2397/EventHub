@@ -32,7 +32,8 @@ class GroupChats extends Component {
         const msgDetails = {
             msgTimestamp: msgTimestamp,
             content: this.props.content,
-            userId: this.props.userId
+            userId: this.props.userId,
+            username: this.props.username
         }
 
         this.props.onSendMsg(msgDetails, this.props.chatId, this.props.token);
@@ -92,6 +93,7 @@ const mapStateToProps = state => {
         chats: state.chats.chats,
         content: state.chats.content,
         userId: state.auth.userId,
+        username: state.auth.username,
         chatId: state.chats.chatId,
         token: state.auth.token,
         chatMembers: state.chats.members,
