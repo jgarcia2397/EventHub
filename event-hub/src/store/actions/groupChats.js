@@ -1,10 +1,12 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-events';
 
-export const setChatEventId = (eventId) => {
+export const setChatEventId = (eventId, eventName, eventDate) => {
     return {
         type: actionTypes.SET_CHAT_EVENT_ID,
-        chatId: eventId
+        chatId: eventId,
+        eventName: eventName,
+        eventDate: eventDate
     };
 };
 

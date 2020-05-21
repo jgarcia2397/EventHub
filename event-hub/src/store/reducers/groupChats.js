@@ -3,6 +3,8 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     chatId: '',
+    eventName: '',
+    eventDate: '',
     chats: [],
     content: '',
     chatsLoading: false,
@@ -14,7 +16,7 @@ const initialState = {
 };
 
 export const setChatEventId = (state, action) => {
-    return updateObject(state, {chatId: action.chatId});
+    return updateObject(state, {chatId: action.chatId, eventName: action.eventName, eventDate: action.eventDate});
 };
 
 export const chatInputChanged = (state, action) => {

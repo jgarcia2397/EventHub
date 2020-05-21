@@ -29,7 +29,16 @@ const event = (props) => {
                 <p>You have invited {props.numGuests} guests</p>
             </div>
             <div className={buttonClass}>
-                <button onClick={() => props.onCheckGuestsChat(props.eventId)}>Guest List/Chat</button>
+                <button 
+                    onClick={() => {
+                        props.onCheckGuestsChat(
+                            props.eventId, 
+                            props.details.name, 
+                            props.details.month + " " + props.details.day + ", " + props.details.year
+                        )
+                    }}>
+                        Guest List/Chat
+                </button>
                 {modifyEventButtons}
             </div>
         </div>
