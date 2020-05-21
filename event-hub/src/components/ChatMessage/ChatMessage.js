@@ -12,9 +12,9 @@ const chatMessage = (props) => {
 
     return (
         <div className={chatMsgClass} key={props.timestamp}>
-            <p><strong>{props.user}</strong></p>
-            <p>{props.content}</p>
-            <p>{props.timestamp}</p>
+            <p className={classes.UsernameField}><strong>{props.user}</strong></p>
+            <p className={classes.ContentField}>{props.content}</p>
+            <p className={classes.DateField}>{props.timestamp}</p>
         </div>
     );
 }
