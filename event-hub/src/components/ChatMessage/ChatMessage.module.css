@@ -1,5 +1,5 @@
 .YourChatMessage {
-    padding-left: 5px;
+    padding: 5px 5px 5px 5px;
     text-align: left;
     background-color: skyblue;
     border: 1px solid #aaa;
@@ -12,7 +12,7 @@
 }
 
 .OtherChatMessage {
-    padding-left: 5px;
+    padding: 5px 5px 5px 5px;
     text-align: left;
     background-color: #DCDCDC;
     border: 1px solid #aaa;
@@ -22,4 +22,10 @@
     float: left;
     margin: 5px 0px 5px 5px;
     margin-right: 100%;
+}
+
+.YourChatMessage p,
+.OtherChatMessage p {
+    margin: 0;
+    text-align: left;
 }

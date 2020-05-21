@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions/index';
 import axios from '../../axios-events';
+import moment from 'moment';
 import errorHandler from '../../hoc/errorHandler/errorHandler';
 import classes from './GroupChats.module.css';
 import ChatMessage from '../../components/ChatMessage/ChatMessage';
@@ -50,6 +51,10 @@ class GroupChats extends Component {
         console.log(this.state.inviteInputContent);
     }
 
+    convertTimestampToMoment = (timestamp) => {
+        return moment(timestamp).format("ddd. MMM Do");
+    }
+
     render () {
         let chatWindow = <Spinner />;
         if (!this.props.chatsLoading) {
@@ -57,7 +62,8 @@ class GroupChats extends Component {
                 this.props.chats.map(chatMsg => (
                     <ChatMessage
                         key={chatMsg.id}
-                        timestamp={chatMsg.msgTimestamp}
+                        timestamp={this.convertTimestampToMoment(chatMsg.msgTimestamp)}
+                        user={chatMsg.username}
                         content={chatMsg.content}
                         isYourMsg={chatMsg.userId === this.props.userId} />
                 ))
