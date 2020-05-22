@@ -8,8 +8,8 @@ const guestList = (props) => {
     if (!props.inviteLoading) {
             inviteGuestForm = (
                 <form className={classes.InviteForm}>
-                    <input onChange={props.inputChanged} value={props.val}></input>
-                    <button type="submit" onClick={props.onInvite}>Invite</button>
+                    <input onChange={props.inputChanged} value={props.invitedGuest}></input>
+                    <button type="submit" disabled={props.invitedGuest === ''} onClick={props.onInvite}>Invite</button>
                 </form>
             );
     }

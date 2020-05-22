@@ -80,7 +80,7 @@ class GroupChats extends Component {
                 <div className={classes.ChatsPage}>
                     <GuestList
                         inputChanged={this.inviteInputChangedHandler}
-                        val={this.state.inviteInputContent}
+                        invitedGuest={this.state.inviteInputContent}
                         onInvite={this.inviteSubmitHandler}
                         guests={this.props.chatMembers}
                         inviteLoading={this.props.inviteLoading}
