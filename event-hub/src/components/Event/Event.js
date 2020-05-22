@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import classes from './Event.module.css';
 
 const event = (props) => {
@@ -10,10 +9,7 @@ const event = (props) => {
 
     if (!props.isGuestEvent) {
         modifyEventButtons = (
-            <Auxiliary>
-                <button>Update Event</button>
-                <button onClick={() => props.delete(props.eventId)}>Delete Event</button>
-            </Auxiliary>
+            <button onClick={() => props.delete(props.eventId)}>Delete Event</button>
         );
         buttonClass = classes.ButtonSide;
         eventClass = classes.Event;
@@ -26,7 +22,6 @@ const event = (props) => {
                 <p><strong>{props.details.name}</strong> @ {props.details.place}</p>
                 <p><strong>Starts at </strong>{props.details.startHour}:{props.details.startMinute} {props.details.startPeriod}</p>
                 <p><strong>Ends at </strong>{props.details.endHour}:{props.details.endMinute} {props.details.endPeriod}</p>
-                <p>You have invited {props.numGuests} guests</p>
             </div>
             <div className={buttonClass}>
                 <button 

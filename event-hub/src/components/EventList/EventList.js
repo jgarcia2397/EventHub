@@ -18,7 +18,6 @@ const eventList = (props) => {
                     key={event.id}
                     eventId={event.id}
                     details={event.eventDetails}
-                    numGuests={event.numberOfGuests}
                     delete={props.onDelete}
                     onCheckGuestsChat={props.onCheckGuestsOrChat}
                     isGuestEvent={props.isGuestList} />

@@ -376,7 +376,6 @@ class EventForm extends Component {
 
             const eventDetails = {
                 eventDetails: formData,
-                numberOfGuests: 0,
                 eventTimestamp: dateData,
                 userId: this.props.userId
             }
