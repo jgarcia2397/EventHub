@@ -122,6 +122,18 @@ export const sendGuestInviteSuccess = (invitedUser) => {
     };
 };
 
+export const sendGuestInviteExists = () => {
+    return {
+        type: actionTypes.SEND_GUEST_INVITE_EXISTS
+    };
+};
+
+export const sendGuestInviteNotExists = () => {
+    return {
+        type: actionTypes.SEND_GUEST_INVITE_NOT_EXISTS
+    };
+};
+
 export const sendGuestInviteFailed = (error) => {
     return {
         type: actionTypes.SEND_GUEST_INVITE_FAILED,
@@ -133,34 +145,39 @@ export const sendGuestInvite = (newUserEmail, chatId, userToken) => {
     return dispatch => {
         dispatch(sendGuestInviteStart());
 
-        // const accountLookup = {
-        //     idToken: tokenOfInvited
-        // };
-
         const queryParams = 'auth=' + userToken;
         const queryParamsUsers = 'orderBy="email"&equalTo="' + newUserEmail + '"';
 
 
         axios.get('/users.json?' + queryParamsUsers)
             .then(res => {
-                console.log(res);
                 let newGuest = null;
                 for (let key in res.data) {
                     newGuest = res.data[key];
                 }
-                // console.log("newGuest: " + newGuest.email + ", " + newGuest.userId);
-                
-                axios.post('/events/' + chatId + '/members.json?' + queryParams, newGuest)
-                    .then(res => {
-                        //console.log(res);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-                dispatch(sendGuestInviteSuccess(newGuest));
+
+                if (Object.keys(res.data).length === 0) {
+                    dispatch(sendGuestInviteNotExists());
+                } else {
+                    axios.get('/events/' + chatId + '/members.json?' + queryParamsUsers + '&' + queryParams)
+                        .then(res => {
+                            if (Object.keys(res.data).length === 0) {
+                                axios.post('/events/' + chatId + '/members.json?' + queryParams, newGuest)
+                                    .then(res => {})
+                                    .catch(err => {
+                                        dispatch(sendGuestInviteFailed(err));
+                                    });
+                                dispatch(sendGuestInviteSuccess(newGuest));
+                            } else {
+                                dispatch(sendGuestInviteExists());
+                            }
+                        })
+                        .catch(err => {
+                            dispatch(sendGuestInviteFailed(err));
+                        });
+                }
             })
             .catch(err => {
-                console.log(err);
                 dispatch(sendGuestInviteFailed(err));
             });
     };

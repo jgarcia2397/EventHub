@@ -12,7 +12,8 @@ const initialState = {
     inviteLoading: false,
     membersLoading: false,
     error: false,
-    members: []
+    members: [],
+    guestNotExists: false
 };
 
 export const setChatEventId = (state, action) => {
@@ -68,14 +69,23 @@ export const sendGuestInviteSuccess = (state, action) => {
     const updatedMemberObject = {
         inviteLoading: false,
         members: state.members.concat(action.user),
-        error: false
+        error: false,
+        guestNotExists: false
     };
 
     return updateObject(state, updatedMemberObject);
 };
 
+export const sendGuestInviteExists = (state, action) => {
+    return updateObject(state, {guestNotExists: false, inviteLoading: false, error: false});
+};
+
+export const sendGuestInviteNotExists = (state, action) => {
+    return updateObject(state, {guestNotExists: true, inviteLoading: false, error: false});
+};
+
 export const sendGuestInviteFailed = (state, action) => {
-    return updateObject(state, {inviteLoading: false, error: true});
+    return updateObject(state, {guestNotExists: false, inviteLoading: false, error: true});
 };
 
 export const fetchChatMembersStart = (state, action) => {
@@ -107,6 +117,8 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.SET_CHAT_EVENT_ID: return setChatEventId(state, action);
         case actionTypes.SEND_GUEST_INVITE_START: return sendGuestInviteStart(state, action);
         case actionTypes.SEND_GUEST_INVITE_SUCCESS: return sendGuestInviteSuccess(state, action);
+        case actionTypes.SEND_GUEST_INVITE_EXISTS: return sendGuestInviteExists(state, action);
+        case actionTypes.SEND_GUEST_INVITE_NOT_EXISTS: return sendGuestInviteNotExists(state, action);
         case actionTypes.SEND_GUEST_INVITE_FAILED: return sendGuestInviteFailed(state, action);
         case actionTypes.FETCH_CHAT_MEMBERS_START: return fetchChatMembersStart(state, action);
         case actionTypes.FETCH_CHAT_MEMBERS_SUCCESS: return fetchChatMembersSuccess(state, action);
