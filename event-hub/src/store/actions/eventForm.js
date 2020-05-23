@@ -56,7 +56,8 @@ export const createEvent = (eventDetails, token, userId) => {
                             }
                         }
 
-                        const SECOND_URL = 'https://event-hub-195ae.firebaseio.com/' + response.data.name + '/members.json?' + queryParams;
+                        const SECOND_URL = 'https://event-hub-195ae.firebaseio.com/events/' + response.data.name + '/members.json?' + queryParams;
+                        const THIRD_URL = 'https://event-hub-195ae.firebaseio.com/events/' + response.data.name + '.json?' + queryParams;
 
                         axiosInstance.post(PROXY_URL + SECOND_URL, originalUser)
                             .then(res => {
@@ -64,6 +65,11 @@ export const createEvent = (eventDetails, token, userId) => {
                                 dispatch(createEventSuccess(response.data.name, eventDetails));
                             })
                             .catch(err => {
+                                axiosInstance.delete(PROXY_URL + THIRD_URL)
+                                    .then(res => {})
+                                    .catch(err => {
+                                        dispatch(createEventFailed(err));
+                                    });
                                 dispatch(createEventFailed(err));
                             });
                     })
