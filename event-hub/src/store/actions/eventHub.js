@@ -161,9 +161,10 @@ export const deleteEventSuccess = (id) => {
     };
 };
 
-export const deleteEventFailed = (error) => {
+export const deleteEventFailed = (id, error) => {
     return {
         type: actionTypes.DELETE_EVENT_FAILED,
+        eventId: id,
         error: error
     };
 };
@@ -176,15 +177,14 @@ export const deleteEvent = (eventId, token) => {
         const queryParams = 'auth=' + token;
 
         const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-        const URL = 'https://event-hub-195ae.firebaseio.com/' + '/events/' + eventId + '.json?' + queryParams;
+        const URL = 'https://event-hub-195ae.firebaseio.com/' + '/events/' + eventId + '.jso?' + queryParams;
 
         axiosInstance.delete(PROXY_URL + URL)
             .then(res => {
                 dispatch(deleteEventSuccess(eventId));
             })
             .catch(err => {
-                // console.log(err);
-                dispatch(deleteEventFailed(err));
+                dispatch(deleteEventFailed(eventId, err));
             });
     };
 };

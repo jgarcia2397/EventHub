@@ -44,3 +44,7 @@ p {
 button {
     width: 80%;
 }
+
+.ErrorMessage {
+    color: #DC143C;
+}

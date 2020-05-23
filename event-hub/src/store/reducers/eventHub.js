@@ -12,8 +12,9 @@ const initialState = {
     eventListLoading: false,
     guestEvents: [],
     guestEventListLoading: false,
-    error: false,
-    deleteLoading: false
+    error: null,
+    deleteLoading: false,
+    deleteFailEventId: ''
 };
 
 const selectMonth = (state, action) => {
@@ -98,7 +99,7 @@ const fetchEventListSuccess = (state, action) => {
     const updatedStateFetchSuccess = {
         events: action.events,
         eventListLoading: false,
-        error: false
+        error: null
     }
     return updateObject(state, updatedStateFetchSuccess);
 };
@@ -106,7 +107,7 @@ const fetchEventListSuccess = (state, action) => {
 const fetchEventListFail = (state, action) => {
     const updatedStateFetchFail = {
         eventListLoading: false,
-        error: true
+        error: action.error
     };
     return updateObject(state, updatedStateFetchFail);
 };
@@ -122,7 +123,7 @@ const fetchGuestEventListSuccess = (state, action) => {
     const updatedStateFetchGuestSuccess = {
         guestEvents: action.guestEvents,
         guestEventListLoading: false,
-        error: false
+        error: null
     }
     return updateObject(state, updatedStateFetchGuestSuccess);
 };
@@ -130,7 +131,7 @@ const fetchGuestEventListSuccess = (state, action) => {
 const fetchGuestEventListFail = (state, action) => {
     const updatedStateFetchGuestFail = {
         guestEventListLoading: false,
-        error: true
+        error: action.error
     };
     return updateObject(state, updatedStateFetchGuestFail);
 };
@@ -149,7 +150,7 @@ const deleteEventSuccess = (state, action) => {
     const updatedStateDeleteSuccess = {
         events: updatedEvents,
         deleteLoading: false,
-        error: false
+        error: null
     };
     return updateObject(state, updatedStateDeleteSuccess);
 };
@@ -157,7 +158,8 @@ const deleteEventSuccess = (state, action) => {
 const deleteEventFail = (state, action) => {
     const updatedStateDeleteFail = {
         deleteLoading: false,
-        error: true
+        deleteFailEventId: action.eventId,
+        error: action.error
     };
     return updateObject(state, updatedStateDeleteFail);
 };

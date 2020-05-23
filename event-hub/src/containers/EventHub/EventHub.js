@@ -306,7 +306,9 @@ class EventHub extends Component {
             eventList = <EventList 
                     eventList={this.props.events}
                     onDelete={this.onDeleteEventClick}
-                    onCheckGuestsOrChat={this.onCheckGuestsOrChatClick} />;
+                    onCheckGuestsOrChat={this.onCheckGuestsOrChatClick}
+                    deleteError={this.props.error}
+                    deleteFailId={this.props.deleteFailEventId} />;
         }
 
         let guestEventList = null;
@@ -356,7 +358,8 @@ const mapStateToProps = state => {
         userId: state.auth.userId,
         eventListLoading: state.eventHub.eventListLoading,
         guestEventListLoading: state.eventHub.guestEventListLoading,
-        deleteLoading: state.eventHub.deleteLoading
+        deleteLoading: state.eventHub.deleteLoading,
+        deleteFailEventId: state.eventHub.deleteFailEventId
     };
 }
 

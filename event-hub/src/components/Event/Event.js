@@ -15,6 +15,11 @@ const event = (props) => {
         eventClass = classes.Event;
     }
 
+    let deleteErrorMsg = null;
+    if (props.deleteError && props.isDeleteFail) {
+        deleteErrorMsg = "Delete error: " + props.deleteError.message;
+    }
+
     return (
         <div className={eventClass}>
             <div className={classes.Text}>
@@ -22,6 +27,7 @@ const event = (props) => {
                 <p><strong>{props.details.name}</strong> @ {props.details.place}</p>
                 <p><strong>Starts at </strong>{props.details.startHour}:{props.details.startMinute} {props.details.startPeriod}</p>
                 <p><strong>Ends at </strong>{props.details.endHour}:{props.details.endMinute} {props.details.endPeriod}</p>
+                <p className={classes.ErrorMessage}>{deleteErrorMsg}</p>
             </div>
             <div className={buttonClass}>
                 <button 

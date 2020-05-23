@@ -20,7 +20,9 @@ const eventList = (props) => {
                     details={event.eventDetails}
                     delete={props.onDelete}
                     onCheckGuestsChat={props.onCheckGuestsOrChat}
-                    isGuestEvent={props.isGuestList} />
+                    isGuestEvent={props.isGuestList}
+                    deleteError={props.deleteError}
+                    isDeleteFail={event.id === props.deleteFailId} />
             ))}
         </div>
     );
