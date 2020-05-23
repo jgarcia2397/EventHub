@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axiosInstance from 'axios';
 import axios from '../../axios-events';
 
 export const createEventInit = (month, day, year) => {
@@ -34,7 +35,11 @@ export const createEventStart = () => {
 export const createEvent = (eventDetails, token, userId) => {
     return dispatch => {
         dispatch(createEventStart());
-        axios.post('/events.json?auth=' + token, eventDetails)
+
+        const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
+        const FIRST_URL = 'https://event-hub-195ae.firebaseio.com/' + '/events.json?auth=' + token;
+
+        axiosInstance.post(PROXY_URL + FIRST_URL, eventDetails)
             .then(response => {
                 // console.log(response.data.name);
                 // dispatch(createEventSuccess(response.data.name, eventDetails));
@@ -50,7 +55,10 @@ export const createEvent = (eventDetails, token, userId) => {
                                 originalUser = res.data[key];
                             }
                         }
-                        axios.post('/events/' + response.data.name + '/members.json?' + queryParams, originalUser)
+
+                        const SECOND_URL = 'https://event-hub-195ae.firebaseio.com/' + response.data.name + '/members.json?' + queryParams;
+
+                        axiosInstance.post(PROXY_URL + SECOND_URL, originalUser)
                             .then(res => {
                                 // console.log(res);
                                 dispatch(createEventSuccess(response.data.name, eventDetails));
