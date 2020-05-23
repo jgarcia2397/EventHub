@@ -18,7 +18,13 @@ const initialState = {
 };
 
 export const setChatEventId = (state, action) => {
-    return updateObject(state, {chatId: action.chatId, eventName: action.eventName, eventDate: action.eventDate});
+    return updateObject(state, {
+        chatId: action.chatId, 
+        eventName: action.eventName, 
+        eventDate: action.eventDate,
+        guestNotExists: false,
+        guestAlreadyInvited: false
+    });
 };
 
 export const chatInputChanged = (state, action) => {
