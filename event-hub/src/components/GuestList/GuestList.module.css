@@ -33,3 +33,7 @@
 .InviteForm input {
     width: 100%;
 }
+
+.WarningMessage {
+    color: #DC143C;
+}

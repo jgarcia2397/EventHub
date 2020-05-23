@@ -4,10 +4,18 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './GuestList.module.css';
 
 const guestList = (props) => {
+    let inviteWarningMsg = null;
+    if (props.guestAlreadyInvited) {
+        inviteWarningMsg = <p className={classes.WarningMessage}>This guest was already invited!</p>;
+    } else if (props.guestNotExists) {
+        inviteWarningMsg = <p className={classes.WarningMessage}>The invited guest has not registered for an account!</p>;
+    }
+
     let inviteGuestForm = <Spinner />;
     if (!props.inviteLoading) {
             inviteGuestForm = (
                 <form className={classes.InviteForm}>
+                    {inviteWarningMsg}
                     <input onChange={props.inputChanged} value={props.invitedGuest}></input>
                     <button type="submit" disabled={props.invitedGuest === ''} onClick={props.onInvite}>Invite</button>
                 </form>

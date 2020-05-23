@@ -84,7 +84,9 @@ class GroupChats extends Component {
                         onInvite={this.inviteSubmitHandler}
                         guests={this.props.chatMembers}
                         inviteLoading={this.props.inviteLoading}
-                        membersLoading={this.props.membersLoading} />
+                        membersLoading={this.props.membersLoading}
+                        guestAlreadyInvited={this.props.guestAlreadyInvited}
+                        guestNotExists={this.props.guestNotExists} />
                     <div className={classes.GroupChat}>
                         <div className={classes.MessageList}>
                             {chatWindow}
@@ -114,7 +116,9 @@ const mapStateToProps = state => {
         chatsLoading: state.chats.chatsLoading,
         membersLoading: state.chats.membersLoading,
         eventName: state.chats.eventName,
-        eventDate: state.chats.eventDate
+        eventDate: state.chats.eventDate,
+        guestNotExists: state.chats.guestNotExists,
+        guestAlreadyInvited: state.chats.guestAlreadyInvited
     };
 };
 

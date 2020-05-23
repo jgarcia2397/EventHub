@@ -13,7 +13,8 @@ const initialState = {
     membersLoading: false,
     error: false,
     members: [],
-    guestNotExists: false
+    guestNotExists: false,
+    guestAlreadyInvited: false
 };
 
 export const setChatEventId = (state, action) => {
@@ -70,22 +71,23 @@ export const sendGuestInviteSuccess = (state, action) => {
         inviteLoading: false,
         members: state.members.concat(action.user),
         error: false,
-        guestNotExists: false
+        guestNotExists: false,
+        guestAlreadyInvited: false
     };
 
     return updateObject(state, updatedMemberObject);
 };
 
 export const sendGuestInviteExists = (state, action) => {
-    return updateObject(state, {guestNotExists: false, inviteLoading: false, error: false});
+    return updateObject(state, {guestAlreadyInvited: true, guestNotExists: false, inviteLoading: false, error: false});
 };
 
 export const sendGuestInviteNotExists = (state, action) => {
-    return updateObject(state, {guestNotExists: true, inviteLoading: false, error: false});
+    return updateObject(state, {guestNotExists: true, guestAlreadyInvited: false, inviteLoading: false, error: false});
 };
 
 export const sendGuestInviteFailed = (state, action) => {
-    return updateObject(state, {guestNotExists: false, inviteLoading: false, error: true});
+    return updateObject(state, {guestNotExists: false, guestAlreadyInvited: false, inviteLoading: false, error: true});
 };
 
 export const fetchChatMembersStart = (state, action) => {
