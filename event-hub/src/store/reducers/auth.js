@@ -5,7 +5,7 @@ const initialState = {
     token: null,
     userId: null,
     username: '',
-    error: false,
+    error: null,
     loading: false,
     authRedirectPath: '/'
 };
@@ -13,7 +13,7 @@ const initialState = {
 const authStart = (state, action) => {
     return updateObject(state, {
         loading: true,
-        error: false
+        error: null
     });
 };
 
@@ -23,14 +23,14 @@ const authSuccess = (state, action) => {
         userId: action.userId,
         username: action.username,
         loading: false,
-        error: false
+        error: null
     });
 };
 
 const authFailed = (state, action) => {
     return updateObject(state, {
         loading: false,
-        error: true
+        error: action.error
     });
 };
 

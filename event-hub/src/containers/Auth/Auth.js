@@ -146,6 +146,12 @@ class Auth extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />;
         }
 
+        let errorMessage = null;
+        if (this.props.error) {
+            let errorConcatenation = "WARNING: " + this.props.error.message;
+            errorMessage = <p className={classes.ErrorMessage}>{errorConcatenation}</p>
+        }
+
         let authWindow = null;
         if (this.props.loading) {
             authWindow = <Spinner />;
@@ -153,6 +159,7 @@ class Auth extends Component {
             authWindow = (
                 <div className={classes.Auth}>
                     {authRedirect}
+                    {errorMessage}
                     {form}
                     <div className={classes.AuthSwitch}>
                         <label>{this.state.isSignUp ? 'Already have an account? Sign in now!' : 'Don\'t have an account? Sign up now!'}</label>
@@ -173,7 +180,8 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.token !== null,
         creatingEvent: state.eventForm.creatingEvent,
         authRedirectPath: state.auth.authRedirectPath,
-        loading: state.auth.loading
+        loading: state.auth.loading,
+        error: state.auth.error
     };
 }
 
