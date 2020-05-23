@@ -1,6 +1,6 @@
 .GuestList {
     width: 20%;
-    height: 980px;
+    height: 985px;
     margin: 0;
     padding: 10px;
     border: 1px solid grey;
@@ -9,9 +9,10 @@
 
 .GuestList h3 {
     text-align: center;
+    margin: 15px auto;
 }
 
-.GuestList p {
+.Guests p {
     width: 80%;
     height: 20px;
     margin: 10px auto;
@@ -21,7 +22,7 @@
 
 .Guests {
     overflow-y: scroll;
-    height: 850px;
+    height: 800px;
 }
 
 .InviteForm {
@@ -32,6 +33,11 @@
 
 .InviteForm input {
     width: 100%;
+    margin: 10px auto;
+}
+
+.InviteForm p {
+    margin: 5px auto;
 }
 
 .WarningMessage {

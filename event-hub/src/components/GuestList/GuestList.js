@@ -15,9 +15,9 @@ const guestList = (props) => {
     if (!props.inviteLoading) {
             inviteGuestForm = (
                 <form className={classes.InviteForm}>
-                    {inviteWarningMsg}
                     <input onChange={props.inputChanged} value={props.invitedGuest}></input>
                     <button type="submit" disabled={props.invitedGuest === ''} onClick={props.onInvite}>Invite</button>
+                    {inviteWarningMsg}
                 </form>
             );
     }
