@@ -391,7 +391,7 @@ class EventForm extends Component {
     render () {
         const eventCreatedRedirect = this.props.eventCreated ? <Redirect to="/" /> : null;
 
-        const errorMessage = this.props.error ? <p className={classes.ErrorMessage}>{"Event creation error: " + this.props.error.message}</p> : null;
+        const errorMessage = this.props.error ? <p className={classes.ErrorMessage}>{"Event creation error: " + this.props.error.message + ". Please try again."}</p> : null;
 
         const formElementsArray = [];
         for (let key in this.state.eventForm) {
