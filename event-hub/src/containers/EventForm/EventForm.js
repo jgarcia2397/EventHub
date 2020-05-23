@@ -391,6 +391,8 @@ class EventForm extends Component {
     render () {
         const eventCreatedRedirect = this.props.eventCreated ? <Redirect to="/" /> : null;
 
+        const errorMessage = this.props.error ? <p className={classes.ErrorMessage}>{"Event creation error: " + this.props.error.message}</p> : null;
+
         const formElementsArray = [];
         for (let key in this.state.eventForm) {
             formElementsArray.push({
@@ -430,6 +432,7 @@ class EventForm extends Component {
         return (
             <div className={classes.EventForm}>
                 {eventCreatedRedirect}
+                {errorMessage}
                 {form}
             </div>
         );
@@ -445,7 +448,8 @@ const mapStateToProps = state => {
         isAuthenticated: state.auth.token !== null,
         monthInputVal: state.eventForm.initialMonthVal,
         dayInputVal: state.eventForm.initialDayVal,
-        yearInputVal: state.eventForm.initialYearVal
+        yearInputVal: state.eventForm.initialYearVal,
+        error: state.eventForm.error
     };
 }
 

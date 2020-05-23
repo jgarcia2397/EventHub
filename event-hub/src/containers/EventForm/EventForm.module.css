@@ -8,3 +8,7 @@
     box-sizing: border-box;
     display: block;
 }
+
+.ErrorMessage {
+    color: #DC143C;
+}
