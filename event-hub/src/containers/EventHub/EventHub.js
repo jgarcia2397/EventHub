@@ -28,10 +28,10 @@ class EventHub extends Component {
     componentDidMount() {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
-        if (this.props.token === null) {
+        if (this.props.token === null && (token !== null && userId !== null)) {
             this.props.onInitEventList(token, userId);
             this.props.onInitGuestEventList(token, userId);
-        } else {
+        } else if (this.props.token !== null && this.props.userId !== null) {
             this.props.onInitEventList(this.props.token, this.props.userId);
             this.props.onInitGuestEventList(this.props.token, this.props.userId);
         }
@@ -41,10 +41,10 @@ class EventHub extends Component {
         if (this.props.events.length !== prevProps.events.length) {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
-            if (this.props.token === null) {
+            if (this.props.token === null && (token !== null && userId !== null)) {
                 this.props.onInitEventList(token, userId);
                 this.props.onInitGuestEventList(token, userId);
-            } else {
+            } else if (this.props.token !== null && this.props.userId !== null) {
                 this.props.onInitEventList(this.props.token, this.props.userId);
                 this.props.onInitGuestEventList(this.props.token, this.props.userId);
             }
