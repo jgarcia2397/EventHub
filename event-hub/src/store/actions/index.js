@@ -7,6 +7,7 @@ export {
     onNextCalendarClick,
     initEventList,
     initGuestEventList,
+    setEmptyEventLists,
     deleteEvent
 } from './eventHub';
 

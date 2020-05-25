@@ -41,6 +41,12 @@ export const onNextCalendarClick = () => {
     };
 };
 
+export const setEmptyEventLists = () => {
+    return {
+        type: actionTypes.SET_EMPTY_EVENT_LISTS
+    };
+};
+
 export const fetchEventListStart = (events) => {
     return {
         type: actionTypes.FETCH_EVENT_LIST_START

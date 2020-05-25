@@ -28,7 +28,10 @@ class EventHub extends Component {
     componentDidMount() {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
-        if (this.props.token === null && (token !== null && userId !== null)) {
+
+        if ((this.props.token === null && this.props.userId === null) || (token === null && userId === null)) {
+            this.props.onSetEmptyEventLists();
+        } else if (this.props.token === null && (token !== null && userId !== null)) {
             this.props.onInitEventList(token, userId);
             this.props.onInitGuestEventList(token, userId);
         } else if (this.props.token !== null && this.props.userId !== null) {
@@ -41,7 +44,9 @@ class EventHub extends Component {
         if (this.props.events.length !== prevProps.events.length) {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
-            if (this.props.token === null && (token !== null && userId !== null)) {
+            if ((this.props.token === null && this.props.userId === null) || (token === null && userId === null)) {
+                this.props.onSetEmptyEventLists();
+            } else if (this.props.token === null && (token !== null && userId !== null)) {
                 this.props.onInitEventList(token, userId);
                 this.props.onInitGuestEventList(token, userId);
             } else if (this.props.token !== null && this.props.userId !== null) {
@@ -375,7 +380,8 @@ const mapDispatchToProps = dispatch => {
         onInitCreateEvent: (month, day, year) => dispatch(actions.createEventInit(month, day, year)),
         onDeleteEvent: (eventId, token) => dispatch(actions.deleteEvent(eventId, token)),
         onCheckGuestsChat: (eventId, eventName, eventDate, eventCreator) => dispatch(actions.setChatEventId(eventId, eventName, eventDate, eventCreator)),
-        onInitGuestEventList: (token, userId) => dispatch(actions.initGuestEventList(token, userId))
+        onInitGuestEventList: (token, userId) => dispatch(actions.initGuestEventList(token, userId)),
+        onSetEmptyEventLists: () => dispatch(actions.setEmptyEventLists())
     }
 }
 

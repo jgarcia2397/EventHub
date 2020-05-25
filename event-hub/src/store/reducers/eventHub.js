@@ -88,6 +88,14 @@ const onNextCalendarClick = (state, action) => {
     return updateObject(state, updatedStateNextClick);
 };
 
+const setEmptyEventLists = (state, action) => {
+    const updatedStateLists = {
+        events: [],
+        guestEvents: []
+    }
+    return updateObject(state, updatedStateLists);
+};
+
 const fetchEventListStart = (state, action) => {
     const updatedStateFetchStart = {
         eventListLoading: true
@@ -172,6 +180,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.TOGGLE_YEAR_SELECTOR: return toggleYearSelector(state,action);
         case actionTypes.ON_PREV_CALENDAR_CLICK: return onPrevCalendarClick(state,action);
         case actionTypes.ON_NEXT_CALENDAR_CLICK: return onNextCalendarClick(state,action);
+        case actionTypes.SET_EMPTY_EVENT_LISTS: return setEmptyEventLists(state, action);
         case actionTypes.FETCH_EVENT_LIST_START: return fetchEventListStart(state,action);
         case actionTypes.FETCH_EVENT_LIST_SUCCESS: return fetchEventListSuccess(state,action);
         case actionTypes.FETCH_EVENT_LIST_FAILED: return fetchEventListFail(state,action);
