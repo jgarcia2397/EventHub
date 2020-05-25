@@ -17,6 +17,7 @@ const eventList = (props) => {
                 <Event 
                     key={event.id}
                     eventId={event.id}
+                    eventLeader={event.userId}
                     details={event.eventDetails}
                     delete={props.onDelete}
                     onCheckGuestsChat={props.onCheckGuestsOrChat}

@@ -35,7 +35,8 @@ const event = (props) => {
                         props.onCheckGuestsChat(
                             props.eventId, 
                             props.details.name, 
-                            props.details.month + " " + props.details.day + ", " + props.details.year
+                            props.details.month + " " + props.details.day + ", " + props.details.year,
+                            props.eventLeader
                         )
                     }}>
                         Guest List/Chat

@@ -5,6 +5,7 @@ const initialState = {
     chatId: '',
     eventName: '',
     eventDate: '',
+    eventCreator: '',
     chats: [],
     content: '',
     chatsLoading: false,
@@ -22,6 +23,7 @@ export const setChatEventId = (state, action) => {
         chatId: action.chatId, 
         eventName: action.eventName, 
         eventDate: action.eventDate,
+        eventCreator: action.eventCreator,
         guestNotExists: false,
         guestAlreadyInvited: false
     });

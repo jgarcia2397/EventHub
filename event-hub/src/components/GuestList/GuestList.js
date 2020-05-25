@@ -11,8 +11,10 @@ const guestList = (props) => {
         inviteWarningMsg = <p className={classes.WarningMessage}>The invited guest has not registered for an account!</p>;
     }
 
-    let inviteGuestForm = <Spinner />;
-    if (!props.inviteLoading) {
+    let inviteGuestForm = null;
+    if (props.isLeader && props.inviteLoading) {
+        inviteGuestForm = <Spinner />;
+    } else if (props.isLeader && !props.inviteLoading) {
             inviteGuestForm = (
                 <form className={classes.InviteForm}>
                     <input onChange={props.inputChanged} value={props.invitedGuest}></input>
