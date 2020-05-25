@@ -40,5 +40,29 @@
 .MessageList {
     display: block;
     overflow-y: scroll;
-    height: 1000px;
+    height: 400px;
 } 
+
+@media (min-height: 400px) {
+    .MessageList {
+        height: 300px;
+    } 
+}
+
+@media (min-height: 600px) {
+    .MessageList {
+        height: 500px;
+    } 
+}
+
+@media (min-height: 800px) {
+    .MessageList {
+        height: 700px;
+    } 
+}
+
+@media (min-height: 1200px) {
+    .MessageList {
+        height: 1000px;
+    } 
+}

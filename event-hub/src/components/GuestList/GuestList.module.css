@@ -43,3 +43,43 @@
 .WarningMessage {
     color: #DC143C;
 }
+
+@media (min-height: 400px) {
+    .GuestList {
+        height: 300px;
+    } 
+
+    .Guests {
+        height: 115px;
+    }
+}
+
+@media (min-height: 600px) {
+    .GuestList {
+        height: 500px;
+    } 
+
+    .Guests {
+        height: 315px;
+    }
+}
+
+@media (min-height: 800px) {
+    .GuestList {
+        height: 700px;
+    } 
+
+    .Guests {
+        height: 515px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .GuestList {
+        height: 1000px;
+    } 
+
+    .Guests {
+        height: 815px;
+    }
+}
