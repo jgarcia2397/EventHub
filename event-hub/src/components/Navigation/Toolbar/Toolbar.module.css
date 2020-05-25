@@ -12,3 +12,8 @@
     box-sizing: border-box;
     z-index: 90;
 }
+
+.EventHubTitle {
+    font-size: 35px;
+    color: #B0C4DE;
+}

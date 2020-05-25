@@ -5,7 +5,7 @@ import classes from './Toolbar.module.css';
 
 const toolbar = (props) => (
     <header className={classes.Toolbar}>
-        <div>EventHub</div>
+        <div className={classes.EventHubTitle}><strong>EventHub</strong></div>
         <div>
             <NavigationItems 
                 isAuth={props.auth}
