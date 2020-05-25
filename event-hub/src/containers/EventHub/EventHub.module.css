@@ -131,6 +131,7 @@ h1 {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    margin: 0 150px;
 }
 
 .YourEvents,

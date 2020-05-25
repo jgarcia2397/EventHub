@@ -2,8 +2,8 @@
     text-align: center;
     margin: auto;
     overflow-y: scroll;
-    width: 75%;
-    height: 600px;
+    width: 65%;
+    height: 300px;
     border: 2px solid #F0E68C;
     box-shadow: 0 2px 3px #ccc;
 }
@@ -12,8 +12,28 @@
     text-align: center;
     margin: auto;
     overflow-y: scroll;
-    width: 75%;
-    height: 600px;
+    width: 65%;
+    height: 300px;
     border: 2px solid #00FA9A;
     box-shadow: 0 2px 3px #ccc;
 }
+
+@media (min-height: 400px) {
+    .List {
+        height: 350px;
+    }
+
+    .GuestList {
+        height: 350px;
+    }
+} 
+
+@media (min-height: 800px) {
+    .List {
+        height: 600px;
+    }
+
+    .GuestList {
+        height: 600px;
+    }
+} 
