@@ -24,8 +24,9 @@ p {
     font: inherit;
     padding: 6px 10px;
     display: block;
-    width: 100%;
+    width: 60%;
     box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .TimeInputElement {
@@ -34,7 +35,7 @@ p {
     background-color: white;
     font: inherit;
     padding: 6px 10px;
-    width: 10%;
+    width: 15%;
     box-sizing: border-box;
 }
 
