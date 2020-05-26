@@ -3,3 +3,31 @@
     height: 40px;
     font-size: 1.0em;
 }
+
+@media (min-height: 400px) {
+    .WeekDay {
+        font-size: 0.25em;
+        height: 10px;
+    }
+}
+
+@media (min-height: 600px) {
+    .WeekDay {
+        font-size: 0.5em;
+        height: 20px;
+    }
+}
+
+@media (min-height: 800px) {
+    .WeekDay {
+        font-size: 0.75em;
+        height: 30px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .WeekDay {
+        font-size: 1.0em;
+        height: 40px;
+    }
+}
