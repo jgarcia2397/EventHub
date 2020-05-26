@@ -18,3 +18,17 @@ button:hover {
     background-color: #4169E1;
     color: white;
 } 
+
+@media (min-height: 800px) {
+    .ButtonPrev,
+    .ButtonNext {
+        height: 30px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .ButtonPrev,
+    .ButtonNext {
+        height: 40px;
+    }
+}
