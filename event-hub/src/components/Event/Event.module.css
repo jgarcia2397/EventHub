@@ -6,7 +6,8 @@
     margin: 10px auto;
     box-sizing: border-box;
     display: flex;
-    background-color: #F0E68C;
+    /* background-color: #F0E68C; */
+    background-color: #FFFFE0;
 }
 
 .GuestEvent {
@@ -17,7 +18,8 @@
     margin: 10px auto;
     box-sizing: border-box;
     display: flex;
-    background-color: #00FA9A;
+    /* background-color: #00FA9A; */
+    background-color: #F0FFF0;
 }
 
 .Text {

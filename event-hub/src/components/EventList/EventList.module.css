@@ -6,6 +6,7 @@
     height: 300px;
     border: 2px solid #F0E68C;
     box-shadow: 0 2px 3px #ccc;
+    background-color: #F0E68C;
 }
 
 .GuestList {
@@ -16,6 +17,7 @@
     height: 300px;
     border: 2px solid #00FA9A;
     box-shadow: 0 2px 3px #ccc;
+    background-color: #00FA9A;
 }
 
 @media (min-height: 400px) {
