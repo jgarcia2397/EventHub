@@ -9,4 +9,15 @@
     left: 25%;
     top: 40%;
     z-index: 200;
+    text-align: center;
+}
+
+.Modal p,
+.Modal h2 {
+    text-align: left;
+}
+
+.Modal button {
+    width: 30%;
+    margin: 0 auto;
 }
