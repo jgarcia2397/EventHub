@@ -22,15 +22,35 @@
 
 @media (min-height: 400px) {
     .List {
-        height: 350px;
+        height: 225px;
     }
 
     .GuestList {
-        height: 350px;
+        height: 225px;
+    }
+} 
+
+@media (min-height: 600px) {
+    .List {
+        height: 300px;
+    }
+
+    .GuestList {
+        height: 300px;
     }
 } 
 
 @media (min-height: 800px) {
+    .List {
+        height: 400px;
+    }
+
+    .GuestList {
+        height: 400px;
+    }
+} 
+
+@media (min-height: 1200px) {
     .List {
         height: 600px;
     }
