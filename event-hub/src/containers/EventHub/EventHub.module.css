@@ -37,7 +37,6 @@ h1 {
 
 .CalendarHeader {
     border-bottom: 1px dashed skyblue;
-    /* font-size: 1.6em; */
     text-align: center;
 }
 
@@ -137,4 +136,49 @@ h1 {
 .YourEvents,
 .InvitedTo {
     width: 50%;
+}
+
+@media (min-height: 400px) {
+    .EmptySlot,
+    .Day,
+    .CurrentDay,
+    .EventDay,
+    .GuestEventDay,
+    .EventCurrentDay {
+        font-size: 0.45em;
+    }
+
+    .CalendarContainer {
+        margin: 50px auto 25px;
+    }
+}
+
+@media (min-height: 800px) {
+    .EmptySlot,
+    .Day,
+    .CurrentDay,
+    .EventDay,
+    .GuestEventDay,
+    .EventCurrentDay {
+        font-size: 0.6em;
+    }
+
+    .CalendarContainer {
+        margin: 100px auto 50px;
+    }
+}
+
+@media (min-height: 1200px) {
+    .EmptySlot,
+    .Day,
+    .CurrentDay,
+    .EventDay,
+    .GuestEventDay,
+    .EventCurrentDay {
+        font-size: 0.8em;
+    }
+
+    .CalendarContainer {
+        margin: 150px auto 75px;
+    }
 }
