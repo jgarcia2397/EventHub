@@ -8,8 +8,15 @@
     box-sizing: border-box;
 }
 
+.Auth button {
+    width: 25%;
+    display: block;
+    margin: 0 auto;
+}
+
 .AuthSwitch {
     margin-top: 30px;
+    
 }
 
 .ErrorMessage {
