@@ -28,13 +28,19 @@
 .ButtonSide {
     width: 30%;
     float: right;
-    padding: 30px 0px 0px;
+    padding: 45px 0px 0px;
 }
 
 .GuestButtonSide {
     width: 30%;
     float: right;
     padding: 65px 0px 0px;
+}
+
+.ButtonSide button,
+.GuestButtonSide button {
+    overflow-wrap: break-word;
+    padding: 6px 2px;
 }
 
 p {

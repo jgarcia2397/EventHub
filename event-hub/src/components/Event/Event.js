@@ -39,7 +39,7 @@ const event = (props) => {
                             props.eventLeader
                         )
                     }}>
-                        Guest List/Chat
+                        Guest List / Chat
                 </button>
                 {modifyEventButtons}
             </div>
