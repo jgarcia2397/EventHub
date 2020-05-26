@@ -13,3 +13,31 @@
     float: right;
     width: 50%;
 }
+
+@media (min-height: 400px) {
+    .LabelMonth,
+    .LabelYear {
+        font-size: 0.825em;
+    }
+}
+
+@media (min-height: 600px) {
+    .LabelMonth,
+    .LabelYear {
+        font-size: 1.1em;
+    }
+}
+
+@media (min-height: 800px) {
+    .LabelMonth,
+    .LabelYear {
+        font-size: 1.65em;
+    }
+}
+
+@media (min-height: 1200px) {
+    .LabelMonth,
+    .LabelYear {
+        font-size: 2.2em;
+    }
+}
