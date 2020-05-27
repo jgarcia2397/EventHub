@@ -20,7 +20,6 @@ class EventHub extends Component {
     state = {
         selectedDay: 0,
         isDaySelected: false,
-        events: [],
         deletingEvent: false,
         eventIdToBeDeleted: null
     };
@@ -57,27 +56,22 @@ class EventHub extends Component {
     }
 
     getDays = () => {
-        // return this.state.dateObject.daysInMonth();
         return this.props.date.daysInMonth();
     }
 
     getCurrentDay = () => {
-        // return this.state.dateObject.format("D");
         return this.props.date.format("D");
     }
 
     getMonth = () => {
-        // return this.state.dateObject.format("MMMM");
         return this.props.date.format("MMMM");
     }
 
     getYear = () => {
-        // return this.state.dateObject.format("Y");
         return this.props.date.format("Y");
     }
 
     getFirstDayOfMonth = () => {
-        // let dateObject = this.state.dateObject;
         let dateObject = this.props.date;
         let firstDay = moment(dateObject).startOf("month").format("d");
 
@@ -93,7 +87,6 @@ class EventHub extends Component {
                 </td>
             );
         }
-        // console.log("Blanks: ", blanks);
         return blanks;
     }
 
@@ -117,8 +110,6 @@ class EventHub extends Component {
         const currYear = moment().format("YYYY");
 
         // selected calendar date, dateObject in state updated everytime new date selected
-        // const dateObjectMonth = this.state.dateObject.format("MMMM");
-        // const dateObjectYear = this.state.dateObject.format("YYYY");
         const dateObjectMonth = this.props.date.format("MMMM");
         const dateObjectYear = this.props.date.format("YYYY");
 
@@ -143,8 +134,7 @@ class EventHub extends Component {
                     key={d} 
                     className={day}
                     onClick={() => {this.onDayClick(d)}}
-                >
-                    {d}
+                >{d}
                 </td>
             );
         }
@@ -155,9 +145,6 @@ class EventHub extends Component {
         this.setState({
             selectedDay: d,
             isDaySelected: true
-        },
-        () => {
-            console.log("SELECTED DAY: ", this.state.selectedDay);
         });
     }
 
@@ -190,16 +177,11 @@ class EventHub extends Component {
 
     getYearRange(startYear, stopYear) {
         var yearArray = [];
-        // console.log("[getYearRange] startYear: ", startYear);
-        // console.log("[getYearRange] stopYear: ", stopYear);
         var currentYear = moment(startYear, "YYYY");
         var endYear = moment(stopYear, "YYYY");
-        // console.log("[getYearRange] currentYear: ", currentYear);
-        // console.log("[getYearRange] endYear: ", endYear);
         while (currentYear <= endYear) {
             yearArray.push(moment(currentYear).format("YYYY"));
             currentYear = moment(currentYear).add(1, "year");
-            // console.log("[getYearRange] currentYear + 1: ", currentYear);
         }
         return yearArray;
     }
@@ -242,21 +224,15 @@ class EventHub extends Component {
                     <thead className={classes.CalendarHeader}>
                         <tr>
                             <DateButton
-                                // prevClick={this.onPrev}
-                                // nextClick={this.onNext}
                                 prevClick={this.props.onDatePrevClick}
                                 nextClick={this.props.onDateNextClick}
                                 type="prev" />
                             <DateHeader
-                                // toggleMonthSel={this.toggleMonthSelector}
-                                // toggleYearSel={this.toggleYearSelector}
                                 toggleMonthSel={this.props.onToggleMonthSel}
                                 toggleYearSel={this.props.onToggleYearSel}
                                 month={this.getMonth()}
                                 year={this.getYear()} />
                             <DateButton
-                                // prevClick={this.onPrev}
-                                // nextClick={this.onNext}
                                 prevClick={this.props.onDatePrevClick}
                                 nextClick={this.props.onDateNextClick}
                                 type="next" />
@@ -265,25 +241,18 @@ class EventHub extends Component {
                             <td colSpan="7">
                                 <table>
                                     <Selector 
-                                        // showMonthSelector={this.state.showMonthSelector}
                                         showMonthSelector={this.props.showMonthSel}
-                                        // showYearSelector={this.state.showYearSelector}
                                         showYearSelector={this.props.showYearSel}
-                                        // listOfMonths={this.state.monthList}
                                         listOfMonths={this.props.months}
-                                        // selectedMonth={this.selectMonth}
                                         selectedMonth={this.props.onMonthSelected}
                                         currentYear={this.getYear()}
                                         yearRange={this.getYearRange}
-                                        // selectedYear={this.selectYear}
                                         selectedYear={this.props.onYearSelected} />
                                 </table>
                             </td>
                         </tr>
                     </thead>
                     <CalendarTable
-                        // showMonthSel={this.state.showMonthSelector}
-                        // showYearSel={this.state.showYearSelector}
                         showMonthSel={this.props.showMonthSel}
                         showYearSel={this.props.showYearSel}
                         calendar={this.createCalendar} />
@@ -294,10 +263,8 @@ class EventHub extends Component {
         let eventPopup = null;
         eventPopup = <EventPopup
                         isDeleting={this.state.deletingEvent}
-                        // month={this.state.dateObject.format("MMMM")}
                         month={this.props.date.format("MMMM")}
                         day={this.state.selectedDay}
-                        // year={this.state.dateObject.format("YYYY")}
                         year={this.props.date.format("YYYY")}
                         onContinue={this.onCreateEventContinue}
                         onCancel={this.onCreateEventCancel}

@@ -71,10 +71,9 @@ export const initEventList = (token, userId) => {
     return dispatch => {
         dispatch(fetchEventListStart());
 
-        // this will only get events created by a specific user, will need to add functionality to get event if you did not create event, but you are invited by creator
+        // this will only get events created by a specific user, will need to add functionality to get event if you did not create event, but you are invited by creator (DONE: initGuestEventList)
         const queryParams = 'auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
 
-        // axios.get('/events.json?auth=' + token + '&orderBy="eventTimestamp"')
         axios.get('/events.json?' + queryParams)
             .then(res => {
                 const fetchedEvents = [];
@@ -93,12 +92,10 @@ export const initEventList = (token, userId) => {
                         return 0;
                     }
                 });
-                //console.log(res);
                 dispatch(fetchEventListSuccess(fetchedEvents));
             })
             .catch(err => {
                 dispatch(fetchEventListFailed(err));
-                //console.log(err);
             });
     };
 };
@@ -144,12 +141,10 @@ export const initGuestEventList = (token, userId) => {
                         }
                     }
                 }
-                //console.log(res);
                 dispatch(fetchGuestEventListSuccess(fetchedGuestEvents));
             })
             .catch(err => {
                 dispatch(fetchGuestEventListFailed(err));
-                //console.log(err);
             });
     };
 };
