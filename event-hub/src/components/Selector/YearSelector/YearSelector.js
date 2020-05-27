@@ -4,20 +4,12 @@ import moment from 'moment';
 const yearSelector = (props) => {
     let years = [];
 
-    // let nextTwelveYears = props.moment
-    //     .set("year", props.currentYear)
-    //     .add(11, "year")
-    //     .format("Y");
-
     let nextTwelveYears = moment()
         .set("year", props.currentYear)
         .add(11, "year")
         .format("Y");
 
     let yearRange = props.yearRange(props.currentYear, nextTwelveYears);
-    // console.log("props.currentYear: " + props.currentYear);
-    // console.log("nextTwelveYears: " + nextTwelveYears);
-    // console.log("yearRange: " + yearRange);
 
     yearRange.map(data => {
         return years.push(
