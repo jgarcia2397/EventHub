@@ -285,25 +285,25 @@ class EventForm extends Component {
     checkDateAndTimeValidity(updatedForm) {
         let isValid = false;
 
-        let currentDate = moment().format("MMMM D YYYY, h:mm a");
+        let currentDate = moment(moment(), "MMMM D YYYY, h:mm a");
         let startDate = moment(
                             updatedForm.month.value 
                             + " " + updatedForm.day.value 
                             + " " + updatedForm.year.value 
                             + ", " + updatedForm.startHour.value 
                             + ":" + updatedForm.startMinute.value 
-                            + " " + updatedForm.startPeriod.value
+                            + " " + updatedForm.startPeriod.value,
+                            "MMMM D YYYY, h:mm a"
                         )
-                        .format("MMMM D YYYY, h:mm a");
         let endDate = moment(
                             updatedForm.month.value 
                             + " " + updatedForm.day.value 
                             + " " + updatedForm.year.value 
                             + ", " + updatedForm.endHour.value 
                             + ":" + updatedForm.endMinute.value 
-                            + " " + updatedForm.endPeriod.value
+                            + " " + updatedForm.endPeriod.value,
+                            "MMMM D YYYY, h:mm a"
                         )
-                        .format("MMMM D YYYY, h:mm a");
 
         if (moment(startDate).isBefore(currentDate) || moment(endDate).isBefore(startDate) || startDate === "Invalid date" || endDate === "Invalid date") {
             isValid = false;
