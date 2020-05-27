@@ -10,7 +10,6 @@ const input = (props) => {
 
     if ((props.invalidElement && props.timeElement && props.touched) || (props.invalidDateTime && props.timeElement)) {
         timeInputClasses.push(classes.Invalid);
-        // validationError = <p>Please enter a valid value.</p>;
     } else if (props.invalidElement && props.touched) {
         textInputClasses.push(classes.Invalid);
         validationError = <p><strong>Please enter a valid value.</strong></p>;
