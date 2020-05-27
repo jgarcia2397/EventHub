@@ -274,7 +274,6 @@ class EventForm extends Component {
         let updatedYear = updatedForm.year.value;
         let dateString = updatedMonth + " " + updatedYear;
         let momentObj = moment(dateString, "MMMM Y").daysInMonth();
-        // console.log("dateString : " + dateString + ", momentObj: " + momentObj);
 
         if (rules.dayCheck) {
             isValid = dayValue <= momentObj;
@@ -284,7 +283,6 @@ class EventForm extends Component {
     }
 
     checkDateAndTimeValidity(updatedForm) {
-        //console.log("updatedForm: " + updatedForm);
         let isValid = false;
 
         let currentDate = moment().format("MMMM D YYYY, h:mm a");
@@ -306,10 +304,6 @@ class EventForm extends Component {
                             + " " + updatedForm.endPeriod.value
                         )
                         .format("MMMM D YYYY, h:mm a");
-
-        // console.log("currentDate: " + currentDate);
-        // console.log("startDate: " + startDate);
-        // console.log("endDate: " + endDate);
 
         if (moment(startDate).isBefore(currentDate) || moment(endDate).isBefore(startDate) || startDate === "Invalid date" || endDate === "Invalid date") {
             isValid = false;
@@ -335,17 +329,13 @@ class EventForm extends Component {
         updatedEventForm[inputIdentifier] = updatedFormElement;
         
         let datesAreValid = this.state.dateAndTimeValid;
-        // if (Object.keys(updatedFormElement.validation).length === 0) {
         if (updatedFormElement.validation.isDateTimeDropdown) {
-            // console.log("goodbye");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
         } else if (updatedFormElement.validation.isDateTimeInput && updatedFormElement.validation.dayCheck) {
-            // console.log("dayCheck");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
             updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation)
                                         && this.checkDayInputValidity(updatedEventForm, updatedFormElement.value, updatedFormElement.validation);
         } else if (updatedFormElement.validation.isDateTimeInput) {
-            // console.log("hello");
             datesAreValid = this.checkDateAndTimeValidity(updatedEventForm);
             updatedFormElement.valid = this.checkTextInputValidity(updatedFormElement.value, updatedFormElement.validation);
         } else {
@@ -356,11 +346,9 @@ class EventForm extends Component {
         for (let inputIdentifier in updatedEventForm) {
             formIsValid = updatedEventForm[inputIdentifier].valid && formIsValid;
         }
-        // console.log("form: " + formIsValid + ", " + "dates: " + datesAreValid);
         formIsValid = datesAreValid && formIsValid;
 
         this.setState({eventForm: updatedEventForm, formIsValid: formIsValid, dateAndTimeValid: datesAreValid});
-        //this.setState({eventForm: updatedEventForm, formIsValid: formIsValid});
     }
 
     createEventHandler = (event) => {
@@ -381,7 +369,6 @@ class EventForm extends Component {
             }
 
             this.props.onCreateEvent(eventDetails, this.props.token, this.props.userId);
-            //this.props.onSendGuestInvite(this.props.token, this.props.eventId, this.props.token);
         } else {
             this.props.onSetAuthRedirectPath('/createEventForm');
             this.props.history.push('/auth');
@@ -457,9 +444,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onCreateEvent: (eventDetails, token, userId) => dispatch(actions.createEvent(eventDetails, token, userId)),
         onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
-        //onSendGuestInvite: (tokenOfInvited, chatId, userToken) => dispatch(actions.sendGuestInvite(tokenOfInvited, chatId, userToken))
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(errorHandler(EventForm, axios));
-// export default connect(mapStateToProps, mapDispatchToProps)(EventForm);

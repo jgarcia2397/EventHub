@@ -41,8 +41,6 @@ export const createEvent = (eventDetails, token, userId) => {
 
         axiosInstance.post(PROXY_URL + FIRST_URL, eventDetails)
             .then(response => {
-                // console.log(response.data.name);
-                // dispatch(createEventSuccess(response.data.name, eventDetails));
 
                 const queryParams = 'auth=' + token;
 
@@ -61,7 +59,6 @@ export const createEvent = (eventDetails, token, userId) => {
 
                         axiosInstance.post(PROXY_URL + SECOND_URL, originalUser)
                             .then(res => {
-                                // console.log(res);
                                 dispatch(createEventSuccess(response.data.name, eventDetails));
                             })
                             .catch(err => {
@@ -78,7 +75,6 @@ export const createEvent = (eventDetails, token, userId) => {
                     });
             })
             .catch(error => {
-                // console.log(error);
                 dispatch(createEventFailed(error));
             });
     };
