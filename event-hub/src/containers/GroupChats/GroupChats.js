@@ -22,7 +22,6 @@ class GroupChats extends Component {
     }
 
     inputChangedHandler = (event) => {
-        // this.setState({content: event.target.value});
         this.props.onChatInputChanged(event.target.value);
     }
 
@@ -94,7 +93,6 @@ class GroupChats extends Component {
                         </div>
                         <form onSubmit={this.msgSubmitHandler} className={classes.MessageForm}>
                             <input onChange={this.inputChangedHandler} value={this.props.content}></input>
-                            {/* {this.state.error ? <p>{this.state.writeError}</p> : null} */}
                             <button type="submit" disabled={this.props.content === ''}>Send</button>
                         </form>
                     </div>

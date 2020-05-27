@@ -39,25 +39,20 @@ export const sendMsgFailed = (error) => {
     };
 };
 
-// Add token as parameter here later
 export const sendMsg = (msgDetails, chatId, token) => {
     return dispatch => {
         dispatch(sendMsgStart());
 
         const queryParams = 'auth=' + token;
 
-        // axios.post('/groupchats.json', msgDetails)
         axios.post('/events/' + chatId + '/chats.json?' + queryParams, msgDetails)
             .then(res => {
                 console.log(res);
                 dispatch(sendMsgSuccess(res.data.name, msgDetails));
-                // this.setState({content: ''});
-                // this.getChatsFromBackend();
             })
             .catch(err => {
                 console.log(err);
                 dispatch(sendMsgFailed(err));
-                // this.setState({ writeError: err.message });
             });
     };
 };
@@ -88,7 +83,6 @@ export const fetchChats = (chatId, token) => {
 
         const queryParams = 'auth=' + token;
 
-        // axios.get('/groupchats.json')
         axios.get('/events/' + chatId + '/chats.json?' + queryParams)
             .then(res => {
                 const fetchedChats = [];
@@ -99,12 +93,10 @@ export const fetchChats = (chatId, token) => {
                     });
                 }
                 dispatch(fetchChatsSuccess(fetchedChats));
-                // this.setState({chats: fetchedChats});
             })
             .catch(err => {
                 console.log(err);
                 dispatch(fetchChatsFailed(err));
-                // this.setState({ readError: err.message });
             });
     };
 };
@@ -212,10 +204,8 @@ export const fetchChatMembers = (chatId, token) => {
 
         axios.get('/events/' + chatId + '/members.json?' + queryParams)
             .then(res => {
-                // console.log(res.data);
                 const fetchedMembers = [];
                 for (let key in res.data) {
-                    // console.log(res.data[key]);
                     fetchedMembers.push({
                         ...res.data[key],
                         id: key
@@ -224,7 +214,6 @@ export const fetchChatMembers = (chatId, token) => {
                 dispatch(fetchChatMembersSuccess(fetchedMembers));
             })
             .catch(err => {
-                // console.log(err);
                 dispatch(fetchChatMembersFailed(err));
             });
     };
