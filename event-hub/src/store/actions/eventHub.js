@@ -173,7 +173,6 @@ export const deleteEventFailed = (id, error) => {
 export const deleteEvent = (eventId, token) => {
     return dispatch => {
         dispatch(deleteEventStart());
-        console.log(eventId);
 
         const queryParams = 'auth=' + token;
 

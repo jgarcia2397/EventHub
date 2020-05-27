@@ -48,7 +48,6 @@ class GroupChats extends Component {
 
     inviteInputChangedHandler = (event) => {
         this.setState({inviteInputContent: event.target.value});
-        console.log(this.state.inviteInputContent);
     }
 
     convertTimestampToMoment = (timestamp) => {

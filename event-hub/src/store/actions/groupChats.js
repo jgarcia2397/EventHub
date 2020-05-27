@@ -47,11 +47,9 @@ export const sendMsg = (msgDetails, chatId, token) => {
 
         axios.post('/events/' + chatId + '/chats.json?' + queryParams, msgDetails)
             .then(res => {
-                console.log(res);
                 dispatch(sendMsgSuccess(res.data.name, msgDetails));
             })
             .catch(err => {
-                console.log(err);
                 dispatch(sendMsgFailed(err));
             });
     };
@@ -95,7 +93,6 @@ export const fetchChats = (chatId, token) => {
                 dispatch(fetchChatsSuccess(fetchedChats));
             })
             .catch(err => {
-                console.log(err);
                 dispatch(fetchChatsFailed(err));
             });
     };
