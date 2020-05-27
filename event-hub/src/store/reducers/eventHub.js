@@ -153,7 +153,7 @@ const deleteEventStart = (state, action) => {
 
 const deleteEventSuccess = (state, action) => {
     const eventsCopy = [...state.events];
-    const deletedEvent = eventsCopy.splice(eventsCopy.findIndex(events => events.key == action.eventId));
+    const deletedEvent = eventsCopy.splice(eventsCopy.findIndex(events => events.key === action.eventId));
     const updatedEvents = updateObject(state.events, deletedEvent);
     const updatedStateDeleteSuccess = {
         events: updatedEvents,

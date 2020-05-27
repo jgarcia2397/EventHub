@@ -37,7 +37,7 @@ export const createEvent = (eventDetails, token, userId) => {
         dispatch(createEventStart());
 
         const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-        const FIRST_URL = 'https://event-hub-195ae.firebaseio.com/' + '/events.json?auth=' + token;
+        const FIRST_URL = 'https://event-hub-195ae.firebaseio.com/events.json?auth=' + token;
 
         axiosInstance.post(PROXY_URL + FIRST_URL, eventDetails)
             .then(response => {

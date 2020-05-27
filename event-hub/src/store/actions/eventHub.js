@@ -177,7 +177,7 @@ export const deleteEvent = (eventId, token) => {
         const queryParams = 'auth=' + token;
 
         const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
-        const URL = 'https://event-hub-195ae.firebaseio.com/' + '/events/' + eventId + '.json?' + queryParams;
+        const URL = 'https://event-hub-195ae.firebaseio.com/events/' + eventId + '.json?' + queryParams;
 
         axiosInstance.delete(PROXY_URL + URL)
             .then(res => {

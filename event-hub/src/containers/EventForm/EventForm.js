@@ -257,7 +257,7 @@ class EventForm extends Component {
             isValid = (value.length > 0) && (value.length <= rules.maxLength) && isValid;
         }
         if (rules.exactLength) {
-            isValid = value.length == rules.exactLength && isValid;
+            isValid = value.length === rules.exactLength && isValid;
         }
         if (rules.isNumeric) {
             const pattern = /^\d+$/;
