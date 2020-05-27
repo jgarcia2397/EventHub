@@ -13,7 +13,7 @@ import eventFormReducer from './store/reducers/eventForm';
 import authReducer from './store/reducers/auth';
 import chatsReducer from './store/reducers/groupChats';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
   eventHub: eventHubReducer,
